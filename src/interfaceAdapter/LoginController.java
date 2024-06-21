@@ -1,4 +1,4 @@
-package InterfaceAdapter;
+package interfaceAdapter;
 
 public class LoginController
 {
