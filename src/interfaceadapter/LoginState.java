@@ -1,4 +1,4 @@
-package interfaceAdapter;
+package interfaceadapter;
 
 public class LoginState {
 }
