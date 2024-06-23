@@ -34,4 +34,15 @@ public class Manager {
         AccessLevel = accessLevel;
     }
 
+    public Boolean isREAD(){
+        return AccessLevel == READ;
+    }
+
+    public Boolean isREADMODIFY(){
+        return AccessLevel == READMODIFY;
+    }
+
+    public Boolean isALL(){
+        return AccessLevel == ALL;
+    }
 }
