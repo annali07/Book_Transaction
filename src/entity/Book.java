@@ -14,9 +14,17 @@ public class Book {
     private Date rentalStartDate;
     private Date rentalEndDate;
 
-
-
+    public Book (String bookname ,int bookid,String ISBN
+                 ,double bookprice, double rentalprice){
+        this.bookName = bookname;
+        this.bookID = bookid;
+        this.isbn = ISBN;
+        this.bookPrice = bookprice;
+        this.rentalPrice = rentalprice;
+    }
 }
+
+
 
 
 
