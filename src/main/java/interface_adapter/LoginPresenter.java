@@ -29,6 +29,7 @@ public class LoginPresenter implements LoginOutputDataBoundary {
         mainMenuViewModel.firePropertyChanged();
         viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
+        System.out.println("Login Success");
     }
 
     @Override
@@ -36,5 +37,6 @@ public class LoginPresenter implements LoginOutputDataBoundary {
         LoginState loginState = loginViewModel.getState();
         loginState.setPasswordError(error);
         loginViewModel.firePropertyChanged();
+        System.out.println("Wrong Password");
     }
 }
