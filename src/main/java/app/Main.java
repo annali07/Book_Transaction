@@ -1,8 +1,10 @@
 package app;
 
 import interface_adapter.LoginViewModel;
+import interface_adapter.MainMenuViewModel;
 import interface_adapter.ViewManagerModel;
 import view.LoginView;
+import view.MainMenuView;
 import view.ViewManager;
 
 import javax.swing.*;
@@ -32,9 +34,11 @@ public class Main {
         // results from the use case. The ViewModels are observable, and will be observed by the Views.
 
         LoginViewModel loginViewModel = new LoginViewModel();
-
-        LoginView loginView = new LoginView(loginViewModel);
+        MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
+        LoginView loginView = new LoginView(loginViewModel, viewManagerModel, mainMenuViewModel);
+        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel);
         views.add(loginView, loginView.viewName);
+        views.add(mainMenuView, mainMenuView.viewName);
         viewManagerModel.firePropertyChanged();
 
         application.pack();
