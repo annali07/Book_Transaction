@@ -9,6 +9,7 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+// Implement Use Case
 public class MainMenuView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "main menu";
     private final MainMenuViewModel mainMenuViewModel;
@@ -16,6 +17,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
     private final JButton addBookButton;
     private final JButton addRentButton;
     private final JButton addPurchaseButton;
+    private final JButton calculateRevenueButton;
 
     public MainMenuView(MainMenuViewModel mainMenuViewModel) {
         this.mainMenuViewModel = mainMenuViewModel;
@@ -53,6 +55,14 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         addPurchaseButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         addPurchaseButton.addActionListener(this);
         add(addPurchaseButton);
+
+        add(Box.createRigidArea(new Dimension(0, 10))); // Add space between buttons
+
+        // Add Calculate Revenue Button
+        calculateRevenueButton = new JButton("Calculate Revenue");
+        calculateRevenueButton.setAlignmentX(Component.CENTER_ALIGNMENT);
+        calculateRevenueButton.addActionListener(this);
+        add(calculateRevenueButton);
     }
 
     @Override
@@ -70,6 +80,9 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
             // Handle Rent Book Entry action
         } else if (e.getSource() == addPurchaseButton) {
             System.out.println("Purchase Book Entry button clicked");
+            // Handle Purchase Book Entry action
+        } else if (e.getSource() == calculateRevenueButton) {
+            System.out.println("Calculate Revenue button clicked");
             // Handle Purchase Book Entry action
         }
     }
