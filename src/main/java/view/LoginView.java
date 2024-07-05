@@ -18,9 +18,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     public final String viewName = "log in";
     private final LoginViewModel loginViewModel;
-    private LoginUseCase loginUseCase;
-    private ViewManagerModel viewManagerModel;
-    private MainMenuViewModel mainMenuViewModel;
+    private final LoginUseCase loginUseCase;
 
     /**
      * The username chosen by the user
@@ -39,7 +37,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     /**
      * A window with a title and a JButton.
      */
-    public LoginView(LoginViewModel loginViewModel) {
+    public LoginView(LoginViewModel loginViewModel, ViewManagerModel viewManagerModel, MainMenuViewModel mainMenuViewModel) {
         this.loginViewModel = loginViewModel;
         this.loginViewModel.addPropertyChangeListener(this);
         UserLoginDataAccessInterface userGateway = new UserLoginDataAccess();
@@ -50,6 +48,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
         JLabel title = new JLabel("Login Screen");
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
+        title.setFont(new Font("Arial", Font.BOLD, 16));
 
         LabelTextPanel usernameInfo = new LabelTextPanel(
                 new JLabel("Username"), usernameInputField);
@@ -57,6 +56,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
                 new JLabel("Password"), passwordInputField);
 
         JPanel buttons = new JPanel();
+        buttons.setLayout(new FlowLayout(FlowLayout.CENTER));
         logIn = new JButton(loginViewModel.LOGIN_BUTTON_LABEL);
         buttons.add(logIn);
         cancel = new JButton(loginViewModel.CANCEL_BUTTON_LABEL);
@@ -79,14 +79,21 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
 
+        this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
+        this.setAlignmentX(Component.CENTER_ALIGNMENT);
+
+        this.add(Box.createVerticalGlue()); // Adds vertical space to center components
         this.add(title);
+        this.add(Box.createRigidArea(new Dimension(0, 20))); // Space between title and username field
         this.add(usernameInfo);
         this.add(usernameErrorField);
+        this.add(Box.createRigidArea(new Dimension(0, 10))); // Space between fields
         this.add(passwordInfo);
         this.add(passwordErrorField);
+        this.add(Box.createRigidArea(new Dimension(0, 20))); // Space between password field and buttons
         this.add(buttons);
+        this.add(Box.createVerticalGlue()); // Adds vertical space to center components
     }
 
     /**
