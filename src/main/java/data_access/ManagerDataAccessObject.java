@@ -1,6 +1,6 @@
 //package data_access;
 //
-//import entity.Manager;
+//import entity.manager.Manager;
 //import java.sql.*;
 //
 //public class ManagerDataAccessObject implements  ManagerDataAccessInterface{

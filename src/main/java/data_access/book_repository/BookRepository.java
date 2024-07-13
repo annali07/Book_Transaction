@@ -1,5 +1,5 @@
 //package data_access.book_repository;
-//import entity.Book;
+//import entity.book.Book;
 //
 //public class BookRepository {
 //    @Override

@@ -3,10 +3,10 @@ package use_case;
 
 import data_access.database_transaction_entry.DataTransactionEntryDataAccessObject;
 import data_access.database_book.DatabaseBookDataAccessObject;
-import entity.Book;
-import entity.TransactionEntry;
-import entity.TransactionEntryFactory;
-import interface_adapter.PurcahseBookPresenter;
+import entity.book.Book;
+import entity.purchase_entry.TransactionEntry;
+import entity.purchase_entry.TransactionEntryFactory;
+import interface_adapter.purchase_book.PurcahseBookPresenter;
 
 import java.util.Date;
 

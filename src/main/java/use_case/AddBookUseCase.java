@@ -1,6 +1,6 @@
 package use_case;
 
-import interface_adapter.AddBookPresenter;
+import interface_adapter.add_book.AddBookPresenter;
 
 /**
  * Use case class for adding a book.

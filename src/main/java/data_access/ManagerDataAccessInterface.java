@@ -1,6 +1,6 @@
 package data_access;
 
-import entity.Manager;
+import entity.manager.Manager;
 
 public interface ManagerDataAccessInterface {
     Manager getManagerByUName(String managerId);

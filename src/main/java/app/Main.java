@@ -1,8 +1,8 @@
 package app;
 
-import interface_adapter.AddBookViewModel;
-import interface_adapter.LoginViewModel;
-import interface_adapter.MainMenuViewModel;
+import interface_adapter.add_book.AddBookViewModel;
+import interface_adapter.login.LoginViewModel;
+import interface_adapter.main_menu.MainMenuViewModel;
 import interface_adapter.ViewManagerModel;
 import view.LoginView;
 import view.MainMenuView;
@@ -39,7 +39,7 @@ public class Main {
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
         AddBookViewModel addBookViewModel = new AddBookViewModel();
 
-        LoginView loginView = new LoginView(loginViewModel, viewManagerModel, mainMenuViewModel);
+        LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, mainMenuViewModel);
         MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, addBookViewModel, viewManagerModel);
         AddBookView addBookView = new AddBookView(addBookViewModel);
 
@@ -47,7 +47,9 @@ public class Main {
         views.add(mainMenuView, mainMenuView.viewName);
         views.add(addBookView, addBookView.viewName);
 
+        viewManagerModel.setActiveView(loginView.viewName);
         viewManagerModel.firePropertyChanged();
+
         application.pack();
         application.setVisible(true);
     }

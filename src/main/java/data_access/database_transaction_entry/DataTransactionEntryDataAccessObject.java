@@ -1,6 +1,6 @@
 package data_access.database_transaction_entry;
 
-import entity.TransactionEntry;
+import entity.purchase_entry.TransactionEntry;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 

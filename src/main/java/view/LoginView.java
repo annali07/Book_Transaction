@@ -3,7 +3,13 @@ package view;
 import data_access.UserLoginDataAccess;
 import data_access.UserLoginDataAccessInterface;
 import interface_adapter.*;
-import use_case.LoginUseCase;
+import interface_adapter.login.LoginController;
+import interface_adapter.login.LoginPresenter;
+import interface_adapter.login.LoginState;
+import interface_adapter.login.LoginViewModel;
+import interface_adapter.main_menu.MainMenuViewModel;
+import use_case.LoginInputDataBoundary;
+
 
 import javax.swing.*;
 import java.awt.*;
@@ -18,8 +24,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
 
     public final String viewName = "log in";
     private final LoginViewModel loginViewModel;
-    private final LoginUseCase loginUseCase;
-
+    private final LoginController loginController;
     /**
      * The username chosen by the user
      */
@@ -37,14 +42,13 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     /**
      * A window with a title and a JButton.
      */
-    public LoginView(LoginViewModel loginViewModel, ViewManagerModel viewManagerModel, MainMenuViewModel mainMenuViewModel) {
+    public LoginView(LoginViewModel loginViewModel, LoginController controller) {
         this.loginViewModel = loginViewModel;
         this.loginViewModel.addPropertyChangeListener(this);
-        UserLoginDataAccessInterface userGateway = new UserLoginDataAccess();
-        LoginPresenter presenter = new LoginPresenter(viewManagerModel, loginViewModel, mainMenuViewModel);
+//        this.loginUseCase = new LoginInteractor(userGateway, presenter);
 
-        // Initialize LoginUseCase
-        this.loginUseCase = new LoginUseCase(userGateway, presenter);
+//        LoginPresenter presenter = new LoginPresenter(viewManagerModel, loginViewModel, mainMenuViewModel);
+        this.loginController = controller;
 
         JLabel title = new JLabel(loginViewModel.TITLE_LABEL);
         title.setAlignmentX(Component.CENTER_ALIGNMENT);
@@ -103,7 +107,8 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
         if (loginViewModel.LOGIN_BUTTON_LABEL.equals(evt.getActionCommand())) {
             String username = usernameInputField.getText();
             String password = new String(passwordInputField.getPassword());
-            loginUseCase.login(username, password);
+            loginController.execute(username, password);
+//            loginUseCase.login(username, password);
         } else if (loginViewModel.CANCEL_BUTTON_LABEL.equals(evt.getActionCommand())) {
             System.exit(0);
         }

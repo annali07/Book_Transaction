@@ -1,12 +1,7 @@
 package view;
 
-import data_access.UserLoginDataAccess;
-import data_access.UserLoginDataAccessInterface;
-import interface_adapter.AddBookState;
-import interface_adapter.AddBookViewModel;
-import interface_adapter.LoginPresenter;
-import interface_adapter.LoginState;
-import use_case.LoginUseCase;
+import interface_adapter.add_book.AddBookState;
+import interface_adapter.add_book.AddBookViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,8 +33,8 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
 //        UserLoginDataAccessInterface userGateway = new UserLoginDataAccess();
 //        LoginPresenter presenter = new LoginPresenter(viewManagerModel, loginViewModel, mainMenuViewModel);
 //
-//        // Initialize LoginUseCase
-//        this.loginUseCase = new LoginUseCase(userGateway, presenter);
+//        // Initialize LoginInteractor
+//        this.loginUseCase = new LoginInteractor(userGateway, presenter);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JLabel title = new JLabel(addBookViewModel.TITLE_LABEL);

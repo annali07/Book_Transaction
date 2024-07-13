@@ -1,6 +1,6 @@
 package data_access.database_book;
 
-import entity.Book;
+import entity.book.Book;
 
 public interface DatabaseBookDataAccessInterface {
     public Book getBook(int bookID);

@@ -1,4 +1,5 @@
 package use_case;
 
-public class LoginInputDataBoundary {
+public interface LoginInputDataBoundary {
+    void execute(LoginInputData loginInputData);
 }

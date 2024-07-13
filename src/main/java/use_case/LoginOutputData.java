@@ -17,6 +17,7 @@ public class LoginOutputData {
         public void setSuccess(boolean success) {
             this.loginFailed = success;
         }
+
         public String defaultButton(){
             return this.activeButton;
         }

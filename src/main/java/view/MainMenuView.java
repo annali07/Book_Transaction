@@ -1,8 +1,8 @@
 package view;
 
-import interface_adapter.AddBookPresenter;
-import interface_adapter.AddBookViewModel;
-import interface_adapter.MainMenuViewModel;
+import interface_adapter.add_book.AddBookPresenter;
+import interface_adapter.add_book.AddBookViewModel;
+import interface_adapter.main_menu.MainMenuViewModel;
 import interface_adapter.ViewManagerModel;
 import use_case.AddBookUseCase;
 
