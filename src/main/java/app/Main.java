@@ -1,11 +1,13 @@
 package app;
 
+import interface_adapter.AddBookViewModel;
 import interface_adapter.LoginViewModel;
 import interface_adapter.MainMenuViewModel;
 import interface_adapter.ViewManagerModel;
 import view.LoginView;
 import view.MainMenuView;
 import view.ViewManager;
+import view.AddBookView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -35,12 +37,17 @@ public class Main {
 
         LoginViewModel loginViewModel = new LoginViewModel();
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
+        AddBookViewModel addBookViewModel = new AddBookViewModel();
+
         LoginView loginView = new LoginView(loginViewModel, viewManagerModel, mainMenuViewModel);
-        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel);
+        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, addBookViewModel, viewManagerModel);
+        AddBookView addBookView = new AddBookView(addBookViewModel);
+
         views.add(loginView, loginView.viewName);
         views.add(mainMenuView, mainMenuView.viewName);
-        viewManagerModel.firePropertyChanged();
+        views.add(addBookView, addBookView.viewName);
 
+        viewManagerModel.firePropertyChanged();
         application.pack();
         application.setVisible(true);
     }

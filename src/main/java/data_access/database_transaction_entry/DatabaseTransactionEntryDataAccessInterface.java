@@ -1,4 +1,4 @@
-package data_access;
+package data_access.database_transaction_entry;
 
 import entity.TransactionEntry;
 

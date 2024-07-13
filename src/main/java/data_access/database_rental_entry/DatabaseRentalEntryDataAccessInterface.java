@@ -1,4 +1,4 @@
-package data_access;
+package data_access.database_rental_entry;
 
 public interface DatabaseRentalEntryDataAccessInterface {
 

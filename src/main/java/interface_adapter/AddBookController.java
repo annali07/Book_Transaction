@@ -1,2 +1,5 @@
-package interface_adapter;public class AddBookController {
+package interface_adapter;
+
+
+public class AddBookController {
 }

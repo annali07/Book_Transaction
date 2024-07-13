@@ -1,2 +1,4 @@
-package interface_adapter;public class PurcahseBookPresenter {
+package interface_adapter;
+
+public class PurcahseBookPresenter {
 }
