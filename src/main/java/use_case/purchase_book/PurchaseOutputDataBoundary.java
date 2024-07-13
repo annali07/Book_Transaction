@@ -1,4 +1,4 @@
-package use_case;
+package use_case.purchase_book;
 
 public interface PurchaseOutputDataBoundary {
     void prepareSuccessView(PurchaseOutputData purchaseOutputData);

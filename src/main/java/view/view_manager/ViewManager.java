@@ -1,13 +1,11 @@
-package view;
+package view.view_manager;
 
-import interface_adapter.ViewManagerModel;
+import interface_adapter.view.ViewManagerModel;
 
 import javax.swing.*;
 import java.awt.*;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
-import java.util.Map;
-import java.util.Map.Entry;
 
 /*
     A listener and controller for managing UI view changes.

@@ -1,7 +1,10 @@
-package view;
+package view.views;
 
+import interface_adapter.add_book.AddBookController;
 import interface_adapter.add_book.AddBookState;
 import interface_adapter.add_book.AddBookViewModel;
+import interface_adapter.main_menu.MainMenuViewModel;
+import interface_adapter.view.ViewManagerModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -16,7 +19,9 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
 
     public final String viewName = "add book";
     private final AddBookViewModel addBookViewModel;
-//    private final AddDBUseCase addDbUseCase;
+    private final AddBookController addBookController;
+    private final MainMenuViewModel mainMenuViewModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Input ISBN given to the manager
@@ -27,14 +32,12 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
     private final JButton addBookButton;
     private final JButton cancelButton;
 
-    public AddBookView(AddBookViewModel addBookViewModel) {
+    public AddBookView(AddBookViewModel addBookViewModel, AddBookController addBookController, ViewManagerModel viewManagerModel, MainMenuViewModel mainMenuViewModel) {
         this.addBookViewModel = addBookViewModel;
         this.addBookViewModel.addPropertyChangeListener(this);
-//        UserLoginDataAccessInterface userGateway = new UserLoginDataAccess();
-//        LoginPresenter presenter = new LoginPresenter(viewManagerModel, loginViewModel, mainMenuViewModel);
-//
-//        // Initialize LoginInteractor
-//        this.loginUseCase = new LoginInteractor(userGateway, presenter);
+        this.addBookController = addBookController;
+        this.viewManagerModel = viewManagerModel;
+        this.mainMenuViewModel = mainMenuViewModel;
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JLabel title = new JLabel(addBookViewModel.TITLE_LABEL);
@@ -86,10 +89,13 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
     public void actionPerformed(ActionEvent evt) {
         if (addBookViewModel.ADD_BOOK_LABEL.equals(evt.getActionCommand())) {
             System.out.println("Add Book Entry button clicked");
-            // Handle Add Book Entry action
+            String isbn = isbnInputField.getText();
+            addBookController.execute(isbn);
         } else if (addBookViewModel.CANCEL_LABEL.equals(evt.getActionCommand())) {
+            // #TODO MODIFY
             System.out.println("Cancel Entry button clicked");
-            // Handle Rent Book Entry action
+            viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
+            viewManagerModel.firePropertyChanged();
         }
     }
 

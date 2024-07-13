@@ -1,6 +1,6 @@
 package interface_adapter.add_book;
 
-import interface_adapter.ViewModel;
+import interface_adapter.view.ViewModel;
 
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;

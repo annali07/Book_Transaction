@@ -1,13 +1,15 @@
 package app;
 
+import app.usecase_factory.AddBookUseCaseFactory;
+import app.usecase_factory.LoginUseCaseFactory;
 import interface_adapter.add_book.AddBookViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.main_menu.MainMenuViewModel;
-import interface_adapter.ViewManagerModel;
-import view.LoginView;
-import view.MainMenuView;
-import view.ViewManager;
-import view.AddBookView;
+import interface_adapter.view.ViewManagerModel;
+import view.views.LoginView;
+import view.views.MainMenuView;
+import view.view_manager.ViewManager;
+import view.views.AddBookView;
 
 import javax.swing.*;
 import java.awt.*;
@@ -41,7 +43,7 @@ public class Main {
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, mainMenuViewModel);
         MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, addBookViewModel, viewManagerModel);
-        AddBookView addBookView = new AddBookView(addBookViewModel);
+        AddBookView addBookView = AddBookUseCaseFactory.create(viewManagerModel, addBookViewModel, mainMenuViewModel);
 
         views.add(loginView, loginView.viewName);
         views.add(mainMenuView, mainMenuView.viewName);

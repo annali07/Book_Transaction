@@ -1,4 +1,4 @@
-package use_case;
+package use_case.purchase_book;
 
 
 import data_access.database_transaction_entry.DataTransactionEntryDataAccessObject;

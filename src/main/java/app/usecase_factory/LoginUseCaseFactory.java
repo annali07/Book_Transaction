@@ -1,16 +1,16 @@
-package app;
+package app.usecase_factory;
 
-import data_access.UserLoginDataAccess;
-import data_access.UserLoginDataAccessInterface;
-import interface_adapter.ViewManagerModel;
+import data_access.login_validation.UserLoginDataAccess;
+import data_access.login_validation.UserLoginDataAccessInterface;
+import interface_adapter.view.ViewManagerModel;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.main_menu.MainMenuViewModel;
-import use_case.LoginInputDataBoundary;
-import use_case.LoginInteractor;
-import use_case.LoginOutputDataBoundary;
-import view.LoginView;
+import use_case.login.LoginInputDataBoundary;
+import use_case.login.LoginInteractor;
+import use_case.login.LoginOutputDataBoundary;
+import view.views.LoginView;
 
 import javax.swing.*;
 import java.io.IOException;

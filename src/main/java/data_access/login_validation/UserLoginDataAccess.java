@@ -1,4 +1,4 @@
-package data_access;
+package data_access.login_validation;
 
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -33,7 +33,6 @@ public class UserLoginDataAccess implements UserLoginDataAccessInterface{
         private JSONObject readUserData() {
             JSONParser parser = new JSONParser();
             try {
-                // Change to local machine path
                 Object obj = parser.parse(new FileReader("/Users/nana/Desktop/BookTransaction/src/main/java/data/managers.json"));
                 return (JSONObject) obj;
             } catch (Exception e) {

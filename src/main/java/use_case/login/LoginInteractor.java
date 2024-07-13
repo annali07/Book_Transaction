@@ -1,11 +1,10 @@
-package use_case;
+package use_case.login;
 
-import data_access.UserLoginDataAccessInterface;
-import interface_adapter.login.LoginPresenter;
+import data_access.login_validation.UserLoginDataAccessInterface;
 
 public class LoginInteractor implements LoginInputDataBoundary{
-    private UserLoginDataAccessInterface userGateway;
-    private LoginOutputDataBoundary presenter;
+    private final UserLoginDataAccessInterface userGateway;
+    private final LoginOutputDataBoundary presenter;
 
     public LoginInteractor(UserLoginDataAccessInterface userGateway, LoginOutputDataBoundary loginOutputDataBoundary) {
         this.userGateway = userGateway;

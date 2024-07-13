@@ -1,2 +1,4 @@
-package use_case.add_book;public class AddBookOutputBoundary {
+package use_case.add_book;
+
+public interface AddBookOutputBoundary {
 }

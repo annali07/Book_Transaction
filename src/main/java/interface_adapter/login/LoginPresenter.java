@@ -2,9 +2,9 @@ package interface_adapter.login;
 
 import interface_adapter.main_menu.MainMenuState;
 import interface_adapter.main_menu.MainMenuViewModel;
-import interface_adapter.ViewManagerModel;
-import use_case.LoginOutputDataBoundary;
-import use_case.LoginOutputData;
+import interface_adapter.view.ViewManagerModel;
+import use_case.login.LoginOutputDataBoundary;
+import use_case.login.LoginOutputData;
 
 /**
  * The presenter for handling the login output data.
@@ -14,7 +14,7 @@ public class LoginPresenter implements LoginOutputDataBoundary {
 
     private final LoginViewModel loginViewModel;
     private final MainMenuViewModel mainMenuViewModel;
-    private ViewManagerModel viewManagerModel;
+    private final ViewManagerModel viewManagerModel;
 
     /**
      * Constructs a LoginPresenter with the specified view manager model,

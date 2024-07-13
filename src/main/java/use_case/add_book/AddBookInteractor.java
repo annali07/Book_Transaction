@@ -1,30 +1,39 @@
 package use_case.add_book;
 
-import interface_adapter.add_book.AddBookPresenter;
+import data_access.add_book_repository.BookRepositoryDataAccessInterface;
+import data_access.api.ExternalBookApiInterface;
+import entity.ApiResponse;
+import entity.book.Book;
 
 /**
  * Use case class for adding a book.
  * This class contains the business logic for adding a book and
  * interacts with the presenter to update the view.
  */
-public class AddBookInteractor {
-    private final AddBookPresenter presenter;
+public class AddBookInteractor implements AddBookInputBoundary{
+    private final BookRepositoryDataAccessInterface bookRepositoryDataAccessObject;
+    private final ExternalBookApiInterface externalBookApi;
+    private final AddBookOutputBoundary presenter;
 
-    /**
-     * Constructs an AddBookUseCase with the specified presenter.
-     *
-     * @param presenter the presenter used to update the view
-     */
-    public AddBookInteractor(AddBookPresenter presenter) {
+    public AddBookInteractor(BookRepositoryDataAccessInterface bookRepositoryDataAccessObject, ExternalBookApiInterface externalBookAPI, AddBookOutputBoundary presenter) {
+        this.bookRepositoryDataAccessObject = bookRepositoryDataAccessObject;
+        this.externalBookApi = externalBookAPI;
         this.presenter = presenter;
     }
 
-    /**
-     * Adds a book and prepares the success view.
-     * This method contains the logic for adding a book and interacts with the
-     * presenter to prepare the success view.
-     */
-    public void addBook() {
-        presenter.prepareSuccessView();
+    @Override
+    public void addBook(AddBookInputData addBookInputData) {
+        // Make API call
+        ApiResponse apiResponse = externalBookApi.fetchBookDetails(addBookInputData.getIsbn());
+
+        // Process API response
+//        Book book = new Book(apiResponse.getBookName(), apiResponse.getAuthor());
+
+        // Store data in the database
+//        bookRepositoryDataAccessObject.saveBook(book);
+
+        // Prepare the response
+//        presenter.prepareSuccessView();
+
     }
 }

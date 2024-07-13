@@ -1,4 +1,4 @@
-package data_access;
+package data_access.manager;
 
 import entity.manager.Manager;
 
