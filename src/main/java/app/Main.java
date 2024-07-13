@@ -21,9 +21,7 @@ public class Main {
         JFrame application = new JFrame("Book Transaction");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
-
-         CardLayout cardLayout = new CardLayout();
-//        FlowLayout layout = new FlowLayout();
+        CardLayout cardLayout = new CardLayout();
 
         // View objects. One view visible at a time.
         JPanel views = new JPanel(cardLayout);

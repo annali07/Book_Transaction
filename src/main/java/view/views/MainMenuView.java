@@ -4,7 +4,6 @@ import interface_adapter.add_book.AddBookViewModel;
 import interface_adapter.main_menu.MainMenuViewModel;
 import interface_adapter.view.ViewManagerModel;
 
-
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -12,6 +11,11 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * A panel representing the main menu view. It contains buttons for various actions
+ * such as adding a book, renting a book, purchasing a book, and calculating revenue.
+ * It listens to property changes from the MainMenuViewModel and updates the UI accordingly.
+ */
 public class MainMenuView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "main menu";
     private final MainMenuViewModel mainMenuViewModel;
@@ -23,6 +27,14 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
     private final JButton addPurchaseButton;
     private final JButton calculateRevenueButton;
 
+    /**
+     * Constructs a MainMenuView with the specified MainMenuViewModel, AddBookViewModel, and ViewManagerModel.
+     * Initializes the UI components and sets up listeners.
+     *
+     * @param mainMenuViewModel the view model for the main menu view
+     * @param addBookViewModel the view model for adding books
+     * @param viewManagerModel the view manager model to manage active views
+     */
     public MainMenuView(MainMenuViewModel mainMenuViewModel, AddBookViewModel addBookViewModel, ViewManagerModel viewManagerModel) {
         this.mainMenuViewModel = mainMenuViewModel;
         this.mainMenuViewModel.addPropertyChangeListener(this);
@@ -71,11 +83,22 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         this.add(calculateRevenueButton);
     }
 
+    /**
+     * Returns the preferred size of this component.
+     *
+     * @return the preferred size of this component
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(400, 250);
     }
 
+    /**
+     * Reacts to a button click that results in an ActionEvent.
+     * Handles actions for add book, add rent, add purchase, and calculate revenue.
+     *
+     * @param evt the action event triggered by button clicks
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         if (mainMenuViewModel.ADD_BOOK.equals(evt.getActionCommand())) {
@@ -93,6 +116,12 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
         }
     }
 
+    /**
+     * Reacts to property changes in the MainMenuViewModel.
+     * Updates the UI based on the new state.
+     *
+     * @param evt the property change event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         // Handle property change updates from the ViewModel

@@ -27,10 +27,8 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
      * Input ISBN given to the manager
      */
     final JTextField isbnInputField = new JTextField(15);
+    final JTextField priceInputField = new JTextField(15);
     private final JLabel isbnErrorField = new JLabel();
-
-    private final JButton addBookButton;
-    private final JButton cancelButton;
 
     public AddBookView(AddBookViewModel addBookViewModel, AddBookController addBookController, ViewManagerModel viewManagerModel, MainMenuViewModel mainMenuViewModel) {
         this.addBookViewModel = addBookViewModel;
@@ -45,17 +43,20 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
         title.setFont(new Font("Arial", Font.BOLD, 16));
         this.add(title);
 
-        LabelTextPanel isbnInfo = new LabelTextPanel(
-                new JLabel(addBookViewModel.ADD_BOOK_LABEL), isbnInputField);
+        LabelTextPanelInt isbnInfo = new LabelTextPanelInt(
+                new JLabel(addBookViewModel.ISBN_LABEL), isbnInputField);
+        LabelTextPanelInt bookPrice = new LabelTextPanelInt(
+                new JLabel(addBookViewModel.PRICE_LABEL), priceInputField);
         this.add(isbnInfo);
+        this.add(bookPrice);
 
         this.add(Box.createRigidArea(new Dimension(0, 20))); // Add space between title and buttons
 
         JPanel buttons = new JPanel();
         buttons.setLayout(new FlowLayout(FlowLayout.CENTER));
-        addBookButton = new JButton(addBookViewModel.ADD_BOOK_LABEL);
+        JButton addBookButton = new JButton(addBookViewModel.ADD_BOOK_LABEL);
         buttons.add(addBookButton);
-        cancelButton = new JButton(addBookViewModel.CANCEL_LABEL);
+        JButton cancelButton = new JButton(addBookViewModel.CANCEL_LABEL);
         buttons.add(cancelButton);
 
         addBookButton.addActionListener(this);
@@ -69,6 +70,8 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
             public void keyTyped(KeyEvent e) {
                 AddBookState currentState = addBookViewModel.getState();
                 currentState.setISBN(isbnInputField.getText());
+                // #TODO make safer
+                currentState.setPrice(Integer.parseInt(priceInputField.getText()));
                 addBookViewModel.setState(currentState);
             }
 
@@ -89,7 +92,10 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
     public void actionPerformed(ActionEvent evt) {
         if (addBookViewModel.ADD_BOOK_LABEL.equals(evt.getActionCommand())) {
             System.out.println("Add Book Entry button clicked");
+            // String isbn = addBookViewModel.getState().getISBN();
             String isbn = isbnInputField.getText();
+            String price = priceInputField.getText();
+
             addBookController.execute(isbn);
         } else if (addBookViewModel.CANCEL_LABEL.equals(evt.getActionCommand())) {
             // #TODO MODIFY

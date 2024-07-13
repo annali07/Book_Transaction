@@ -44,6 +44,7 @@ public class ExternalBookApi implements ExternalBookApiInterface {
 
                 // Print extracted details
                 ApiResponse apiResponse = new ApiResponse(title, author);
+                System.out.println(title);
                 return apiResponse;
             } else {
                 System.out.println("GET request failed");
