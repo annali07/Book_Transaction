@@ -30,7 +30,6 @@ public class LoginUseCaseFactory {
     private static LoginController createUserLoginUseCase(ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, MainMenuViewModel mainMenuViewModel) throws IOException {
         UserLoginDataAccessInterface userGateway = new UserLoginDataAccess();
 
-        // Notice how we pass this method's parameters to the Presenter.
         LoginOutputDataBoundary loginOutputDataBoundary = new LoginPresenter(viewManagerModel,loginViewModel, mainMenuViewModel);
 
         LoginInputDataBoundary userLoginInteractor = new LoginInteractor(

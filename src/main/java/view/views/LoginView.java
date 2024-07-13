@@ -1,15 +1,8 @@
 package view;
 
-import data_access.UserLoginDataAccess;
-import data_access.UserLoginDataAccessInterface;
-import interface_adapter.*;
 import interface_adapter.login.LoginController;
-import interface_adapter.login.LoginPresenter;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
-import interface_adapter.main_menu.MainMenuViewModel;
-import use_case.LoginInputDataBoundary;
-
 
 import javax.swing.*;
 import java.awt.*;
@@ -45,9 +38,7 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
     public LoginView(LoginViewModel loginViewModel, LoginController controller) {
         this.loginViewModel = loginViewModel;
         this.loginViewModel.addPropertyChangeListener(this);
-//        this.loginUseCase = new LoginInteractor(userGateway, presenter);
 
-//        LoginPresenter presenter = new LoginPresenter(viewManagerModel, loginViewModel, mainMenuViewModel);
         this.loginController = controller;
 
         JLabel title = new JLabel(loginViewModel.TITLE_LABEL);
@@ -108,7 +99,6 @@ public class LoginView extends JPanel implements ActionListener, PropertyChangeL
             String username = usernameInputField.getText();
             String password = new String(passwordInputField.getPassword());
             loginController.execute(username, password);
-//            loginUseCase.login(username, password);
         } else if (loginViewModel.CANCEL_BUTTON_LABEL.equals(evt.getActionCommand())) {
             System.exit(0);
         }

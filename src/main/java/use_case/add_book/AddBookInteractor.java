@@ -1,4 +1,4 @@
-package use_case;
+package use_case.add_book;
 
 import interface_adapter.add_book.AddBookPresenter;
 
@@ -7,7 +7,7 @@ import interface_adapter.add_book.AddBookPresenter;
  * This class contains the business logic for adding a book and
  * interacts with the presenter to update the view.
  */
-public class AddBookUseCase {
+public class AddBookInteractor {
     private final AddBookPresenter presenter;
 
     /**
@@ -15,7 +15,7 @@ public class AddBookUseCase {
      *
      * @param presenter the presenter used to update the view
      */
-    public AddBookUseCase(AddBookPresenter presenter) {
+    public AddBookInteractor(AddBookPresenter presenter) {
         this.presenter = presenter;
     }
 
