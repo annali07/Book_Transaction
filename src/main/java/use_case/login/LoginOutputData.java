@@ -1,25 +1,57 @@
 package use_case.login;
 
+/**
+ * Represents the output data for a login attempt, including the username and the status of the login attempt.
+ */
 public class LoginOutputData {
-        private boolean loginFailed;
-        private String username;
-        private String activeButton = "none";
+    /**
+     * Indicates whether the login attempt failed.
+     */
+    private boolean loginFailed;
 
-        public LoginOutputData(String username, boolean loginFailed) {
-            this.username = username;
-            this.loginFailed = loginFailed;
-        }
+    /**
+     * The username of the user attempting to log in.
+     */
+    private final String username;
 
-        public String getUsername(){
-            return this.username;
-        }
+    /**
+     * Constructs a LoginOutputData instance with the specified username and login status.
+     *
+     * @param username    The username of the user attempting to log in.
+     * @param loginFailed Indicates whether the login attempt failed.
+     */
+    public LoginOutputData(String username, boolean loginFailed) {
+        this.username = username;
+        this.loginFailed = loginFailed;
+    }
 
-        public void setSuccess(boolean success) {
-            this.loginFailed = success;
-        }
+    /**
+     * Returns the username of the user attempting to log in.
+     *
+     * @return The username.
+     */
+    public String getUsername() {
+        return this.username;
+    }
 
-        public String defaultButton(){
-            return this.activeButton;
-        }
+    /**
+     * Sets the success status of the login attempt.
+     *
+     * @param success The success status to set.
+     */
+    public void setSuccess(boolean success) {
+        this.loginFailed = success;
+    }
 
+    /**
+     * Returns the default active button status.
+     *
+     * @return The default active button status.
+     */
+    public String defaultButton() {
+        /**
+         * The active button status, default is "none".
+         */
+        return "none";
+    }
 }
