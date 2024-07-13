@@ -1,21 +1,20 @@
 package use_case;
 
 
-import data_access.DataTransactionEntryDataAccessObject;
-import data_access.DatabaseBookDataAccessInterface;
-import data_access.DatabaseBookDataAccessObject;
+import data_access.database_transaction_entry.DataTransactionEntryDataAccessObject;
+import data_access.database_book.DatabaseBookDataAccessObject;
 import entity.Book;
 import entity.TransactionEntry;
 import entity.TransactionEntryFactory;
-import interface_adapter.PurchasePresenter;
+import interface_adapter.PurcahseBookPresenter;
 
 import java.util.Date;
 
 public class PurchaseUseCase implements PurchaseInputDataBoundary{
 
-    private PurchasePresenter presenter;
+    private PurcahseBookPresenter presenter;
 
-    public PurchaseUseCase(PurchasePresenter presenter) {
+    public PurchaseUseCase(PurcahseBookPresenter presenter) {
         this.presenter = presenter;
     }
 
