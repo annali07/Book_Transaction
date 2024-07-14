@@ -1,6 +1,7 @@
 package data_access.add_book_repository;
 
 import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import entity.book.Book;
@@ -15,7 +16,10 @@ import java.util.Map;
 public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessInterface {
 
     private static final String FILE_PATH = "/Users/nana/Desktop/BookTransaction/src/main/java/data/TotalBooks.json";
-    private final Gson gson = GsonConfig.getGson();
+
+    private final Gson gson = new GsonBuilder()
+            .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
+            .create();
 
     @Override
     public void saveBook(Book book) {
