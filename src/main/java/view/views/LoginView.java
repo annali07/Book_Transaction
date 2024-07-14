@@ -3,6 +3,7 @@ package view.views;
 import interface_adapter.login.LoginController;
 import interface_adapter.login.LoginState;
 import interface_adapter.login.LoginViewModel;
+import view.helper_functions.LabelTextPanel;
 
 import javax.swing.*;
 import java.awt.*;

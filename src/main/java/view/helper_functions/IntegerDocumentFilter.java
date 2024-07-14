@@ -1,4 +1,4 @@
-package view.views;
+package view.helper_functions;
 
 import javax.swing.text.BadLocationException;
 import javax.swing.text.DocumentFilter;

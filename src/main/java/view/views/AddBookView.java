@@ -5,6 +5,8 @@ import interface_adapter.add_book.AddBookState;
 import interface_adapter.add_book.AddBookViewModel;
 import interface_adapter.main_menu.MainMenuViewModel;
 import interface_adapter.view.ViewManagerModel;
+import view.helper_functions.LabelTextPanel;
+import view.helper_functions.LabelTextPanelInt;
 
 import javax.swing.*;
 import java.awt.*;
@@ -20,8 +22,6 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
     public final String viewName = "add book";
     private final AddBookViewModel addBookViewModel;
     private final AddBookController addBookController;
-    private final MainMenuViewModel mainMenuViewModel;
-    private final ViewManagerModel viewManagerModel;
 
     /**
      * Input ISBN given to the manager
@@ -30,12 +30,10 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
     final JTextField priceInputField = new JTextField(15);
     private final JLabel isbnErrorField = new JLabel();
 
-    public AddBookView(AddBookViewModel addBookViewModel, AddBookController addBookController, ViewManagerModel viewManagerModel, MainMenuViewModel mainMenuViewModel) {
+    public AddBookView(AddBookViewModel addBookViewModel, AddBookController addBookController) {
         this.addBookViewModel = addBookViewModel;
         this.addBookViewModel.addPropertyChangeListener(this);
         this.addBookController = addBookController;
-        this.viewManagerModel = viewManagerModel;
-        this.mainMenuViewModel = mainMenuViewModel;
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JLabel title = new JLabel(addBookViewModel.TITLE_LABEL);
@@ -70,13 +68,13 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
             public void keyTyped(KeyEvent e) {
                 AddBookState currentState = addBookViewModel.getState();
                 currentState.setISBN(isbnInputField.getText());
-                // #TODO make safer
                 currentState.setPrice(Integer.parseInt(priceInputField.getText()));
                 addBookViewModel.setState(currentState);
             }
 
             @Override
-            public void keyPressed(KeyEvent e) {}
+            public void keyPressed(KeyEvent e) {
+            }
 
             @Override
             public void keyReleased(KeyEvent e) {}
@@ -92,21 +90,36 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
     public void actionPerformed(ActionEvent evt) {
         if (addBookViewModel.ADD_BOOK_LABEL.equals(evt.getActionCommand())) {
             System.out.println("Add Book Entry button clicked");
-            // String isbn = addBookViewModel.getState().getISBN();
-            String isbn = isbnInputField.getText();
-            int price = Integer.parseInt(priceInputField.getText()); // Safe b/c the input box ensures integer input
+            AddBookState state = addBookViewModel.getState();
+            if (state == null) {
+                throw new IllegalStateException("AddBookState is null");
+            }
+            String isbn = state.getISBN();
+            if (isbn == null || isbn.isEmpty()) {
+                System.out.println("ISBN is empty or null");
+                return;
+            }
+            int price;
+            try {
+                price = Integer.parseInt(priceInputField.getText());
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid price input");
+                return;
+            }
             addBookController.execute(isbn, price);
         } else if (addBookViewModel.CANCEL_LABEL.equals(evt.getActionCommand())) {
-            // #TODO MODIFY
-            System.out.println("Cancel Entry button clicked");
-            viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
-            viewManagerModel.firePropertyChanged();
+            addBookController.cancel();
         }
     }
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
-
+        AddBookState state = (AddBookState) evt.getNewValue();
+        setFields(state);
+    }
+    private void setFields(AddBookState state) {
+        isbnInputField.setText(state.getISBN());
+        priceInputField.setText(String.valueOf(state.getPrice()));
     }
 
 
