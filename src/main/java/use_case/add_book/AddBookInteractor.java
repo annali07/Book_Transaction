@@ -27,13 +27,14 @@ public class AddBookInteractor implements AddBookInputBoundary{
         ApiResponse apiResponse = externalBookApi.fetchBookDetails(addBookInputData.getIsbn());
 
         // Process API response
-//        Book book = new Book(apiResponse.getBookName(), apiResponse.getAuthor());
+        Book book = new Book(apiResponse.getBookName(), apiResponse.getAuthor(), ++Book.bookCount, addBookInputData.getPrice());
 
         // Store data in the database
-//        bookRepositoryDataAccessObject.saveBook(book);
+        bookRepositoryDataAccessObject.saveBook(book);
 
+        System.out.println("Saved to DB\n");
         // Prepare the response
-//        presenter.prepareSuccessView();
+        presenter.prepareSuccessView();
 
     }
 }

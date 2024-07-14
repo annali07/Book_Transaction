@@ -5,6 +5,7 @@ use_case/login/LoginInputData.class
 interface_adapter/add_book/AddBookViewModel.class
 data_access/database_rental_entry/DatabaseRentalEntryDataAccessInterface.class
 data_access/add_book_repository/BookRepositoryDataAccessInterface.class
+use_case/book_info/BookInformationDataBoundary.class
 data_access/database_book/DatabaseBookDataAccessInterface.class
 entity/manager/ManagerFactory.class
 interface_adapter/main_menu/MainMenuState.class
@@ -19,7 +20,6 @@ view/view_manager/ViewManager.class
 interface_adapter/login/LoginController.class
 use_case/purchase_book/PurchaseRecordData.class
 use_case/add_book/AddBookInputData.class
-use_case/BookInformationDataBoundary.class
 data_access/database_transaction_entry/DataTransactionEntryDataAccessObject.class
 use_case/rent_book/BorrowerData.class
 data_access/manager/ManagerDataAccessInterface.class
@@ -39,6 +39,7 @@ data_access/api/ExternalBookApiInterface.class
 use_case/purchase_book/PurchaseData.class
 data_access/database_book/DatabaseBookDataAccessObject.class
 use_case/add_book/AddBookInteractor.class
+view/views/LabelTextPanelInt.class
 entity/book/Book.class
 interface_adapter/main_menu/MainMenuViewModel.class
 interface_adapter/view/ViewModel.class
@@ -53,9 +54,9 @@ interface_adapter/main_menu/MainMenuPresenter.class
 interface_adapter/login/UserLoginFailed.class
 data_access/fetch_book/FetchBookViaAPIDataAccessObject.class
 use_case/manager/CreateManagerData.class
-use_case/BookInformationData.class
 interface_adapter/add_book/AddBookController.class
 data_access/login_validation/UserLoginDataAccess.class
+use_case/book_info/BookInformationData.class
 entity/password/PasswordValidator.class
 entity/password/PasswordValidatorService.class
 use_case/manager/CreateManagerDataBoundary.class
@@ -69,6 +70,7 @@ use_case/rent_book/RentalRecordDataBoundary.class
 interface_adapter/login/LoginViewModel.class
 use_case/login/LoginInputDataBoundary.class
 data_access/login_validation/UserLoginDataAccessInterface.class
+view/views/IntegerDocumentFilter.class
 use_case/login/LoginInteractor.class
 data_access/database_transaction_entry/DatabaseTransactionEntryDataAccessInterface.class
 use_case/login/LoginOutputDataBoundary.class

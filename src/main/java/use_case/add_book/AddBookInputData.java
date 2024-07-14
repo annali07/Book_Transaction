@@ -8,14 +8,16 @@ public class AddBookInputData {
      * The ISBN of the book to be added.
      */
     final private String isbn;
+    final private int price;
 
     /**
      * Constructs an AddBookInputData instance with the specified ISBN.
      *
      * @param isbn The ISBN of the book.
      */
-    public AddBookInputData(String isbn) {
+    public AddBookInputData(String isbn, int price) {
         this.isbn = isbn;
+        this.price = price;
     }
 
     /**
@@ -26,4 +28,7 @@ public class AddBookInputData {
     String getIsbn() {
         return this.isbn;
     }
+
+    int getPrice() {return this.price;}
+
 }

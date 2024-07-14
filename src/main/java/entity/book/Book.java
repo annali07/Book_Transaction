@@ -3,29 +3,34 @@ package entity.book;
 import java.util.Date;
 
 public class Book {
+    // #TODO Is this public static variable valid
+    public static int bookCount = 0;
+
+    private final int rentalPrice = 1;
     private String bookName;
     private int bookID;
-    private String isbn;
-    private boolean damageStatus;
-    private boolean availability;
     private String rentalOrPurchase;
     private double bookPrice;
-    private double rentalPrice;
+    private String author;
     private Date rentalStartDate;
     private Date rentalEndDate;
+    private String BorrowerName;
+    private String BorrowerNumber;
+//    private boolean damageStatus;
+//    private boolean availability;
 
     // Constructor with parameters and default values
-    public Book(String bookName, int bookID, String isbn, double bookPrice, double rentalPrice) {
+    public Book(String bookName, String author, int bookID, double bookPrice) {
         this.bookName = bookName;
         this.bookID = bookID;
-        this.isbn = isbn;
         this.bookPrice = bookPrice;
-        this.rentalPrice = rentalPrice;
-        this.damageStatus = false; // default value
-        this.availability = true;  // default value
-        this.rentalOrPurchase = "Purchase"; // default value
+//        this.damageStatus = false; // default value
+//        this.availability = true;  // default value
+//        this.rentalOrPurchase = "Purchase"; // default value
         this.rentalStartDate = null; // default value
-        this.rentalEndDate = null; // default value
+        this.rentalEndDate = null; //
+        this.BorrowerName = "";
+        this.BorrowerNumber = "";
     }
 
     // Getter and Setter for bookName
@@ -46,32 +51,23 @@ public class Book {
         this.bookID = bookID;
     }
 
-    // Getter and Setter for isbn
-    public String getIsbn() {
-        return isbn;
-    }
-
-    public void setIsbn(String isbn) {
-        this.isbn = isbn;
-    }
-
-    // Getter and Setter for damageStatus
-    public boolean isDamageStatus() {
-        return damageStatus;
-    }
-
-    public void setDamageStatus(boolean damageStatus) {
-        this.damageStatus = damageStatus;
-    }
-
-    // Getter and Setter for availability
-    public boolean isAvailability() {
-        return availability;
-    }
-
-    public void setAvailability(boolean availability) {
-        this.availability = availability;
-    }
+//    // Getter and Setter for damageStatus
+//    public boolean isDamageStatus() {
+//        return damageStatus;
+//    }
+//
+//    public void setDamageStatus(boolean damageStatus) {
+//        this.damageStatus = damageStatus;
+//    }
+//
+//    // Getter and Setter for availability
+//    public boolean isAvailability() {
+//        return availability;
+//    }
+//
+//    public void setAvailability(boolean availability) {
+//        this.availability = availability;
+//    }
 
     // Getter and Setter for rentalOrPurchase
     public String getRentalOrPurchase() {
@@ -89,15 +85,6 @@ public class Book {
 
     public void setBookPrice(double bookPrice) {
         this.bookPrice = bookPrice;
-    }
-
-    // Getter and Setter for rentalPrice
-    public double getRentalPrice() {
-        return rentalPrice;
-    }
-
-    public void setRentalPrice(double rentalPrice) {
-        this.rentalPrice = rentalPrice;
     }
 
     // Getter and Setter for rentalStartDate

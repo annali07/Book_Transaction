@@ -1,9 +1,1 @@
-{
-  "0": {
-    "totalBooks": 2
-  },
-  "1": {
-    "bookID": 1,
-    "bookNamw": "abc"
-  }
-}
+{"1":{"rentalPrice":1,"bookName":"The Seven Husbands of Evelyn Hugo","bookID":1,"bookPrice":12.0,"BorrowerName":"","BorrowerNumber":""},"2":{"rentalPrice":1,"bookName":"The Seven Husbands of Evelyn Hugo","bookID":2,"bookPrice":24.0,"BorrowerName":"","BorrowerNumber":""},"3":{"rentalPrice":1,"bookName":"The Seven Husbands of Evelyn Hugo","bookID":3,"bookPrice":36.0,"BorrowerName":"","BorrowerNumber":""}}

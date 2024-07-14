@@ -43,7 +43,7 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
         title.setFont(new Font("Arial", Font.BOLD, 16));
         this.add(title);
 
-        LabelTextPanelInt isbnInfo = new LabelTextPanelInt(
+        LabelTextPanel isbnInfo = new LabelTextPanel(
                 new JLabel(addBookViewModel.ISBN_LABEL), isbnInputField);
         LabelTextPanelInt bookPrice = new LabelTextPanelInt(
                 new JLabel(addBookViewModel.PRICE_LABEL), priceInputField);
@@ -94,9 +94,8 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
             System.out.println("Add Book Entry button clicked");
             // String isbn = addBookViewModel.getState().getISBN();
             String isbn = isbnInputField.getText();
-            String price = priceInputField.getText();
-
-            addBookController.execute(isbn);
+            int price = Integer.parseInt(priceInputField.getText()); // Safe b/c the input box ensures integer input
+            addBookController.execute(isbn, price);
         } else if (addBookViewModel.CANCEL_LABEL.equals(evt.getActionCommand())) {
             // #TODO MODIFY
             System.out.println("Cancel Entry button clicked");

@@ -21,4 +21,9 @@ public class AddBookPresenter implements AddBookOutputBoundary {
         viewManagerModel.firePropertyChanged();
         System.out.println("Switched to Add Book View");
     }
+
+    @Override
+    public void prepareFailView(String error) {
+        System.out.println("Failed to add book");
+    }
 }
