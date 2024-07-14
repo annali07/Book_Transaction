@@ -6,8 +6,17 @@ import java.io.FileReader;
 import java.util.Iterator;
 import java.util.Set;
 
+/**
+ * Implementation of UserLoginDataAccessInterface for validating user login credentials.
+ */
 public class UserLoginDataAccess implements UserLoginDataAccessInterface{
-
+        /**
+         * Validates the user login by checking the provided username and password against stored user data.
+         *
+         * @param username the username to validate
+         * @param password the password to validate
+         * @return true if the username and password match a stored user, false otherwise
+         */
         @Override
         public boolean validateUserLogin(String username, String password) {
             JSONObject userData = readUserData();
@@ -29,7 +38,11 @@ public class UserLoginDataAccess implements UserLoginDataAccessInterface{
 
             return false;
         }
-
+        /**
+         * Reads the user data from a JSON file.
+         *
+         * @return a JSONObject containing the user data, or null if an error occurs
+         */
         private JSONObject readUserData() {
             JSONParser parser = new JSONParser();
             try {

@@ -8,10 +8,17 @@ import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import entity.api.ApiResponse;
 
+/**
+ * A class that implements ExternalBookApiInterface to fetch book details from an external API.
+ */
 public class ExternalBookApi implements ExternalBookApiInterface {
-    private String bookName;
-    private String author;
 
+    /**
+     * Fetches book details from an external API using the provided ISBN.
+     *
+     * @param isbn the ISBN of the book to fetch details for
+     * @return an ApiResponse object containing the title and author of the book, or null if the request fails
+     */
     @Override
     public ApiResponse fetchBookDetails(String isbn) {
         String url = "https://openlibrary.org/api/books?bibkeys=ISBN:" + isbn + "&jscmd=data&format=json";
@@ -40,7 +47,6 @@ public class ExternalBookApi implements ExternalBookApiInterface {
                 // Extract fields from the JSON object
                 String title = bookNode.path("title").asText();
                 String author = bookNode.path("authors").get(0).path("name").asText();
-                int numberOfPages = bookNode.path("number_of_pages").asInt();
 
                 // Print extracted details
                 ApiResponse apiResponse = new ApiResponse(title, author);
