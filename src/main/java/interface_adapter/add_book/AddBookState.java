@@ -17,7 +17,7 @@ public class AddBookState {
 
     public void setPrice(int price){this.price = price;}
 
-    public String getISBN() {return isbn;}
+    public String getISBN() {return this.isbn;}
 
-    public int getPrice() {return price;}
+    public int getPrice() {return this.price;}
 }

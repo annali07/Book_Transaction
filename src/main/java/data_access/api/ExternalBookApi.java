@@ -6,7 +6,7 @@ import java.net.URL;
 
 import com.fasterxml.jackson.databind.JsonNode;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import entity.ApiResponse;
+import entity.api.ApiResponse;
 
 public class ExternalBookApi implements ExternalBookApiInterface {
     private String bookName;

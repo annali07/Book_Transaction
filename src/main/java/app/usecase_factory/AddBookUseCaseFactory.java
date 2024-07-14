@@ -25,7 +25,7 @@ public class AddBookUseCaseFactory {
 
         try {
             AddBookController addBookController = createAddBookUsecase(viewManagerModel, addBookViewModel, mainMenuViewModel);
-            return new AddBookView(addBookViewModel, addBookController, viewManagerModel, mainMenuViewModel);
+            return new AddBookView(addBookViewModel, addBookController);
         } catch (IOException e) {
             JOptionPane.showMessageDialog(null, "Could not open user data file.");
         }

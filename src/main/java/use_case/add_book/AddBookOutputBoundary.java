@@ -6,4 +6,5 @@ public interface AddBookOutputBoundary {
 
     void prepareSuccessView();
     void prepareFailView(String error);
+    void prepareCancelView();
 }

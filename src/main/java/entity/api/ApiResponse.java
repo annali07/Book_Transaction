@@ -1,6 +1,4 @@
-package entity;
-
-import java.util.Date;
+package entity.api;
 
 public class ApiResponse {
     private String bookName;

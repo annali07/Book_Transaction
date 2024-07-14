@@ -16,7 +16,6 @@ public class AddBookViewModel extends ViewModel {
     public final String PRICE_LABEL = "Enter book price";
     public final String ADD_BOOK_LABEL = "Add Book to Database";
     public final String CANCEL_LABEL = "Cancel";
-
     private AddBookState state = new AddBookState();
 
     public AddBookViewModel() {
@@ -39,6 +38,6 @@ public class AddBookViewModel extends ViewModel {
         support.addPropertyChangeListener(listener);
     }
     public AddBookState getState(){
-        return state;
+        return this.state;
     }
 }

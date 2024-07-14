@@ -2,7 +2,7 @@ package use_case.add_book;
 
 import data_access.add_book_repository.BookRepositoryDataAccessInterface;
 import data_access.api.ExternalBookApiInterface;
-import entity.ApiResponse;
+import entity.api.ApiResponse;
 import entity.book.Book;
 
 /**
@@ -36,5 +36,8 @@ public class AddBookInteractor implements AddBookInputBoundary{
         // Prepare the response
         presenter.prepareSuccessView();
 
+    }
+    public void cancel(){
+        presenter.prepareCancelView();
     }
 }

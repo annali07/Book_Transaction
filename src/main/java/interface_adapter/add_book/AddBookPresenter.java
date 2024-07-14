@@ -26,4 +26,10 @@ public class AddBookPresenter implements AddBookOutputBoundary {
     public void prepareFailView(String error) {
         System.out.println("Failed to add book");
     }
+    @Override
+    public void prepareCancelView(){
+        viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+        System.out.println("Switched from Add Book View to Main Menu");
+    }
 }

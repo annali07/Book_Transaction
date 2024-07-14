@@ -10,4 +10,6 @@ public interface AddBookInputBoundary {
      * @param addBookInputData The input data containing the ISBN of the book to be added.
      */
     void addBook(AddBookInputData addBookInputData);
+
+    void cancel();
 }

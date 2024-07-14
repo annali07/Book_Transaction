@@ -1,4 +1,4 @@
-package view.views;
+package view.helper_functions;
 
 import javax.swing.*;
 import javax.swing.text.PlainDocument;
@@ -21,8 +21,6 @@ public class LabelTextPanelInt extends JPanel {
         super();
         this.add(label);
         this.add(textField);
-
-        // Apply IntegerDocumentFilter to the text field
         ((PlainDocument) textField.getDocument()).setDocumentFilter(new IntegerDocumentFilter());
     }
 }

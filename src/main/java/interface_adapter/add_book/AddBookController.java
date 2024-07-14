@@ -14,4 +14,7 @@ public class AddBookController {
         AddBookInputData addBookInputData = new AddBookInputData(isbn, price);
         addBookUsecaseInteractor.addBook(addBookInputData);
     }
+    public void cancel(){
+        addBookUsecaseInteractor.cancel();
+    }
 }
