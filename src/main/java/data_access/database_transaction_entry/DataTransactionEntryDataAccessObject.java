@@ -7,6 +7,10 @@ import org.json.simple.parser.JSONParser;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.Set;
 
 public class DataTransactionEntryDataAccessObject implements DatabaseTransactionEntryDataAccessInterface{
     private static int transactionID = 0;
@@ -43,7 +47,7 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
         JSONParser parser = new JSONParser();
 
         try{
-            Object obj = parser.parse(new FileReader("/Users/sakuramao/Desktop/Book_Transaction/src/main/java/data/PurchaseTransaction.json"));
+            Object obj = parser.parse(new FileReader("D:\\School\\207\\Book_Transaction\\src\\main\\java\\data\\PurchaseTransaction.json"));
             jsonObject = (JSONObject) obj;
         } catch(Exception e){
             e.printStackTrace();
@@ -60,7 +64,7 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
         int num = transactionEntry.getTransactionId();
         String stringNum = Integer.toString(num);
         jsonObject.put(stringNum, transactionJSONObject);
-        try (FileWriter file = new FileWriter("/Users/sakuramao/Desktop/Book_Transaction/src/main/java/data/PurchaseTransaction.json")){
+        try (FileWriter file = new FileWriter("D:\\School\\207\\Book_Transaction\\src\\main\\java\\data\\PurchaseTransaction.json")){
             file.write(jsonObject.toJSONString());
             file.flush();
             return true;
@@ -78,7 +82,7 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
     public int createTransactionID(){
         JSONParser parser = new JSONParser();
         try{
-            Object obj = parser.parse(new FileReader("/Users/sakuramao/Desktop/Book_Transaction/src/main/java/data/PurchaseTransaction.json"));
+            Object obj = parser.parse(new FileReader("D:\\School\\207\\Book_Transaction\\src\\main\\java\\data\\PurchaseTransaction.json"));
             JSONObject jsonObject = (JSONObject) obj;
             // check if the target obj in the database
             while(jsonObject.containsKey(Integer.toString(transactionID))){
@@ -92,5 +96,28 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
         }
 
 
+    }
+
+    @Override
+    public ArrayList<TransactionEntry> getTransactionEntriesBetweenDate(Date startDate, Date endDate) {
+        ArrayList<TransactionEntry> transactions = new ArrayList<>();
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader("D:\\School\\207\\Book_Transaction\\src\\main\\java\\data\\PurchaseTransaction.json"));
+            JSONObject jsonObject = (JSONObject) obj;
+
+            Set<String> keys = jsonObject.keySet();
+            for (String key: keys) {
+                JSONObject transaction = (JSONObject) jsonObject.get(key);
+                Date date = (Date) transaction.get("date");
+                if (date.after(startDate) && date.before(endDate)) {
+                    // do something
+                    transactions.add(new TransactionEntry(Integer.parseInt(key), (int) transaction.get("bookid"), "noName", (double) transaction.get("price"), date));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return transactions;
     }
 }
