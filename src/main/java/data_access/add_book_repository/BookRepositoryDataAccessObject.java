@@ -36,6 +36,14 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
         writeBooksToFile(books);
     }
 
+
+    @Override
+    public JsonObject getBook(int bookId) {
+        Map<String, JsonObject> books = readBooksFromFile();
+        return books.get(bookId);
+
+    }
+
     /**
      * Reads the books from the JSON file.
      *
