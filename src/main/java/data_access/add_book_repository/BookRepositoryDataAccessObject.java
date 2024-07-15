@@ -18,7 +18,7 @@ import java.util.Map;
  */
 public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessInterface {
 
-    private static final String FILE_PATH = "/Users/nana/Desktop/BookTransaction/src/main/java/data/TotalBooks.json";
+    private static final String FILE_PATH = "/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/TotalBooks.json";
 
     private final Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")

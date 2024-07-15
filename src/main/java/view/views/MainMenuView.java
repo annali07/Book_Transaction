@@ -1,5 +1,6 @@
 package view.views;
 
+import interface_adapter.RentMenu.RentMenuViewModel;
 import interface_adapter.add_book.AddBookViewModel;
 import interface_adapter.main_menu.MainMenuViewModel;
 import interface_adapter.view.ViewManagerModel;
@@ -21,6 +22,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
     private final MainMenuViewModel mainMenuViewModel;
     private final ViewManagerModel viewManagerModel;
     private final AddBookViewModel addBookViewModel;
+    private final RentMenuViewModel rentMenuViewModel;
 
     private final JButton addBookButton;
     private final JButton addRentButton;
@@ -35,11 +37,12 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
      * @param addBookViewModel the view model for adding books
      * @param viewManagerModel the view manager model to manage active views
      */
-    public MainMenuView(MainMenuViewModel mainMenuViewModel, AddBookViewModel addBookViewModel, ViewManagerModel viewManagerModel) {
+    public MainMenuView(MainMenuViewModel mainMenuViewModel, AddBookViewModel addBookViewModel, ViewManagerModel viewManagerModel, RentMenuViewModel rentMenuViewModel) {
         this.mainMenuViewModel = mainMenuViewModel;
         this.mainMenuViewModel.addPropertyChangeListener(this);
         this.viewManagerModel = viewManagerModel;
         this.addBookViewModel = addBookViewModel;
+        this.rentMenuViewModel = rentMenuViewModel;
 
         // Set layout
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -107,6 +110,8 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
             viewManagerModel.firePropertyChanged();
         } else if (mainMenuViewModel.ADD_RENT.equals(evt.getActionCommand())) {
             System.out.println("Rent Book Entry button clicked");
+            viewManagerModel.setActiveView(rentMenuViewModel.getViewName());
+            viewManagerModel.firePropertyChanged();
             // Handle Rent Book Entry action
         } else if (mainMenuViewModel.ADD_PURCHASE.equals(evt.getActionCommand())) {
             System.out.println("Purchase Book Entry button clicked");
