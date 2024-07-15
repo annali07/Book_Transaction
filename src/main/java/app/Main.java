@@ -2,14 +2,17 @@ package app;
 
 import app.usecase_factory.AddBookUseCaseFactory;
 import app.usecase_factory.LoginUseCaseFactory;
+import app.usecase_factory.PurchaseBookCaseFactory;
 import interface_adapter.add_book.AddBookViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.main_menu.MainMenuViewModel;
+import interface_adapter.purchase_book.PurchaseControllor;
+import interface_adapter.purchase_book.PurchaseViewModel;
 import interface_adapter.view.ViewManagerModel;
-import view.views.LoginView;
-import view.views.MainMenuView;
+import use_case.purchase_book.PurchaseUseCase;
+import view.views.*;
 import view.view_manager.ViewManager;
-import view.views.AddBookView;
+import interface_adapter.purchase_book.PurchaseViewModel;
 
 import javax.swing.*;
 import java.awt.*;
@@ -38,19 +41,39 @@ public class Main {
         LoginViewModel loginViewModel = new LoginViewModel();
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
         AddBookViewModel addBookViewModel = new AddBookViewModel();
+        PurchaseViewModel purchaseViewModel = new PurchaseViewModel();
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, mainMenuViewModel);
-        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, addBookViewModel, viewManagerModel);
+        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, addBookViewModel, viewManagerModel, purchaseViewModel);
+        SuccessfullyPurchaseTheBookView successfullyPurchaseTheBookView =
+                PurchaseBookCaseFactory.createSuccessfully(viewManagerModel, purchaseViewModel, mainMenuViewModel);
+        FailedToPurchaseView failedToPurchaseView =
+                PurchaseBookCaseFactory.failedCreate(viewManagerModel, purchaseViewModel, mainMenuViewModel);
+
         AddBookView addBookView = AddBookUseCaseFactory.create(viewManagerModel, addBookViewModel, mainMenuViewModel);
+        PurchaseView purchaseView = PurchaseBookCaseFactory.create(viewManagerModel, purchaseViewModel, mainMenuViewModel);
+
 
         views.add(loginView, loginView.viewName);
         views.add(mainMenuView, mainMenuView.viewName);
         views.add(addBookView, addBookView.viewName);
+        views.add(purchaseView, purchaseView.viewName);
+        views.add(successfullyPurchaseTheBookView, successfullyPurchaseTheBookView.viewName);
+        views.add(failedToPurchaseView, failedToPurchaseView.viewName);
+
+
 
         viewManagerModel.setActiveView(loginView.viewName);
         viewManagerModel.firePropertyChanged();
 
+
+
+
+
         application.pack();
         application.setVisible(true);
+
+
+
     }
 }

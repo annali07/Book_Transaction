@@ -1,4 +1,5 @@
 package data_access.add_book_repository;
+import com.google.gson.JsonObject;
 import entity.book.Book;
 
 /**
@@ -11,4 +12,5 @@ public interface BookRepositoryDataAccessInterface {
      * @param book the book to be saved
      */
     void saveBook(Book book);
+    JsonObject getBook(int bookId);
 }
