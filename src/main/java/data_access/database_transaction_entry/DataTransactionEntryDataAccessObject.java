@@ -47,7 +47,7 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
         JSONParser parser = new JSONParser();
 
         try{
-            Object obj = parser.parse(new FileReader("D:\\School\\207\\Book_Transaction\\src\\main\\java\\data\\PurchaseTransaction.json"));
+            Object obj = parser.parse(new FileReader("/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/PurchaseTransactions.json"));
             jsonObject = (JSONObject) obj;
         } catch(Exception e){
             e.printStackTrace();
@@ -64,7 +64,7 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
         int num = transactionEntry.getTransactionId();
         String stringNum = Integer.toString(num);
         jsonObject.put(stringNum, transactionJSONObject);
-        try (FileWriter file = new FileWriter("D:\\School\\207\\Book_Transaction\\src\\main\\java\\data\\PurchaseTransaction.json")){
+        try (FileWriter file = new FileWriter("/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/PurchaseTransactions.json")){
             file.write(jsonObject.toJSONString());
             file.flush();
             return true;
@@ -82,7 +82,7 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
     public int createTransactionID(){
         JSONParser parser = new JSONParser();
         try{
-            Object obj = parser.parse(new FileReader("D:\\School\\207\\Book_Transaction\\src\\main\\java\\data\\PurchaseTransaction.json"));
+            Object obj = parser.parse(new FileReader("/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/PurchaseTransactions.json"));
             JSONObject jsonObject = (JSONObject) obj;
             // check if the target obj in the database
             while(jsonObject.containsKey(Integer.toString(transactionID))){

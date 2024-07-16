@@ -44,7 +44,9 @@ public class LoginPresenter implements LoginOutputDataBoundary {
         MainMenuState mainMenuState = mainMenuViewModel.getState();
         mainMenuState.setActiveButton(response.defaultButton());
         this.mainMenuViewModel.setState(mainMenuState);
+
         mainMenuViewModel.firePropertyChanged();
+
         viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
         System.out.println("Login Success");

@@ -1,12 +1,13 @@
 package data_access.database_rental_entry;
 
-import entity.rent_entry.RentalEntry;
+public interface DatabaseRentalEntryDataAccessInterface{
 
-import java.util.Date;
+    /**
+     * Validates the bookID by checking the provided bookID against stored bookData.
+     *
+     * @param bookID the bookID to validate
+     * @return true if the bookID matches a stored user, false otherwise
+     */
 
-import java.util.ArrayList;
-
-public interface DatabaseRentalEntryDataAccessInterface {
-    public ArrayList<RentalEntry> getRentalEntriesBetweenDate(Date startDate, Date endDate);
-
+    boolean validatebook(int bookID);
 }
