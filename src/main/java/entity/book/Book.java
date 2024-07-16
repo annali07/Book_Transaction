@@ -1,5 +1,6 @@
 package entity.book;
 
+import java.io.File;
 import java.util.Date;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -7,10 +8,10 @@ import com.google.gson.JsonObject;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-
+import data.FilePathConstants;
 
 public class Book {
-    private static final String FILE_PATH = "/Users/nana/Desktop/BookTransaction/src/main/java/data/bookCount.json";
+    private static final String FILE_PATH = FilePathConstants.BOOK_COUNT_FILE;
     private static final Gson gson = new Gson();
 
     private final int rentalPrice = 1;

@@ -12,13 +12,14 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
+import data.FilePathConstants;
 
 /**
  * A data access object (DAO) implementation for saving books to a JSON file.
  */
 public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessInterface {
 
-    private static final String FILE_PATH = "/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/TotalBooks.json";
+    private static final String FILE_PATH = FilePathConstants.TOTAL_BOOKS_FILE;
 
     private final Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")

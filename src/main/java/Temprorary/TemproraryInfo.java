@@ -9,6 +9,7 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
+import data.FilePathConstants;
 
 public class TemproraryInfo {
     // Temporary class for all of book information
@@ -50,7 +51,7 @@ public class TemproraryInfo {
     public static JSONObject readBookData() {
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader("/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/TotalBooks.json"));
+            Object obj = parser.parse(new FileReader(FilePathConstants.TOTAL_BOOKS_FILE));
             return (JSONObject) obj;
         } catch (Exception e) {
             e.printStackTrace();

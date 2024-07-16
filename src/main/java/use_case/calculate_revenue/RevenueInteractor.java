@@ -22,7 +22,7 @@ public class RevenueInteractor implements RevenueDataBoundary {
 
        if (revenueData.isRental()) {
            DatabaseRentalEntryDataAccessInterface databaseRentalEntryDataAccessInterface = new DatabaseRentalEntryDataAccessObject();
-           ArrayList<RentalEntry> rentalEntries = databaseRentalEntryDataAccessInterface.getRentalEntriesBetweenDate(revenueData.getStartDate(), revenueData.getEndDate());
+           ArrayList<RentalEntry> rentalEntries = databaseRentalEntryDataAccessInterface.getRentalEntryBetweenDate(revenueData.getStartDate(), revenueData.getEndDate());
            if (rentalEntries == null) {
                System.out.println("rentel entry is null");
            } else {

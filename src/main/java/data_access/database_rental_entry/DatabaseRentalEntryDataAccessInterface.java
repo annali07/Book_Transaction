@@ -1,5 +1,11 @@
 package data_access.database_rental_entry;
 
+import entity.purchase_entry.TransactionEntry;
+import entity.rent_entry.RentalEntry;
+
+import java.util.ArrayList;
+import java.util.Date;
+
 public interface DatabaseRentalEntryDataAccessInterface{
 
     /**
@@ -10,4 +16,8 @@ public interface DatabaseRentalEntryDataAccessInterface{
      */
 
     boolean validatebook(int bookID);
+//    public boolean createTransactionEntry(TransactionEntry transactionEntry);
+//    public int createTransactionID();
+    public ArrayList<RentalEntry> getRentalEntryBetweenDate(Date startDate, Date endDate);
+
 }

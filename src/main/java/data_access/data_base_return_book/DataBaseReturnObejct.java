@@ -2,16 +2,17 @@ package data_access.data_base_return_book;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.util.Iterator;
 import java.util.Set;
-
+import data.FilePathConstants;
 
 public class DataBaseReturnObejct implements DatabaseReturnInterface{
-    private static final String FILE_PATH_BOOK = "/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/TotalBooks.json";
-    private static final String RENTAL_FILE_PATH = "/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/Rental.json";
+    private static final String FILE_PATH_BOOK = FilePathConstants.TOTAL_BOOKS_FILE;
+    private static final String RENTAL_FILE_PATH = FilePathConstants.RENTAL_FILE;
     @Override
     public void editBookFile(int bookID) {
 
