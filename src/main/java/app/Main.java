@@ -1,5 +1,7 @@
 package app;
 
+import app.usecase_factory.PurchaseBookCaseFactory;
+
 import app.usecase_factory.*;
 import interface_adapter.RentInformation.borrowbook.BorrowBookViewModel;
 import interface_adapter.RentInformation.returnbook.ReturnBookViewModel;
@@ -7,8 +9,12 @@ import interface_adapter.RentMenu.RentMenuViewModel;
 import interface_adapter.add_book.AddBookViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.main_menu.MainMenuViewModel;
+import interface_adapter.purchase_book.PurchaseControllor;
+import interface_adapter.purchase_book.PurchaseViewModel;
 import interface_adapter.returnorborrow.ReturnOrBorrowViewModel;
 import interface_adapter.view.ViewManagerModel;
+import use_case.purchase_book.PurchaseUseCase;
+import view.views.*;
 import view.views.*;
 import view.view_manager.ViewManager;
 
@@ -41,14 +47,23 @@ public class Main {
         LoginViewModel loginViewModel = new LoginViewModel();
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
         AddBookViewModel addBookViewModel = new AddBookViewModel();
+        PurchaseViewModel purchaseViewModel = new PurchaseViewModel();
         RentMenuViewModel rentMenuViewModel = new RentMenuViewModel();
         ReturnOrBorrowViewModel returnOrBorrowViewModel = new ReturnOrBorrowViewModel();
         ReturnBookViewModel returnBookViewModel = new ReturnBookViewModel();
         BorrowBookViewModel borrowBookViewModel = new BorrowBookViewModel();
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, mainMenuViewModel);
-        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, addBookViewModel, viewManagerModel, rentMenuViewModel);
+        // last argument originally purchase view model
+        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, addBookViewModel, viewManagerModel, rentMenuViewModel, purchaseViewModel);
+        SuccessfullyPurchaseTheBookView successfullyPurchaseTheBookView =
+                PurchaseBookCaseFactory.createSuccessfully(viewManagerModel, purchaseViewModel, mainMenuViewModel);
+        FailedToPurchaseView failedToPurchaseView =
+                PurchaseBookCaseFactory.failedCreate(viewManagerModel, purchaseViewModel, mainMenuViewModel);
+
         AddBookView addBookView = AddBookUseCaseFactory.create(viewManagerModel, addBookViewModel, mainMenuViewModel);
+        PurchaseView purchaseView = PurchaseBookCaseFactory.create(viewManagerModel, purchaseViewModel, mainMenuViewModel);
+
         RentMenuView rentMenuView = RentMenuUseCaseFactory.create(viewManagerModel, rentMenuViewModel, mainMenuViewModel, returnOrBorrowViewModel);
         ReturnOrBorrowView returnOrBorrowView = RobUseCaseFactory.create(viewManagerModel, returnOrBorrowViewModel, rentMenuViewModel, returnBookViewModel, borrowBookViewModel);
         ReturnBookView returnBookView = ReturnBookUseCaseFactory.create(viewManagerModel, returnBookViewModel, mainMenuViewModel, returnOrBorrowViewModel);
@@ -58,6 +73,11 @@ public class Main {
         views.add(loginView, loginView.viewName);
         views.add(mainMenuView, mainMenuView.viewName);
         views.add(addBookView, addBookView.viewName);
+        views.add(purchaseView, purchaseView.viewName);
+        views.add(successfullyPurchaseTheBookView, successfullyPurchaseTheBookView.viewName);
+        views.add(failedToPurchaseView, failedToPurchaseView.viewName);
+
+
         views.add(rentMenuView, rentMenuView.viewName);
         views.add(returnOrBorrowView, returnOrBorrowView.viewName);
         views.add(returnBookView, returnBookView.viewName);
@@ -67,9 +87,11 @@ public class Main {
         viewManagerModel.setActiveView(loginView.viewName);
         viewManagerModel.firePropertyChanged();
 
+
+
+
+
         application.pack();
         application.setVisible(true);
-
-        // Remember: You still do not clear text message
     }
 }
