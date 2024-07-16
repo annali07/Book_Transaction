@@ -6,6 +6,8 @@ import java.io.FileReader;
 import java.util.Iterator;
 import java.util.Set;
 
+import data.FilePathConstants;
+
 /**
  * Implementation of UserLoginDataAccessInterface for validating user login credentials.
  */
@@ -46,7 +48,7 @@ public class UserLoginDataAccess implements UserLoginDataAccessInterface{
         private JSONObject readUserData() {
             JSONParser parser = new JSONParser();
             try {
-                Object obj = parser.parse(new FileReader("/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/managers.json"));
+                Object obj = parser.parse(new FileReader(FilePathConstants.MANAGERS_FILE));
                 return (JSONObject) obj;
             } catch (Exception e) {
                 e.printStackTrace();

@@ -10,9 +10,10 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
+import data.FilePathConstants;
 
 public class DatabaseBorrowObject implements DatabaseBorrowInterface{
-    private static final String FILE_PATH_BOOK = "/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/TotalBooks.json";
+    private static final String FILE_PATH_BOOK = FilePathConstants.TOTAL_BOOKS_FILE;
     @Override
     public void writeBorrowFile(int bookID, Date startDate, Date endDate, String borrowerName, String borrowerNumber) {
         JSONObject bookData = readBookData(FILE_PATH_BOOK);

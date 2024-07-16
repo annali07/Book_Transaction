@@ -1,12 +1,25 @@
 package data_access.database_rental_entry;
 
 import data_access.database_transaction_entry.DatabaseTransactionEntryDataAccessInterface;
+import entity.purchase_entry.TransactionEntry;
+import entity.rent_entry.RentalEntry;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import java.io.File;
 import java.io.FileReader;
 import java.util.Iterator;
 import java.util.Set;
+
+import java.util.ArrayList;
+import java.util.Date;
+import java.text.SimpleDateFormat;
+import org.json.simple.JSONObject;
+import org.json.simple.parser.ParseException;
+import java.io.FileReader;
+import java.io.IOException;
+import data.FilePathConstants;
+
 
 /**
  * Implementation of DatabaseRentalEntryDataAccessInterface for validating bookID.
@@ -36,12 +49,50 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
     private JSONObject readBookData() {
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader("/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/TotalBooks.json"));
+            Object obj = parser.parse(new FileReader(FilePathConstants.TOTAL_BOOKS_FILE));
             return (JSONObject) obj;
         } catch (Exception e) {
             e.printStackTrace();
             return null;
         }
+    }
+
+    @Override
+    public ArrayList<RentalEntry> getRentalEntryBetweenDate(Date startDate, Date endDate) {
+        ArrayList<RentalEntry> rentalTransactions = new ArrayList<>();
+        JSONParser parser = new JSONParser();
+        try {
+            Object obj = parser.parse(new FileReader(FilePathConstants.RENTAL_TRANSACTION_FILE));
+            JSONObject jsonObject = (JSONObject) obj;
+
+            Set<String> keys = jsonObject.keySet();
+            for (String key: keys) {
+                JSONObject transaction = (JSONObject) jsonObject.get(key);
+                Date date = (Date) transaction.get("date");
+                if (date.after(startDate) && date.before(endDate)) {
+                    // Parse individual fields
+                    int rentalId = ((Long) transaction.get("rentalId")).intValue();
+                    int bookId = ((Long) transaction.get("bookId")).intValue();
+                    String bookName = (String) transaction.get("bookName");
+                    String borrowerName = (String) transaction.get("borrowerName");
+                    String borrowerPhoneNumber = (String) transaction.get("borrowerPhoneNumber");
+
+                    // Parsing dates assuming the dates are stored as strings in "yyyy-MM-dd" format
+                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+                    String rentalStartDateString = (String) transaction.get("rentalStartDate");
+                    String rentalEndDateString = (String) transaction.get("rentalEndDate");
+                    Date rentalStartDate = formatter.parse(rentalStartDateString);
+                    Date rentalEndDate = formatter.parse(rentalEndDateString);
+
+                    double charge = (Double) transaction.get("charge");
+
+                    rentalTransactions.add(new RentalEntry(rentalId, bookId, charge, bookName, borrowerName, borrowerPhoneNumber, rentalStartDate, rentalEndDate));
+                }
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+        return rentalTransactions;
     }
 }
 
