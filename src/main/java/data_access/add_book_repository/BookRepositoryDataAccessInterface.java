@@ -9,8 +9,10 @@ public interface BookRepositoryDataAccessInterface {
     /**
      * Saves the given book to the repository.
      *
-     * @param book the book to be saved
+     * @param book the book to be updated
      */
     void saveBook(Book book);
+    void updateBook(Book book);
+    boolean deleteBook(int bookId);
     JsonObject getBook(int bookId);
 }

@@ -17,7 +17,7 @@ public class PurchaseViewModel extends ViewModel {
 
     private PurchaseState purchaseState = new PurchaseState();
 
-    public final String CONFIREM_LABLE = "OK";
+    public final String CONFIREM_LABLE = "Purchase";
     public final String CANCEL_LABLE = "Cancel";
 
     public PurchaseViewModel() {

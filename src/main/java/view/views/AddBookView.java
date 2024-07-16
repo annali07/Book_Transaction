@@ -68,7 +68,7 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
             public void keyTyped(KeyEvent e) {
                 AddBookState currentState = addBookViewModel.getState();
                 currentState.setISBN(isbnInputField.getText());
-                currentState.setPrice(Integer.parseInt(priceInputField.getText()));
+//                currentState.setPrice(Integer.parseInt(priceInputField.getText()));
                 addBookViewModel.setState(currentState);
             }
 
@@ -79,7 +79,6 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
             @Override
             public void keyReleased(KeyEvent e) {}
         });
-
     }
     @Override
     public Dimension getPreferredSize() {
@@ -94,11 +93,13 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
             if (state == null) {
                 throw new IllegalStateException("AddBookState is null");
             }
+
             String isbn = state.getISBN();
             if (isbn == null || isbn.isEmpty()) {
                 System.out.println("ISBN is empty or null");
                 return;
             }
+
             int price;
             try {
                 price = Integer.parseInt(priceInputField.getText());
@@ -106,6 +107,7 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
                 System.out.println("Invalid price input");
                 return;
             }
+
             addBookController.execute(isbn, price);
         } else if (addBookViewModel.CANCEL_LABEL.equals(evt.getActionCommand())) {
             addBookController.cancel();
@@ -117,10 +119,9 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
         AddBookState state = (AddBookState) evt.getNewValue();
         setFields(state);
     }
+
     private void setFields(AddBookState state) {
-        isbnInputField.setText(state.getISBN());
+        isbnInputField.setText(String.valueOf(state.getISBN()));
         priceInputField.setText(String.valueOf(state.getPrice()));
     }
-
-
 }

@@ -64,6 +64,9 @@ public class IntegerDocumentFilter extends DocumentFilter {
      * @return true if the string is numeric, false otherwise
      */
     private boolean isNumeric(String str) {
+        if (str == null || str.isEmpty()) {
+            return true; // Allow empty input
+        }
         try {
             Integer.parseInt(str);
             return true;

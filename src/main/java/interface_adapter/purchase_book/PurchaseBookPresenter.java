@@ -19,37 +19,25 @@ public class PurchaseBookPresenter implements PurchaseOutputDataBoundary{
     }
 
 //    @Override
-//    public void prepareSuccessView(PurchaseOutputData purchaseOutputData) {
-//        System.out.println("prepareSuccessView");
+//    public void prepareErrorView(PurchaseOutputData purchaseOutputData) {
+//        System.out.println("Purchase Error");
 //    }
 
     @Override
-    public void prepareErrorView(PurchaseOutputData purchaseOutputData) {
-        System.out.println("prepareErrorView");
+    public void prepareSuccessView(){
+        viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
+        viewManagerModel.firePropertyChanged();
+        System.out.println("Purchase Success");
     }
 
     @Override
-    public void prepareSuccessView(){
-        System.out.println("prepareSuccessView");
-//        viewManagerModel.setActiveView(PurchaseViewModel.getViewName());
-        viewManagerModel.firePropertyChanged();
-        System.out.println("Switched to Add Book View");
-    }
-
     public void prepareFailView(){
-        System.out.println("Fail to find the book");
-
-
+        System.out.println("Failed to find the book");
     }
 
     public void prepareCancelView(){
         viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-        System.out.println("Cancel View");
-    }
-
-    @Override
-    public void prepareFailView(PurchaseOutputData purchaseOutputData) {
-
+        System.out.println("Cancel Purchase");
     }
 }

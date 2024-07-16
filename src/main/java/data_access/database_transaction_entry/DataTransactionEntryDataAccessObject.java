@@ -4,6 +4,7 @@ import entity.purchase_entry.TransactionEntry;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
+import com.google.gson.JsonArray;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
@@ -14,9 +15,20 @@ import java.util.Set;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import data.FilePathConstants;
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonElement;
+import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.Date;
+import java.util.Map;
 
 public class DataTransactionEntryDataAccessObject implements DatabaseTransactionEntryDataAccessInterface{
-    private static int transactionID = 0;
 
     @Override
      //input the transaction id and return TransactionEntry
@@ -54,63 +66,46 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
         }
     }
 
-
     @Override
     public boolean createTransactionEntry(TransactionEntry transactionEntry) {
-        JSONObject jsonObject;
-        // get the outer object of whole json file
-        JSONParser parser = new JSONParser();
+        Gson gson = new GsonBuilder().setPrettyPrinting().create();
 
-        try{
-            Object obj = parser.parse(new FileReader(FilePathConstants.PURCHASE_TRANSACTION_FILE));
-            jsonObject = (JSONObject) obj;
-        } catch(Exception e){
-            e.printStackTrace();
-            return false;
-        }
+        // Read the existing file and parse it as a JsonArray
+        JsonArray jsonArray;
 
-        // create a 'small' JSONObject
-        JSONObject transactionJSONObject = new JSONObject();
-        transactionJSONObject.put("bookid", transactionEntry.getBookId());
-        transactionJSONObject.put("price", transactionEntry.getSoldPrice());
-        transactionJSONObject.put("date", transactionEntry.getDate());
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(FilePathConstants.PURCHASE_TRANSACTION_FILE)));
+            JsonElement jsonElement = JsonParser.parseString(content);
 
-        // Write the small json object to file
-        int num = transactionEntry.getTransactionId();
-        String stringNum = Integer.toString(num);
-        jsonObject.put(stringNum, transactionJSONObject);
-        try (FileWriter file = new FileWriter(FilePathConstants.PURCHASE_TRANSACTION_FILE)){
-            file.write(jsonObject.toJSONString());
-            file.flush();
-            return true;
-        }
-        // fail to write the object into the json file
-        catch(IOException e) {
-            e.printStackTrace();
-            return false;
-        }
-
-    }
-
-    @Override
-    // create TransactionID
-    public int createTransactionID(){
-        JSONParser parser = new JSONParser();
-        try{
-            Object obj = parser.parse(new FileReader(FilePathConstants.PURCHASE_TRANSACTION_FILE));
-            JSONObject jsonObject = (JSONObject) obj;
-            // check if the target obj in the database
-            while(jsonObject.containsKey(Integer.toString(transactionID))){
-                transactionID++;
+            // Check if the existing content is an array or an object
+            if (jsonElement.isJsonArray()) {
+                jsonArray = jsonElement.getAsJsonArray();
+            } else if (jsonElement.isJsonObject()) {
+                // If it's an object, create a new array and add the object to it
+                jsonArray = new JsonArray();
+                jsonArray.add(jsonElement.getAsJsonObject());
+            } else{
+                jsonArray = new JsonArray();
             }
-            return transactionID;
+        } catch (IOException e) {
+            jsonArray = new JsonArray();
         }
-        catch(Exception e){
+
+        // Convert the transactionEntry to a JsonElement
+        JsonElement transactionElement = gson.toJsonTree(transactionEntry);
+
+        // Add the transaction to the JsonArray
+        jsonArray.add(transactionElement);
+
+        // Write the updated JsonArray back to the file
+        try (FileWriter writer = new FileWriter(FilePathConstants.PURCHASE_TRANSACTION_FILE)) {
+            gson.toJson(jsonArray, writer);
+        } catch (IOException e) {
             e.printStackTrace();
-            return -1;
+            return false;
         }
 
-
+        return true;
     }
 
     @Override

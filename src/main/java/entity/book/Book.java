@@ -9,6 +9,12 @@ import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import data.FilePathConstants;
+import com.google.gson.JsonParser;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 public class Book {
     private static final String FILE_PATH = FilePathConstants.BOOK_COUNT_FILE;
@@ -88,9 +94,22 @@ public class Book {
     }
 
     private static void writeBookCount(int bookCount) {
-        try (FileWriter writer = new FileWriter(FILE_PATH)) {
-            JsonObject jsonObject = new JsonObject();
-            jsonObject.addProperty("bookCount", bookCount);
+        JsonObject jsonObject;
+
+        // Read the existing file and parse it as a JsonObject
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(FilePathConstants.BOOK_COUNT_FILE)));
+            jsonObject = JsonParser.parseString(content).getAsJsonObject();
+        } catch (IOException e) {
+            jsonObject = new JsonObject();
+            jsonObject.addProperty("transactionCount", 0); // Initialize with default value if file does not exist
+        }
+
+        // Update the bookCount field
+        jsonObject.addProperty("bookCount", bookCount);
+
+        // Write the updated JsonObject back to the file
+        try (FileWriter writer = new FileWriter(FilePathConstants.BOOK_COUNT_FILE)) {
             gson.toJson(jsonObject, writer);
         } catch (IOException e) {
             e.printStackTrace();

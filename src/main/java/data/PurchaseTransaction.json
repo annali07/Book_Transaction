@@ -1,0 +1,58 @@
+[
+  {
+    "transactionId": 1,
+    "bookId": 1,
+    "bookName": "The Seven Husbands of Evelyn Hugo",
+    "soldPrice": 30.0,
+    "date": "Jul 16, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 2,
+    "bookId": 2,
+    "bookName": "The Seven Husbands of Evelyn Hugo",
+    "soldPrice": 50.0,
+    "date": "Jul 16, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 3,
+    "bookId": 3,
+    "bookName": "Stephen King\u0027s Danse Macabre",
+    "soldPrice": 50.0,
+    "date": "Jul 16, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 4,
+    "bookId": 1,
+    "bookName": "The Seven Husbands of Evelyn Hugo",
+    "soldPrice": 30.0,
+    "date": "Jul 16, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 5,
+    "bookId": 5,
+    "bookName": "The Seven Husbands of Evelyn Hugo",
+    "soldPrice": 12.0,
+    "date": "Jul 16, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 6,
+    "bookId": 1,
+    "bookName": "The Seven Husbands of Evelyn Hugo",
+    "soldPrice": 30.0,
+    "date": "Jul 16, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 7,
+    "bookId": 1,
+    "bookName": "The Seven Husbands of Evelyn Hugo",
+    "soldPrice": 30.0,
+    "date": "Jul 16, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 8,
+    "bookId": 1,
+    "bookName": "The Seven Husbands of Evelyn Hugo",
+    "soldPrice": 30.0,
+    "date": "Jul 16, 2024, 12:00:00 AM"
+  }
+]
