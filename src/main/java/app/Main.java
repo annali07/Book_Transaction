@@ -1,12 +1,16 @@
 package app;
 
+import app.usecase_factory.AddBookUseCaseFactory;
+import app.usecase_factory.LoginUseCaseFactory;
 import app.usecase_factory.PurchaseBookCaseFactory;
+import app.usecase_factory.RevenueUseCaseFactory;
 
 import app.usecase_factory.*;
 import interface_adapter.RentInformation.borrowbook.BorrowBookViewModel;
 import interface_adapter.RentInformation.returnbook.ReturnBookViewModel;
 import interface_adapter.RentMenu.RentMenuViewModel;
 import interface_adapter.add_book.AddBookViewModel;
+import interface_adapter.calculate_revenue.RevenueViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.main_menu.MainMenuViewModel;
 import interface_adapter.purchase_book.PurchaseControllor;
@@ -48,6 +52,7 @@ public class Main {
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
         AddBookViewModel addBookViewModel = new AddBookViewModel();
         PurchaseViewModel purchaseViewModel = new PurchaseViewModel();
+        RevenueViewModel revenueViewModel = new RevenueViewModel();
         RentMenuViewModel rentMenuViewModel = new RentMenuViewModel();
         ReturnOrBorrowViewModel returnOrBorrowViewModel = new ReturnOrBorrowViewModel();
         ReturnBookViewModel returnBookViewModel = new ReturnBookViewModel();
@@ -55,7 +60,7 @@ public class Main {
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, mainMenuViewModel);
         // last argument originally purchase view model
-        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, addBookViewModel, viewManagerModel, rentMenuViewModel, purchaseViewModel);
+        MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, addBookViewModel, viewManagerModel, rentMenuViewModel, purchaseViewModel, revenueViewModel);
         SuccessfullyPurchaseTheBookView successfullyPurchaseTheBookView =
                 PurchaseBookCaseFactory.createSuccessfully(viewManagerModel, purchaseViewModel, mainMenuViewModel);
         FailedToPurchaseView failedToPurchaseView =
@@ -63,6 +68,7 @@ public class Main {
 
         AddBookView addBookView = AddBookUseCaseFactory.create(viewManagerModel, addBookViewModel, mainMenuViewModel);
         PurchaseView purchaseView = PurchaseBookCaseFactory.create(viewManagerModel, purchaseViewModel, mainMenuViewModel);
+        RevenueView revenueView = RevenueUseCaseFactory.create(viewManagerModel, revenueViewModel, mainMenuViewModel);
 
         RentMenuView rentMenuView = RentMenuUseCaseFactory.create(viewManagerModel, rentMenuViewModel, mainMenuViewModel, returnOrBorrowViewModel);
         ReturnOrBorrowView returnOrBorrowView = RobUseCaseFactory.create(viewManagerModel, returnOrBorrowViewModel, rentMenuViewModel, returnBookViewModel, borrowBookViewModel);
@@ -76,6 +82,7 @@ public class Main {
         views.add(purchaseView, purchaseView.viewName);
         views.add(successfullyPurchaseTheBookView, successfullyPurchaseTheBookView.viewName);
         views.add(failedToPurchaseView, failedToPurchaseView.viewName);
+        views.add(revenueView, revenueView.viewName);
 
 
         views.add(rentMenuView, rentMenuView.viewName);
@@ -93,5 +100,8 @@ public class Main {
 
         application.pack();
         application.setVisible(true);
+
+
+
     }
 }

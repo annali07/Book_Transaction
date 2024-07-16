@@ -2,6 +2,7 @@ package view.views;
 
 import interface_adapter.RentMenu.RentMenuViewModel;
 import interface_adapter.add_book.AddBookViewModel;
+import interface_adapter.calculate_revenue.RevenueViewModel;
 import interface_adapter.main_menu.MainMenuViewModel;
 import interface_adapter.purchase_book.PurchaseViewModel;
 import interface_adapter.view.ViewManagerModel;
@@ -24,6 +25,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
     private final ViewManagerModel viewManagerModel;
     private final AddBookViewModel addBookViewModel;
     private final PurchaseViewModel purchaseViewModel;
+    private final RevenueViewModel revenueViewModel;
     private final RentMenuViewModel rentMenuViewModel;
 
     private final JButton addBookButton;
@@ -39,9 +41,10 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
      * @param addBookViewModel the view model for adding books
      * @param viewManagerModel the view manager model to manage active views
      */
-    public MainMenuView(MainMenuViewModel mainMenuViewModel, AddBookViewModel addBookViewModel, ViewManagerModel viewManagerModel, RentMenuViewModel rentMenuViewModel, PurchaseViewModel purchaseViewModel) {
+    public MainMenuView(MainMenuViewModel mainMenuViewModel, AddBookViewModel addBookViewModel, ViewManagerModel viewManagerModel, RentMenuViewModel rentMenuViewModel, PurchaseViewModel purchaseViewModel, RevenueViewModel revenueViewModel) {
         this.mainMenuViewModel = mainMenuViewModel;
         this.purchaseViewModel = purchaseViewModel;
+        this.revenueViewModel = revenueViewModel;
         this.mainMenuViewModel.addPropertyChangeListener(this);
         this.viewManagerModel = viewManagerModel;
         this.addBookViewModel = addBookViewModel;
@@ -123,7 +126,9 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
 //            System.out.println(purchaseViewModel.getViewName());
             // Handle Purchase Book Entry action
         } else if (mainMenuViewModel.CALCULATE_REVENUE.equals(evt.getActionCommand())) {
-            System.out.println("Calculate Revenue");
+            System.out.println("Calculate Revenue button clicked");
+            viewManagerModel.setActiveView(revenueViewModel.getViewName());
+            viewManagerModel.firePropertyChanged();
         }
     }
 
