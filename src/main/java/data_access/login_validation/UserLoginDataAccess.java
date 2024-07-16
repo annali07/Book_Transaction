@@ -46,7 +46,7 @@ public class UserLoginDataAccess implements UserLoginDataAccessInterface{
         private JSONObject readUserData() {
             JSONParser parser = new JSONParser();
             try {
-                Object obj = parser.parse(new FileReader("/Users/sakuramao/Desktop/Book_Transaction/src/main/java/data/managers.json"));
+                Object obj = parser.parse(new FileReader("/Users/zhenyizhangkenny/IdeaProjects/Book_Transaction/src/main/java/data/managers.json"));
                 return (JSONObject) obj;
             } catch (Exception e) {
                 e.printStackTrace();
