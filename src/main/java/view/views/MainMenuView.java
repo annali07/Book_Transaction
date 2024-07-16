@@ -21,6 +21,7 @@ import java.beans.PropertyChangeListener;
  */
 public class MainMenuView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "main menu";
+
     private final MainMenuViewModel mainMenuViewModel;
     private final ViewManagerModel viewManagerModel;
     private final AddBookViewModel addBookViewModel;

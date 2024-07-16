@@ -13,12 +13,9 @@ import interface_adapter.add_book.AddBookViewModel;
 import interface_adapter.calculate_revenue.RevenueViewModel;
 import interface_adapter.login.LoginViewModel;
 import interface_adapter.main_menu.MainMenuViewModel;
-import interface_adapter.purchase_book.PurchaseControllor;
 import interface_adapter.purchase_book.PurchaseViewModel;
 import interface_adapter.returnorborrow.ReturnOrBorrowViewModel;
 import interface_adapter.view.ViewManagerModel;
-import use_case.purchase_book.PurchaseUseCase;
-import view.views.*;
 import view.views.*;
 import view.view_manager.ViewManager;
 
@@ -59,8 +56,8 @@ public class Main {
         BorrowBookViewModel borrowBookViewModel = new BorrowBookViewModel();
 
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, mainMenuViewModel);
-        // last argument originally purchase view model
         MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, addBookViewModel, viewManagerModel, rentMenuViewModel, purchaseViewModel, revenueViewModel);
+
         SuccessfullyPurchaseTheBookView successfullyPurchaseTheBookView =
                 PurchaseBookCaseFactory.createSuccessfully(viewManagerModel, purchaseViewModel, mainMenuViewModel);
         FailedToPurchaseView failedToPurchaseView =
@@ -75,7 +72,6 @@ public class Main {
         ReturnBookView returnBookView = ReturnBookUseCaseFactory.create(viewManagerModel, returnBookViewModel, mainMenuViewModel, returnOrBorrowViewModel);
         BorrowBookView borrowBookView = BorrowBookUseCaseFactory.create(viewManagerModel, borrowBookViewModel, mainMenuViewModel, returnOrBorrowViewModel);
 
-
         views.add(loginView, loginView.viewName);
         views.add(mainMenuView, mainMenuView.viewName);
         views.add(addBookView, addBookView.viewName);
@@ -84,24 +80,15 @@ public class Main {
         views.add(failedToPurchaseView, failedToPurchaseView.viewName);
         views.add(revenueView, revenueView.viewName);
 
-
         views.add(rentMenuView, rentMenuView.viewName);
         views.add(returnOrBorrowView, returnOrBorrowView.viewName);
         views.add(returnBookView, returnBookView.viewName);
         views.add(borrowBookView, borrowBookView.viewName);
-        // Need to add some more views
 
         viewManagerModel.setActiveView(loginView.viewName);
         viewManagerModel.firePropertyChanged();
 
-
-
-
-
         application.pack();
         application.setVisible(true);
-
-
-
     }
 }

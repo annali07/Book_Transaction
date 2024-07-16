@@ -4,22 +4,22 @@ import use_case.purchase_book.PurchaseInputData;
 import use_case.purchase_book.PurchaseInputDataBoundary;
 
 public class PurchaseControllor {
-    final PurchaseInputDataBoundary purchaseInputDataBoundary;
-
+    final PurchaseInputDataBoundary addBookUsecaseInteractor;
 
     /*
-    * Constructs a purchaseControllor with spcified use case*/
-    public PurchaseControllor(PurchaseInputDataBoundary purchaseInputDataBoundary) {
-        this.purchaseInputDataBoundary = purchaseInputDataBoundary;
+    * Constructs a purchaseControllor with spcified use case
+    */
+    public PurchaseControllor(PurchaseInputDataBoundary purchaseUsecaseInteractor) {
+        this.addBookUsecaseInteractor = purchaseUsecaseInteractor;
     }
 
     /**/
     public void execute(int bookid) {
         PurchaseInputData purchaseInputData = new PurchaseInputData(bookid);
-        purchaseInputDataBoundary.purchase(purchaseInputData);
+        addBookUsecaseInteractor.purchase(purchaseInputData);
     }
 
     public void cancel() {
-        purchaseInputDataBoundary.cancel();
+        addBookUsecaseInteractor.cancel();
     }
 }

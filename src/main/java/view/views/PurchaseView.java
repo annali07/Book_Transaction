@@ -5,6 +5,7 @@ import interface_adapter.purchase_book.PurchaseControllor;
 import interface_adapter.purchase_book.PurchaseState;
 import interface_adapter.purchase_book.PurchaseViewModel;
 import view.helper_functions.LabelTextPanel;
+import view.helper_functions.LabelTextPanelInt;
 
 import javax.swing.*;
 import javax.swing.text.View;
@@ -15,6 +16,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
+
 
 public class PurchaseView extends JPanel implements ActionListener, PropertyChangeListener {
 
@@ -27,8 +29,9 @@ public class PurchaseView extends JPanel implements ActionListener, PropertyChan
 
     public PurchaseView(PurchaseViewModel purchaseViewModel, PurchaseControllor purchaseControllor) {
         this.purchaseViewModel = purchaseViewModel;
-        this.purchaseControllor = purchaseControllor;
         this.purchaseViewModel.addPropertyChangeListener(this);
+
+        this.purchaseControllor = purchaseControllor;
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
         JLabel title = new JLabel(purchaseViewModel.TITLE_LABELE);
@@ -36,7 +39,7 @@ public class PurchaseView extends JPanel implements ActionListener, PropertyChan
         title.setFont(new Font("Arial", Font.BOLD, 16));
         this.add(title);
 
-        LabelTextPanel bookid = new LabelTextPanel(
+        LabelTextPanelInt bookid = new LabelTextPanelInt(
                 new JLabel(purchaseViewModel.ID_BOX_LABLE), bookidInputField);
         this.add(bookid);
 
@@ -55,26 +58,27 @@ public class PurchaseView extends JPanel implements ActionListener, PropertyChan
         this.add(buttons);
         this.add(Box.createVerticalGlue());
 
-        bookidInputField.addKeyListener(new KeyAdapter() {
-            @Override
-            public void keyTyped(KeyEvent e){
-                PurchaseState currentState = purchaseViewModel.getPurchaseState();
-                try{
-                    currentState.setPurchaseState(Integer.parseInt(bookidInputField.getText()));
-                } catch (NumberFormatException ex){
-
-                }
-
-                purchaseViewModel.setPurchaseState(currentState);;
-            }
-
-            @Override
-            public void keyPressed(KeyEvent e) {
-            }
-
-            @Override
-            public void keyReleased(KeyEvent e) {}
-        });
+        // #TODO Modify the input field and state to accept only integer
+//        bookidInputField.addKeyListener(new KeyAdapter() {
+//            @Override
+//            public void keyTyped(KeyEvent e){
+//                char c = e.getKeyChar();
+//                // Check if character is not a digit and not a control character
+//                if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
+//                    e.consume();
+//                }
+//                PurchaseState currentState = purchaseViewModel.getPurchaseState();
+//                currentState.setBookId(Integer.parseInt(bookidInputField.getText()));
+//                purchaseViewModel.setPurchaseState(currentState);;
+//            }
+//
+//            @Override
+//            public void keyPressed(KeyEvent e) {
+//            }
+//
+//            @Override
+//            public void keyReleased(KeyEvent e) {}
+//        });
     }
 
     @Override
@@ -98,13 +102,14 @@ public class PurchaseView extends JPanel implements ActionListener, PropertyChan
                 System.out.println("Invalid bookid input");
                 return;
             }
+
             purchaseControllor.execute(bookid);
         }else if (purchaseViewModel.CANCEL_LABLE.equals(evt.getActionCommand())){
+            // #TODO Clean up the input boxes
             System.out.println("Canceled to search for the book");
             purchaseControllor.cancel();
         }
     }
-
 
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
@@ -112,7 +117,6 @@ public class PurchaseView extends JPanel implements ActionListener, PropertyChan
         setFields(state);
     }
 
-    //TODO: this has problem on @Override ?
     private void setFields(PurchaseState state){
         bookidInputField.setText(Integer.toString(state.getBookId()));
     }

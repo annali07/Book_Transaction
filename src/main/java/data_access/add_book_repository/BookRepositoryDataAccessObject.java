@@ -37,12 +37,21 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
         writeBooksToFile(books);
     }
 
+    @Override
+    public void updateBook(Book book) {
+
+    }
+
+    @Override
+    public boolean deleteBook(int bookId) {
+        // #TODO Implementation
+        return true;
+    }
 
     @Override
     public JsonObject getBook(int bookId) {
         Map<String, JsonObject> books = readBooksFromFile();
-        return books.get(bookId);
-
+        return books.get(String.valueOf(bookId));
     }
 
     /**
