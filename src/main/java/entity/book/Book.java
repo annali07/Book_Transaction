@@ -1,6 +1,5 @@
 package entity.book;
 
-import java.io.File;
 import java.util.Date;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -8,11 +7,9 @@ import com.google.gson.JsonObject;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import data.FilePathConstants;
+import data.misc_info.FilePathConstants;
 import com.google.gson.JsonParser;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 

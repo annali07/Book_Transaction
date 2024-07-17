@@ -1,5 +1,5 @@
-{
-  "1": {
+[
+  {
     "rentalId": 1,
     "bookId": 1,
     "bookName": "Example Book",
@@ -11,4 +11,4 @@
     "charge": 5.0,
     "maxCharge": 75.0
   }
-}
+]

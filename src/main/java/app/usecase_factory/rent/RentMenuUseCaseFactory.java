@@ -1,11 +1,12 @@
-package app.usecase_factory;
+package app.usecase_factory.rent;
 
+import data_access.add_book_repository.BookRepositoryDataAccessInterface;
+import data_access.add_book_repository.BookRepositoryDataAccessObject;
 import data_access.database_rental_entry.DatabaseRentalEntryDataAccessInterface;
 import data_access.database_rental_entry.DatabaseRentalEntryDataAccessObject;
 import interface_adapter.RentMenu.RentMenuController;
 import interface_adapter.RentMenu.RentMenuPresenter;
 import interface_adapter.RentMenu.RentMenuViewModel;
-import interface_adapter.login.LoginController;
 import interface_adapter.main_menu.MainMenuViewModel;
 import interface_adapter.returnorborrow.ReturnOrBorrowViewModel;
 import interface_adapter.view.ViewManagerModel;
@@ -30,9 +31,10 @@ public class RentMenuUseCaseFactory {
         return null;
     }
     private static RentMenuController createUserRentMenuUseCase(ViewManagerModel viewManagerModel, RentMenuViewModel rentMenuViewModel, MainMenuViewModel mainMenuViewModel, ReturnOrBorrowViewModel returnOrBorrowViewModel) throws IOException {
+        BookRepositoryDataAccessInterface bookRepositoryDataAccessObj = new BookRepositoryDataAccessObject();
         DatabaseRentalEntryDataAccessInterface userGateway = new DatabaseRentalEntryDataAccessObject();
-        RentMenuOutputBoundary rentMenuOutputBoundary = new RentMenuPresenter(viewManagerModel,rentMenuViewModel, mainMenuViewModel, returnOrBorrowViewModel);
 
+        RentMenuOutputBoundary rentMenuOutputBoundary = new RentMenuPresenter(viewManagerModel,rentMenuViewModel, mainMenuViewModel, returnOrBorrowViewModel);
         RentMenuInputBoundary rentMenuInteractor = new RentMenuInteractor(userGateway, rentMenuOutputBoundary);
 
         return new RentMenuController(rentMenuInteractor);

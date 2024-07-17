@@ -1,6 +1,5 @@
-package Temprorary;
+package data.misc_info;
 
-import com.fasterxml.jackson.core.util.InternCache;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -9,7 +8,6 @@ import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
 import java.util.Set;
-import data.FilePathConstants;
 
 public class TemproraryInfo {
     // Temporary class for all of book information

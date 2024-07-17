@@ -1,25 +1,18 @@
-package app.usecase_factory;
+package app.usecase_factory.rent;
 
 import data_access.data_base_return_book.DataBaseReturnObejct;
 import data_access.data_base_return_book.DatabaseReturnInterface;
 import interface_adapter.RentInformation.returnbook.ReturnBookController;
 import interface_adapter.RentInformation.returnbook.ReturnBookPresenter;
 import interface_adapter.RentInformation.returnbook.ReturnBookViewModel;
-import interface_adapter.RentMenu.RentMenuController;
 import interface_adapter.main_menu.MainMenuViewModel;
-import interface_adapter.returnorborrow.ReturnOrBorrowController;
-import interface_adapter.returnorborrow.ReturnOrBorrowPresenter;
 import interface_adapter.returnorborrow.ReturnOrBorrowViewModel;
 import interface_adapter.view.ViewManagerModel;
 import use_case.rent_book.ReturnBook.ReturnBookInputBoundary;
 import use_case.rent_book.ReturnBook.ReturnBookInteractor;
 import use_case.rent_book.ReturnBook.ReturnBookOutputBoundary;
-import use_case.rent_book.ReturnOrBorrow.RobInteractor;
-import use_case.rent_book.ReturnOrBorrow.RobOutputBoundary;
-import view.views.RentMenuView;
 import view.views.ReturnBookView;
 
-import javax.swing.*;
 import java.io.IOException;
 import java.text.ParseException;
 

@@ -1,7 +1,6 @@
 package interface_adapter.RentMenu;
 
-import Temprorary.TemproraryInfo;
-import interface_adapter.login.LoginState;
+import data.misc_info.TemproraryInfo;
 import interface_adapter.main_menu.MainMenuState;
 import interface_adapter.main_menu.MainMenuViewModel;
 import interface_adapter.returnorborrow.ReturnOrBorrowViewModel;
@@ -31,9 +30,14 @@ public class RentMenuPresenter implements RentMenuOutputBoundary {
         TemproraryInfo.setClassVariable(rentMenuOutputData.getBookID());
         mainMenuViewModel.firePropertyChanged();
 
+//        ReturnOrBorrowState robState = returnOrBorrowViewModel.getState();
+//        robState.setBookId(rentMenuOutputData.getBookID());
+//        returnOrBorrowViewModel.setState(robState);
+//        returnOrBorrowViewModel.firePropertyChanged();
+
         viewManagerModel.setActiveView(returnOrBorrowViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-        System.out.println("I find the book");
+        System.out.println("Found the book");
     }
 
     @Override

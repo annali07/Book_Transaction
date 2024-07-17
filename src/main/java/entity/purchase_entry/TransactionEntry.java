@@ -1,19 +1,15 @@
 package entity.purchase_entry;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
-import data.FilePathConstants;
+import data.misc_info.FilePathConstants;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import  java.util.Date;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonObject;
+
 import com.google.gson.JsonParser;
 
-import java.io.FileWriter;
-import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 

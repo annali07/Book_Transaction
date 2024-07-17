@@ -1,6 +1,6 @@
 package view.views;
 
-import Temprorary.TemproraryInfo;
+import data.misc_info.TemproraryInfo;
 import interface_adapter.RentInformation.borrowbook.BorrowBookController;
 import interface_adapter.RentInformation.borrowbook.BorrowBookState;
 import interface_adapter.RentInformation.borrowbook.BorrowBookViewModel;
@@ -21,7 +21,6 @@ import java.beans.PropertyChangeListener;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
 public class BorrowBookView extends JPanel implements ActionListener, PropertyChangeListener {

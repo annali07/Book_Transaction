@@ -1,4 +1,4 @@
-package data;
+package data.misc_info;
 
 public class FilePathConstants {
     public static final String FILE_PATH = "/Users/nana/Desktop/BookTransaction/src/main/java/data";

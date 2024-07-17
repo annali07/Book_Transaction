@@ -1,6 +1,6 @@
 package view.views;
 
-import Temprorary.TemproraryInfo;
+import data.misc_info.TemproraryInfo;
 import interface_adapter.RentInformation.returnbook.ReturnBookController;
 import interface_adapter.RentInformation.returnbook.ReturnBookState;
 import interface_adapter.RentInformation.returnbook.ReturnBookViewModel;

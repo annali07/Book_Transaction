@@ -85,7 +85,6 @@ public class RentMenuView extends JPanel implements ActionListener, PropertyChan
                 }
             }
 
-
             @Override
             public void keyPressed(KeyEvent e) {
             }
@@ -113,7 +112,9 @@ public class RentMenuView extends JPanel implements ActionListener, PropertyChan
                 System.out.println("bookID is null");
                 return;
             }
+
             boolean indicator = rentMenuController.execute(bookID);
+
             if (!indicator){
                 isbookIDErrorField.setText("There is no such book in library.");
             }
@@ -121,8 +122,6 @@ public class RentMenuView extends JPanel implements ActionListener, PropertyChan
         }else if (rentMenuViewModel.CANCEL_LABEL.equals(e.getActionCommand())) {
             resetFields();
             rentMenuController.cancel();
-
-
         }
 
     }
