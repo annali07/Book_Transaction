@@ -1,0 +1,6 @@
+use_case/add_book/AddBookInteractorTest.class
+app/usecase_factory/AddBookUseCaseFactoryTest.class
+data_access/data_base_return_book/DataBaseReturnObejctTest.class
+data_access/login_validation/UserLoginDataAccessTest.class
+data_access/api/ExternalBookApiTest.class
+data_access/add_book_repository/BookRepositoryDataAccessObjectTest.class
