@@ -1,12 +1,9 @@
 package data_access.database_rental_entry;
 
-import data_access.database_transaction_entry.DatabaseTransactionEntryDataAccessInterface;
-import entity.purchase_entry.TransactionEntry;
 import entity.rent_entry.RentalEntry;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
-import java.io.File;
 import java.io.FileReader;
 import java.util.Iterator;
 import java.util.Set;
@@ -14,11 +11,8 @@ import java.util.Set;
 import java.util.ArrayList;
 import java.util.Date;
 import java.text.SimpleDateFormat;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.ParseException;
-import java.io.FileReader;
-import java.io.IOException;
-import data.FilePathConstants;
+
+import data.misc_info.FilePathConstants;
 
 
 /**

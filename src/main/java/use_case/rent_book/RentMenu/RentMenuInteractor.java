@@ -1,6 +1,5 @@
 package use_case.rent_book.RentMenu;
 
-import Temprorary.TemproraryInfo;
 import data_access.database_rental_entry.DatabaseRentalEntryDataAccessInterface;
 
 

@@ -5,7 +5,10 @@ import app.usecase_factory.LoginUseCaseFactory;
 import app.usecase_factory.PurchaseBookCaseFactory;
 import app.usecase_factory.RevenueUseCaseFactory;
 
-import app.usecase_factory.*;
+import app.usecase_factory.rent.BorrowBookUseCaseFactory;
+import app.usecase_factory.rent.RentMenuUseCaseFactory;
+import app.usecase_factory.rent.ReturnBookUseCaseFactory;
+import app.usecase_factory.rent.RobUseCaseFactory;
 import interface_adapter.RentInformation.borrowbook.BorrowBookViewModel;
 import interface_adapter.RentInformation.returnbook.ReturnBookViewModel;
 import interface_adapter.RentMenu.RentMenuViewModel;
@@ -45,16 +48,19 @@ public class Main {
         // This information will be changed by a presenter object that is reporting the
         // results from the use case. The ViewModels are observable, and will be observed by the Views.
 
+        // ViewModels
         LoginViewModel loginViewModel = new LoginViewModel();
         MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
         AddBookViewModel addBookViewModel = new AddBookViewModel();
         PurchaseViewModel purchaseViewModel = new PurchaseViewModel();
         RevenueViewModel revenueViewModel = new RevenueViewModel();
+
         RentMenuViewModel rentMenuViewModel = new RentMenuViewModel();
         ReturnOrBorrowViewModel returnOrBorrowViewModel = new ReturnOrBorrowViewModel();
         ReturnBookViewModel returnBookViewModel = new ReturnBookViewModel();
         BorrowBookViewModel borrowBookViewModel = new BorrowBookViewModel();
 
+        // Views
         LoginView loginView = LoginUseCaseFactory.create(viewManagerModel, loginViewModel, mainMenuViewModel);
         MainMenuView mainMenuView = new MainMenuView(mainMenuViewModel, addBookViewModel, viewManagerModel, rentMenuViewModel, purchaseViewModel, revenueViewModel);
 
@@ -68,7 +74,7 @@ public class Main {
         RevenueView revenueView = RevenueUseCaseFactory.create(viewManagerModel, revenueViewModel, mainMenuViewModel);
 
         RentMenuView rentMenuView = RentMenuUseCaseFactory.create(viewManagerModel, rentMenuViewModel, mainMenuViewModel, returnOrBorrowViewModel);
-        ReturnOrBorrowView returnOrBorrowView = RobUseCaseFactory.create(viewManagerModel, returnOrBorrowViewModel, rentMenuViewModel, returnBookViewModel, borrowBookViewModel);
+        ReturnOrBorrowView returnOrBorrowView = RobUseCaseFactory.create(viewManagerModel, returnOrBorrowViewModel, rentMenuViewModel, returnBookViewModel, borrowBookViewModel, mainMenuViewModel);
         ReturnBookView returnBookView = ReturnBookUseCaseFactory.create(viewManagerModel, returnBookViewModel, mainMenuViewModel, returnOrBorrowViewModel);
         BorrowBookView borrowBookView = BorrowBookUseCaseFactory.create(viewManagerModel, borrowBookViewModel, mainMenuViewModel, returnOrBorrowViewModel);
 

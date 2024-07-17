@@ -58,7 +58,7 @@ public class PurchaseView extends JPanel implements ActionListener, PropertyChan
         this.add(buttons);
         this.add(Box.createVerticalGlue());
 
-        // #TODO Modify the input field and state to accept only integer
+        // #TODO (Phase 2) Modify the input field and state to accept only integer
 //        bookidInputField.addKeyListener(new KeyAdapter() {
 //            @Override
 //            public void keyTyped(KeyEvent e){
@@ -105,7 +105,7 @@ public class PurchaseView extends JPanel implements ActionListener, PropertyChan
 
             purchaseControllor.execute(bookid);
         }else if (purchaseViewModel.CANCEL_LABLE.equals(evt.getActionCommand())){
-            // #TODO Clean up the input boxes
+            // #TODO (Phase 2) Clean up the input boxes
             System.out.println("Canceled to search for the book");
             purchaseControllor.cancel();
         }

@@ -12,7 +12,7 @@ import java.io.IOException;
 import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
-import data.FilePathConstants;
+import data.misc_info.FilePathConstants;
 
 /**
  * A data access object (DAO) implementation for saving books to a JSON file.
