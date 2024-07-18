@@ -16,6 +16,11 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * The RentMenuView class represents the user interface for the rent book menu.
+ * It handles user input and interactions for searching and managing book rentals.
+ *
+ */
 public class RentMenuView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "rent book menu";
     private final RentMenuViewModel rentMenuViewModel;
@@ -25,8 +30,19 @@ public class RentMenuView extends JPanel implements ActionListener, PropertyChan
      * Input bookID given to the manager
      */
     final JTextField isbookIDInputField = new JTextField(15);
+
+    /**
+     * Field for displaying error messages related to the book ID.
+     */
     private final JTextField isbookIDErrorField = new JTextField(15);
 
+
+    /**
+     * Constructs a RentMenuView object with the specified view model and controller.
+     *
+     * @param rentMenuViewModel the view model for the rent menu
+     * @param rentMenuController the controller for the rent menu
+     */
     public RentMenuView(RentMenuViewModel rentMenuViewModel, RentMenuController rentMenuController) {
         this.rentMenuViewModel = rentMenuViewModel;
         this.rentMenuViewModel.addPropertyChangeListener(this);
@@ -94,11 +110,22 @@ public class RentMenuView extends JPanel implements ActionListener, PropertyChan
         });
 
     }
+
+    /**
+     * Gets the preferred size for this component.
+     *
+     * @return the preferred size
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(400, 250);
     }
 
+    /**
+     * Handles action events for the search and cancel buttons.
+     *
+     * @param e the action event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (rentMenuViewModel.SEARCH_LABEL.equals(e.getActionCommand())) {
@@ -126,16 +153,30 @@ public class RentMenuView extends JPanel implements ActionListener, PropertyChan
 
     }
 
+    /**
+     * Handles property change events from the view model.
+     *
+     * @param evt the property change event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         RentMenuState state = (RentMenuState) evt.getNewValue();
         setFields(state);
     }
+
+    /**
+     * Sets the fields in the view based on the given state.
+     *
+     * @param state the current state of the view model
+     */
     private void setFields(RentMenuState state) {
         isbookIDInputField.setText(String.valueOf(state.getBookID()));
 
     }
 
+    /**
+     * Resets the input fields to their default values.
+     */
     private void resetFields() {
         this.isbookIDInputField.setText("");
         this.isbookIDErrorField.setText("");

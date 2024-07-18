@@ -10,12 +10,29 @@ import interface_adapter.calculate_revenue.RevenuePresenter;
 
 import java.util.ArrayList;
 
+/**
+ * The RevenueInteractor class implements the RevenueDataBoundary interface and handles the business logic for calculating revenue.
+ *
+ */
 public class RevenueInteractor implements RevenueDataBoundary {
     private RevenueOutputDataBoundary revenuePresenter;
 
+
+    /**
+     * Constructs a RevenueInteractor object with the specified revenue presenter.
+     *
+     * @param revenuePresenter the RevenueOutputDataBoundary object that handles the presentation of revenue data
+     */
     public RevenueInteractor(RevenueOutputDataBoundary revenuePresenter) {
         this.revenuePresenter = revenuePresenter;
     }
+
+    /**
+     * Calculates the revenue based on the provided RevenueData.
+     * It sums up the charges from rental entries and sold prices from transaction entries within the specified date range.
+     *
+     * @param revenueData the RevenueData object containing the start date, end date, and flags for rental and purchase inclusion
+     */
     @Override
     public void calculateRevenue(RevenueData revenueData) {
         double revenue = 0;
@@ -46,6 +63,9 @@ public class RevenueInteractor implements RevenueDataBoundary {
        revenuePresenter.prepareSuccessView("Revenue: " + revenue);
     }
 
+    /**
+     * Cancels the revenue calculation process and invokes the presenter's cancel view.
+     */
     @Override
     public void cancel() {
         revenuePresenter.prepareCancelView();

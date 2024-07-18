@@ -17,6 +17,11 @@ import java.beans.PropertyChangeListener;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
+/**
+ * The AddBookView class represents the user interface for adding a book.
+ * It handles user input and interactions for adding a book.
+ *
+ */
 public class AddBookView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "add book";
@@ -30,6 +35,12 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
     final JTextField priceInputField = new JTextField(15);
     private final JLabel isbnErrorField = new JLabel();
 
+    /**
+     * Constructs an AddBookView object with the specified view model and controller.
+     *
+     * @param addBookViewModel the view model for adding a book
+     * @param addBookController the controller for adding a book
+     */
     public AddBookView(AddBookViewModel addBookViewModel, AddBookController addBookController) {
         this.addBookViewModel = addBookViewModel;
         this.addBookViewModel.addPropertyChangeListener(this);
@@ -80,11 +91,22 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
             public void keyReleased(KeyEvent e) {}
         });
     }
+
+    /**
+     * Gets the preferred size for this component.
+     *
+     * @return the preferred size
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(400, 250);
     }
 
+    /**
+     * Handles action events for the add book and cancel buttons.
+     *
+     * @param evt the action event
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         if (addBookViewModel.ADD_BOOK_LABEL.equals(evt.getActionCommand())) {
@@ -114,12 +136,22 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
         }
     }
 
+    /**
+     * Handles property change events from the view model.
+     *
+     * @param evt the property change event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         AddBookState state = (AddBookState) evt.getNewValue();
         setFields(state);
     }
 
+    /**
+     * Sets the fields in the view based on the given state.
+     *
+     * @param state the current state of the view model
+     */
     private void setFields(AddBookState state) {
         isbnInputField.setText(String.valueOf(state.getISBN()));
         priceInputField.setText(String.valueOf(state.getPrice()));

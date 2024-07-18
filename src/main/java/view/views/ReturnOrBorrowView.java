@@ -13,11 +13,22 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * The ReturnOrBorrowView class represents the user interface for deciding between returning or borrowing a book.
+ * It handles user interactions for selecting to return or borrow a book.
+ *
+ */
 public class ReturnOrBorrowView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "return or borrow";
     private final ReturnOrBorrowViewModel returnOrBorrowViewModel;
     private final ReturnOrBorrowController returnOrBorrowController;
 
+    /**
+     * Constructs a ReturnOrBorrowView object with the specified view model and controller.
+     *
+     * @param returnOrBorrowViewModel the view model for returning or borrowing a book
+     * @param returnOrBorrowController the controller for returning or borrowing a book
+     */
     public ReturnOrBorrowView(ReturnOrBorrowViewModel returnOrBorrowViewModel, ReturnOrBorrowController returnOrBorrowController){
         this.returnOrBorrowViewModel = returnOrBorrowViewModel;
         this.returnOrBorrowViewModel.addPropertyChangeListener(this);
@@ -46,11 +57,21 @@ public class ReturnOrBorrowView extends JPanel implements ActionListener, Proper
         this.add(Box.createVerticalGlue());
     }
 
+    /**
+     * Gets the preferred size for this component.
+     *
+     * @return the preferred size
+     */
     public Dimension getPreferredSize() {
         return new Dimension(400, 250);
     }
 
 
+    /**
+     * Handles action events for the borrow, return, and cancel buttons.
+     *
+     * @param e the action event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (returnOrBorrowViewModel.RETURN.equals(e.getActionCommand())) {
@@ -65,6 +86,11 @@ public class ReturnOrBorrowView extends JPanel implements ActionListener, Proper
         }
     }
 
+    /**
+     * Handles property change events from the view model.
+     *
+     * @param evt the property change event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 

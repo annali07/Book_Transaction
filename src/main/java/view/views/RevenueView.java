@@ -18,6 +18,11 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+/**
+ * The RevenueView class represents the user interface for calculating revenue.
+ * It handles user input and interactions for calculating total, purchase, and rental revenue.
+ *
+ */
 public class RevenueView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "Calculate Revenue";
@@ -25,12 +30,25 @@ public class RevenueView extends JPanel implements ActionListener, PropertyChang
     private final RevenueController revenueController;
 
     /**
-     * Input ISBN given to the manager
+     * Input field for the start date.
      */
     final JTextField startDateField = new JTextField(15);
+    /**
+     * Input field for the end date.
+     */
     final JTextField endDateField = new JTextField(15);
+
+    /**
+     * Field for displaying error messages related to the dates.
+     */
     private final JLabel dateErrorField = new JLabel();
 
+    /**
+     * Constructs a RevenueView object with the specified view model and controller.
+     *
+     * @param revenueViewModel the view model for calculating revenue
+     * @param revenueController the controller for calculating revenue
+     */
     public RevenueView(RevenueViewModel revenueViewModel, RevenueController revenueController) {
         this.revenueViewModel = revenueViewModel;
         this.revenueViewModel.addPropertyChangeListener(this);
@@ -103,11 +121,22 @@ public class RevenueView extends JPanel implements ActionListener, PropertyChang
         });
 
     }
+
+    /**
+     * Gets the preferred size for this component.
+     *
+     * @return the preferred size
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(400, 250);
     }
 
+    /**
+     * Handles action events for the total revenue, purchase revenue, rental revenue, and cancel buttons.
+     *
+     * @param evt the action event
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         if ("Total Revenue".equals(evt.getActionCommand())) {
@@ -161,16 +190,33 @@ public class RevenueView extends JPanel implements ActionListener, PropertyChang
         }
     }
 
+    /**
+     * Handles property change events from the view model.
+     *
+     * @param evt the property change event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         RevenueState state = (RevenueState) evt.getNewValue();
         setFields(state);
     }
+
+    /**
+     * Sets the fields in the view based on the given state.
+     *
+     * @param state the current state of the view model
+     */
     private void setFields(RevenueState state) {
         startDateField.setText(state.getStartDateString());
         endDateField.setText(state.getEndDateString());
     }
 
+    /**
+     * Converts a string in the format yyyy/MM/dd to a Date object.
+     *
+     * @param dateStr the date string to convert
+     * @return the Date object, or null if the format is invalid
+     */
     public static Date stringToDate( String dateStr ) {
         SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
 
