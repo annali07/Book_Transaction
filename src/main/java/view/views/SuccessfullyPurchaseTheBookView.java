@@ -10,14 +10,25 @@ import java.awt.event.ActionListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * The SuccessfullyPurchaseTheBookView class represents the user interface for successfully purchasing a book.
+ * It handles user interactions after a book has been successfully purchased.
+ *
+ */
 public class SuccessfullyPurchaseTheBookView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "SuccessfullyPurchaseView";
     private final PurchaseViewModel purchaseViewModel;
     private final PurchaseControllor purchaseControllor;
 
-    public SuccessfullyPurchaseTheBookView(PurchaseViewModel purchaseViewModel, PurchaseControllor purchaseControllorr){
+    /**
+     * Constructs a SuccessfullyPurchaseTheBookView object with the specified view model and controller.
+     *
+     * @param purchaseViewModel the view model for purchasing a book
+     * @param purchaseControllor the controller for purchasing a book
+     */
+    public SuccessfullyPurchaseTheBookView(PurchaseViewModel purchaseViewModel, PurchaseControllor purchaseControllor){
         this.purchaseViewModel = purchaseViewModel;
-        this.purchaseControllor = purchaseControllorr;
+        this.purchaseControllor = purchaseControllor;
         this.purchaseViewModel.addPropertyChangeListener(this);
 
         this.setLayout(new BoxLayout(this, BoxLayout.Y_AXIS));
@@ -37,18 +48,31 @@ public class SuccessfullyPurchaseTheBookView extends JPanel implements ActionLis
     }
 
 
-
+    /**
+     * Gets the preferred size for this component.
+     *
+     * @return the preferred size
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(400, 250);
     }
 
-
+    /**
+     * Handles action events for the cancel button.
+     *
+     * @param e the action event
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         purchaseControllor.cancel();
     }
 
+    /**
+     * Handles property change events from the view model.
+     *
+     * @param evt the property change event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
 

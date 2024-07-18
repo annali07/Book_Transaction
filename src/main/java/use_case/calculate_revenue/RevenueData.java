@@ -11,6 +11,14 @@ public class RevenueData {
     private boolean rental;
     private boolean purchase;
 
+    /**
+     * Constructs a RevenueData object with the specified start date, end date, rental status, and purchase status.
+     *
+     * @param startDate the start date of the revenue period
+     * @param endDate the end date of the revenue period
+     * @param rental whether the revenue includes rentals
+     * @param purchase whether the revenue includes purchases
+     */
     public RevenueData (Date startDate,Date endDate,boolean rental,boolean purchase){
         this.startDate = startDate;
         this.endDate = endDate;
@@ -18,8 +26,32 @@ public class RevenueData {
         this.purchase = purchase;
 
     }
+
+    /**
+     * Gets the start date of the revenue period.
+     *
+     * @return the start date
+     */
     public Date getStartDate() {return startDate;}
+
+    /**
+     * Gets the end date of the revenue period.
+     *
+     * @return the end date
+     */
     public Date getEndDate() {return endDate;}
+
+    /**
+     * Checks if the revenue includes rentals.
+     *
+     * @return true if the revenue includes rentals, false otherwise
+     */
     public boolean isRental() {return rental;}
+
+    /**
+     * Checks if the revenue includes purchases.
+     *
+     * @return true if the revenue includes purchases, false otherwise
+     */
     public boolean isPurchase() {return purchase;}
 }

@@ -10,6 +10,11 @@ import use_case.rent_book.ReturnBook.ReturnBookOutputBoundary;
 import use_case.rent_book.ReturnBook.ReturnBookOutputData;
 import view.views.ReturnBookView;
 
+/**
+ * The ReturnBookPresenter class handles the presentation logic for the return book operation.
+ * It interacts with the view models and the view manager to update the views based on the return book operation results.
+ *
+ */
 public class ReturnBookPresenter implements ReturnBookOutputBoundary {
 
     private final ViewManagerModel viewManagerModel;
@@ -19,6 +24,15 @@ public class ReturnBookPresenter implements ReturnBookOutputBoundary {
 
     private final ReturnOrBorrowViewModel returnOrBorrowViewModel;
 
+    /**
+     * Constructs a ReturnBookPresenter object with the specified view manager, main menu view model,
+     * return book view model, and return or borrow view model.
+     *
+     * @param viewManagerModel the view manager model
+     * @param mainMenuViewModel the main menu view model
+     * @param returnBookViewModel the return book view model
+     * @param returnOrBorrowViewModel the return or borrow view model
+     */
     public ReturnBookPresenter(ViewManagerModel viewManagerModel, MainMenuViewModel mainMenuViewModel, ReturnBookViewModel returnBookViewModel, ReturnOrBorrowViewModel returnOrBorrowViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.mainMenuViewModel = mainMenuViewModel;
@@ -26,6 +40,11 @@ public class ReturnBookPresenter implements ReturnBookOutputBoundary {
         this.returnOrBorrowViewModel = returnOrBorrowViewModel;
     }
 
+    /**
+     * Prepares and displays the success view for the return book operation.
+     *
+     * @param returnBookOutputData the output data of the return book operation
+     */
     @Override
     public void prepareSuccessView(ReturnBookOutputData returnBookOutputData) {
         ReturnBookState returnBookstate = returnBookViewModel.getState();
@@ -39,6 +58,9 @@ public class ReturnBookPresenter implements ReturnBookOutputBoundary {
 
     }
 
+    /**
+     * Prepares and switches to the cancel view.
+     */
     @Override
     public void prepareCancelView() {
         viewManagerModel.setActiveView(returnOrBorrowViewModel.getViewName());
