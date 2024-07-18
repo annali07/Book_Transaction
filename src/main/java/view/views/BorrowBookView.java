@@ -24,22 +24,58 @@ import java.util.Date;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+/**
+ * The BorrowBookView class represents the user interface for borrowing a book.
+ * It handles user input and interactions for borrowing a book.
+ *
+ */
 public class BorrowBookView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "borrow book";
     private final BorrowBookViewModel borrowBookViewModel;
     private final BorrowBookController borrowBookController;
 
+    /**
+     * Input field for the book ID of the book to be borrowed.
+     */
     final JTextField isbookIDInputField = new JTextField(20);
 
+    /**
+     * Input field for the book name of the book to be borrowed.
+     */
     final JTextField isbookNameField = new JTextField(20);
 
+    /**
+     * Input field for the start date of the borrowing period.
+     */
     private JFormattedTextField isbookStartDate = new JFormattedTextField();
+
+    /**
+     * Input field for the end date of the borrowing period.
+     */
     private JFormattedTextField isbookEndDate = new JFormattedTextField();
+
+    /**
+     * Field for displaying error messages.
+     */
     final JTextField isErrorMessage = new JTextField(20);
 
+    /**
+     * Input field for the borrower's contact number.
+     */
     private JTextField isBorrowerNumber = new JTextField(20);
+
+    /**
+     * Input field for the borrower's name.
+     */
     private JTextField isBorrowerName = new JTextField(20);
 
+    /**
+     * Constructs a BorrowBookView object with the specified view model and controller.
+     *
+     * @param borrowBookViewModel the view model for borrowing a book
+     * @param borrowBookController the controller for borrowing a book
+     * @throws ParseException if the date format is invalid
+     */
     public BorrowBookView(BorrowBookViewModel borrowBookViewModel, BorrowBookController borrowBookController) throws ParseException {
         this.borrowBookViewModel = borrowBookViewModel;
         this.borrowBookViewModel.addPropertyChangeListener(this);

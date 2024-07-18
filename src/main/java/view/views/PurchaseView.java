@@ -17,16 +17,33 @@ import java.awt.event.KeyEvent;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
-
+/**
+ * The PurchaseView class represents the user interface for purchasing a book.
+ * It handles user input and interactions for searching and purchasing a book.
+ *
+ */
 public class PurchaseView extends JPanel implements ActionListener, PropertyChangeListener {
 
     public final String viewName = "purchase book";
     private final PurchaseViewModel purchaseViewModel;
     private final PurchaseControllor purchaseControllor;
 
+    /**
+     * Input field for the book ID of the book to be purchased.
+     */
     final JTextField bookidInputField = new JTextField(15);
+
+    /**
+     * Field for displaying error messages related to the book ID.
+     */
     private final JLabel bookidErrorField = new JLabel();
 
+    /**
+     * Constructs a PurchaseView object with the specified view model and controller.
+     *
+     * @param purchaseViewModel the view model for purchasing a book
+     * @param purchaseControllor the controller for purchasing a book
+     */
     public PurchaseView(PurchaseViewModel purchaseViewModel, PurchaseControllor purchaseControllor) {
         this.purchaseViewModel = purchaseViewModel;
         this.purchaseViewModel.addPropertyChangeListener(this);
@@ -58,34 +75,23 @@ public class PurchaseView extends JPanel implements ActionListener, PropertyChan
         this.add(buttons);
         this.add(Box.createVerticalGlue());
 
-        // #TODO Modify the input field and state to accept only integer
-//        bookidInputField.addKeyListener(new KeyAdapter() {
-//            @Override
-//            public void keyTyped(KeyEvent e){
-//                char c = e.getKeyChar();
-//                // Check if character is not a digit and not a control character
-//                if (!Character.isDigit(c) && c != KeyEvent.VK_BACK_SPACE && c != KeyEvent.VK_DELETE) {
-//                    e.consume();
-//                }
-//                PurchaseState currentState = purchaseViewModel.getPurchaseState();
-//                currentState.setBookId(Integer.parseInt(bookidInputField.getText()));
-//                purchaseViewModel.setPurchaseState(currentState);;
-//            }
-//
-//            @Override
-//            public void keyPressed(KeyEvent e) {
-//            }
-//
-//            @Override
-//            public void keyReleased(KeyEvent e) {}
-//        });
     }
 
+    /**
+     * Gets the preferred size for this component.
+     *
+     * @return the preferred size
+     */
     @Override
     public Dimension getPreferredSize() {
         return new Dimension(400, 250);
     }
 
+    /**
+     * Handles action events for the confirm and cancel buttons.
+     *
+     * @param evt the action event
+     */
     @Override
     public void actionPerformed(ActionEvent evt) {
         if (purchaseViewModel.CONFIREM_LABLE.equals(evt.getActionCommand())){
@@ -111,12 +117,22 @@ public class PurchaseView extends JPanel implements ActionListener, PropertyChan
         }
     }
 
+    /**
+     * Handles property change events from the view model.
+     *
+     * @param evt the property change event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         PurchaseState state = (PurchaseState) evt.getNewValue();
         setFields(state);
     }
 
+    /**
+     * Sets the fields in the view based on the given state.
+     *
+     * @param state the current state of the view model
+     */
     private void setFields(PurchaseState state){
         bookidInputField.setText(Integer.toString(state.getBookId()));
     }

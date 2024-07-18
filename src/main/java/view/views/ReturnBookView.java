@@ -24,24 +24,54 @@ import java.util.*;
 import java.util.concurrent.TimeUnit;
 import java.util.regex.Pattern;
 
+/**
+ * The ReturnBookView class represents the user interface for returning a book.
+ * It handles user input and interactions for returning a book.
+ *
+ */
 public class ReturnBookView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "return book";
     private final ReturnBookViewModel returnBookViewModel;
     private final ReturnBookController returnBookController;
 
+    /**
+     * Input field for the book ID of the book to be returned.
+     */
     final JTextField isbookIDInputField = new JTextField(20);
+
+    /**
+     * Input field for the start date of the borrowing period.
+     */
     final JTextField isbookStartDate = new JTextField(20);
 
+    /**
+     * Input field for the book name of the book to be returned.
+     */
     final JTextField isbookNameField = new JTextField(20);
 
+    /**
+     * Input field for the return date of the book.
+     */
     private JFormattedTextField isbookReturnDate = new JFormattedTextField();
 
+    /**
+     * Input field for the end date of the borrowing period.
+     */
 
     final JTextField isbookEndDate = new JTextField(20);
 
+    /**
+     * Field for displaying error messages.
+     */
     final JTextField isErrorMessage = new JTextField(20);
 
-
+    /**
+     * Constructs a ReturnBookView object with the specified view model and controller.
+     *
+     * @param returnBookViewModel the view model for returning a book
+     * @param returnBookController the controller for returning a book
+     * @throws ParseException if the date format is invalid
+     */
     public ReturnBookView(ReturnBookViewModel returnBookViewModel, ReturnBookController returnBookController) throws ParseException {
         this.returnBookViewModel = returnBookViewModel;
         this.returnBookViewModel.addPropertyChangeListener(this);
@@ -256,6 +286,10 @@ public class ReturnBookView extends JPanel implements ActionListener, PropertyCh
         this.add(Box.createRigidArea(new Dimension(0, 20)));
     }
 
+
+    /**
+     * Handles the input for the return date field and updates the view model state accordingly.
+     */
     private void handleInput() {
         ReturnBookState currentState = returnBookViewModel.getState();
         String returnDate = isbookReturnDate.getText().trim();
@@ -290,6 +324,12 @@ public class ReturnBookView extends JPanel implements ActionListener, PropertyCh
         }
     }
 
+    /**
+     * Handles action events for the return and cancel buttons.
+     *
+     * @param e the action event
+     */
+    @Override
     public void actionPerformed(ActionEvent e) {
         if (returnBookViewModel.RETURN_BOOK.equals(e.getActionCommand())) {
             if (TemproraryInfo.update().get("isRented").equals("true")) {
@@ -341,10 +381,22 @@ public class ReturnBookView extends JPanel implements ActionListener, PropertyCh
         }
     }
 
+    /**
+     * Checks if the provided date string is in the valid format yyyy-MM-dd.
+     *
+     * @param date the date string to check
+     * @return true if the date is in valid format, false otherwise
+     */
     private boolean isValidDateFormat(String date) {
         String regex = "^\\d{4}-\\d{2}-\\d{2}$";
         return Pattern.matches(regex, date);
     }
+
+    /**
+     * Handles property change events from the view model.
+     *
+     * @param evt the property change event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         ReturnBookState state = (ReturnBookState) evt.getNewValue();
@@ -352,6 +404,11 @@ public class ReturnBookView extends JPanel implements ActionListener, PropertyCh
 
     }
 
+    /**
+     * Sets the fields in the view based on the given state.
+     *
+     * @param state the current state of the view model
+     */
     private void setFields(ReturnBookState state) {
         isbookIDInputField.setText(String.valueOf(state.getBookID()));
         isbookStartDate.setText(String.valueOf(state.getStartDate()));
