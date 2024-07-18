@@ -1,9 +1,11 @@
 package use_case.rent_book.ReturnBook;
 
 import data_access.data_base_return_book.DatabaseReturnInterface;
+import entity.rent_entry.RentalEntry;
 
 import java.util.Date;
 import java.util.concurrent.TimeUnit;
+import java.util.concurrent.locks.AbstractOwnableSynchronizer;
 
 /**
  * The ReturnBookInteractor class handles the business logic for returning a book.
@@ -35,18 +37,12 @@ public class ReturnBookInteractor implements ReturnBookInputBoundary {
      */
     @Override
     public void execute(ReturnBookInputData borrowBookInputData) {
-        // We could use entity here to calculate the charge
-        Date endDate = borrowBookInputData.getEndDate();
-        Date returnDate = borrowBookInputData.getReturnDate();
-        int charge = 0;
-        if (returnDate.after(endDate)){
-            long diffInMillies = Math.abs(returnDate.getTime() - endDate.getTime());
-            long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
-            charge = (int)diffInDays;
-        }
         userGateway.editBookFile(borrowBookInputData.getBookID());
-        userGateway.writeReturnFile(borrowBookInputData.getBookID(), charge);
-        ReturnBookOutputData response = new ReturnBookOutputData(borrowBookInputData.getBookID(), charge);
+
+        RentalEntry rentalEntry = new RentalEntry(borrowBookInputData.getBookID(), borrowBookInputData.getStartDate(), borrowBookInputData.getEndDate(), borrowBookInputData.getReturnDate());
+
+        userGateway.writeReturnFile(rentalEntry);
+        ReturnBookOutputData response = new ReturnBookOutputData(borrowBookInputData.getBookID(), rentalEntry.getCharge());
         presenter.prepareSuccessView(response);
         System.out.println("I have returned the book");
     }

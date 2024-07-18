@@ -80,7 +80,7 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
 
                     double charge = (Double) transaction.get("charge");
 
-                    rentalTransactions.add(new RentalEntry(rentalId, bookId, charge, bookName, borrowerName, borrowerPhoneNumber, rentalStartDate, rentalEndDate));
+//                    rentalTransactions.add(new RentalEntry(rentalId, bookId, charge, bookName, borrowerName, borrowerPhoneNumber, rentalStartDate, rentalEndDate));
                 }
             }
         } catch (Exception e) {

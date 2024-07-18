@@ -16,20 +16,23 @@ import java.nio.file.Paths;
 public class Book {
     private static final String FILE_PATH = FilePathConstants.BOOK_COUNT_FILE;
     private static final Gson gson = new Gson();
+    public static final int RENTAL_PRICE = 1;
 
-    private final int rentalPrice = 1;
+    private String BorrowerNumber;
+    private String isRented = "false";
+    private double bookPrice;
     private String bookName;
+    private String BorrowerName;
     private int bookID;
     private String rentalOrPurchase;
-    private double bookPrice;
     private String author;
     private Date rentalStartDate;
     private Date rentalEndDate;
-    private String BorrowerName;
-    private String BorrowerNumber;
+
+
 
     // Constructor with parameters and default values
-    public Book(String bookName, String author, double bookPrice) {
+    public Book(String bookName, double bookPrice) {
         this.bookName = bookName;
         this.bookPrice = bookPrice;
         this.rentalStartDate = null; // default value
