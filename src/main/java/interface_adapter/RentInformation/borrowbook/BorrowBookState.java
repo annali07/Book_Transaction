@@ -68,6 +68,16 @@ public class BorrowBookState{
         this.bookID = bookID;
     }
 
+    // Getters and Setters for bookIDError
+    public int getBookIDError() {
+        return bookIDError;
+    }
+
+    public void setBookIDError(int bookIDError) {
+        this.bookIDError = bookIDError;
+    }
+
+    // Getters and Setters for rentStartDate
     /**
      * Returns the rentStartDate of this state.
      *
@@ -75,6 +85,11 @@ public class BorrowBookState{
      */
     public Date getRentStartDate() {
         return rentStartDate;
+    }
+
+    // Getters and Setters for rentStartDateError
+    public Date getRentStartDateError() {
+        return rentStartDateError;
     }
 
     /**
@@ -95,6 +110,7 @@ public class BorrowBookState{
         this.rentStartDateError = rentStartDateError;
     }
 
+    // Getters and Setters for rentEndDate
     /**
      * Returns the rentEndDate of this state.
      *
@@ -113,6 +129,16 @@ public class BorrowBookState{
         this.rentEndDate = rentEndDate;
     }
 
+    // Getters and Setters for rentEndDateError
+    public Date getRentEndDateError() {
+        return rentEndDateError;
+    }
+
+    public void setRentEndDateError(Date rentEndDateError) {
+        this.rentEndDateError = rentEndDateError;
+    }
+
+    // Getters and Setters for borrowerName
     /**
      * Returns the borrowerName of this state.
      *
@@ -131,6 +157,7 @@ public class BorrowBookState{
         this.borrowerName = borrowerName;
     }
 
+    // Getters and Setters for borrowerNumber
     /**
      * Returns the borrowerNumber of this state.
      *
@@ -147,6 +174,24 @@ public class BorrowBookState{
      */
     public void setBorrowerNumber(String borrowerNumber) {
         this.borrowerNumber = borrowerNumber;
+    }
+
+    // Getters and Setters for borrowerNameError
+    public String getBorrowerNameError() {
+        return borrowerNameError;
+    }
+
+    public void setBorrowerNameError(String borrowerNameError) {
+        this.borrowerNameError = borrowerNameError;
+    }
+
+    // Getters and Setters for borrowerNumberError
+    public String getBorrowerNumberError() {
+        return borrowerNumberError;
+    }
+
+    public void setBorrowerNumberError(String borrowerNumberError) {
+        this.borrowerNumberError = borrowerNumberError;
     }
 
     /**
@@ -167,5 +212,11 @@ public class BorrowBookState{
         this.bookName = bookName;
     }
 
-}
+    public String getBookNameError(){
+        return bookNameError;
+    }
 
+    public void setBookNameError(String bookNameError) {
+        this.bookNameError = bookNameError;
+    }
+}
