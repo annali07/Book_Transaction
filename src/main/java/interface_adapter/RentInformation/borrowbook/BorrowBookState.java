@@ -78,6 +78,10 @@ public class BorrowBookState{
         return bookIDError;
     }
 
+     public void setBookIDError(int bookIDError) {
+        this.bookIDError = bookIDError;
+    }
+
     // Getters and Setters for rentStartDate
     /**
      * Returns the rentStartDate of this state.
@@ -86,6 +90,10 @@ public class BorrowBookState{
      */
     public Date getRentStartDate() {
         return rentStartDate;
+    }
+
+    public void setRentStartDate(Date rentStartDate) {
+        this.rentStartDate = rentStartDate;
     }
 
     // Getters and Setters for rentStartDateError
@@ -129,14 +137,7 @@ public class BorrowBookState{
     public void setRentEndDate(Date rentEndDate) {
         this.rentEndDate = rentEndDate;
     }
-
-    // Getters and Setters for rentEndDateError
-    public Date getRentEndDateError() {
-        return rentEndDateError;
-    }
-
-    public void setRentEndDateError(Date rentEndDateError) {
-        this.rentEndDateError = rentEndDateError;
+@@ -89,19 +140,39 @@ public void setRentEndDateError(Date rentEndDateError) {
     }
 
     // Getters and Setters for borrowerName
@@ -176,22 +177,7 @@ public class BorrowBookState{
     public void setBorrowerNumber(String borrowerNumber) {
         this.borrowerNumber = borrowerNumber;
     }
-
-    // Getters and Setters for borrowerNameError
-    public String getBorrowerNameError() {
-        return borrowerNameError;
-    }
-
-    public void setBorrowerNameError(String borrowerNameError) {
-        this.borrowerNameError = borrowerNameError;
-    }
-
-    // Getters and Setters for borrowerNumberError
-    public String getBorrowerNumberError() {
-        return borrowerNumberError;
-    }
-
-    public void setBorrowerNumberError(String borrowerNumberError) {
+@@ -124,10 +195,20 @@ public void setBorrowerNumberError(String borrowerNumberError) {
         this.borrowerNumberError = borrowerNumberError;
     }
 
@@ -212,12 +198,9 @@ public class BorrowBookState{
     public void setBookName(String bookName) {
         this.bookName = bookName;
     }
-
-    public String getBookNameError(){
-        return bookNameError;
-    }
-
-    public void setBookNameError(String bookNameError) {
+@@ -140,4 +221,3 @@ public void setBookNameError(String bookNameError) {
         this.bookNameError = bookNameError;
     }
 }
+
+   
