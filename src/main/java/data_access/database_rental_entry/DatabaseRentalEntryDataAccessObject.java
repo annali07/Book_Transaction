@@ -1,15 +1,17 @@
 package data_access.database_rental_entry;
 
+import com.google.gson.*;
+import entity.purchase_entry.TransactionEntry;
 import entity.rent_entry.RentalEntry;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
-import java.util.Iterator;
-import java.util.Set;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.*;
 
-import java.util.ArrayList;
-import java.util.Date;
 import java.text.SimpleDateFormat;
 
 import data.misc_info.FilePathConstants;
@@ -19,6 +21,7 @@ import data.misc_info.FilePathConstants;
  * Implementation of DatabaseRentalEntryDataAccessInterface for validating bookID.
  */
 public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryDataAccessInterface {
+
     @Override
     public boolean validatebook(int bookID) {
         JSONObject bookData = readBookData();
@@ -52,40 +55,42 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
     }
 
     @Override
-    public long getRentRevenueBetweenDate(Date startDate, Date endDate) {
-        ArrayList<RentalEntry> rentalTransactions = new ArrayList<>();
-        JSONParser parser = new JSONParser();
+    public RentalEntry getRentalEntry(int rentalID) {
+        Gson gson = new GsonBuilder().create();
+
         try {
-            Object obj = parser.parse(new FileReader(FilePathConstants.RENTAL_TRANSACTION_FILE));
-            JSONObject jsonObject = (JSONObject) obj;
+            String content = new String(Files.readAllBytes(Paths.get(FilePathConstants.RENTAL_TRANSACTION_FILE)));
+            JsonArray jsonArray = JsonParser.parseString(content).getAsJsonArray();
 
-            Set<String> keys = jsonObject.keySet();
-            for (String key: keys) {
-                JSONObject transaction = (JSONObject) jsonObject.get(key);
-                Date date = (Date) transaction.get("date");
-                if (date.after(startDate) && date.before(endDate)) {
-                    // Parse individual fields
-                    int rentalId = ((Long) transaction.get("rentalId")).intValue();
-                    int bookId = ((Long) transaction.get("bookId")).intValue();
-
-                    // Parsing dates assuming the dates are stored as strings in "yyyy-MM-dd" format
-                    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                    String rentalStartDateString = (String) transaction.get("rentalStartDate");
-                    String rentalEndDateString = (String) transaction.get("rentalEndDate");
-                    String rentalReturnDateString = (String) transaction.get("rentalReturnDate");
-                    Date rentalStartDate = formatter.parse(rentalStartDateString);
-                    Date rentalEndDate = formatter.parse(rentalEndDateString);
-                    Date returnDate = formatter.parse(rentalReturnDateString);
-
-                    int charge = ((Long) transaction.get("charge")).intValue();
-                    int maxCharge = ((Long) transaction.get("maxCharge")).intValue();
-                    rentalTransactions.add(new RentalEntry(rentalId, bookId, charge, rentalStartDate, rentalEndDate, returnDate, maxCharge));
+            for (JsonElement element : jsonArray) {
+                RentalEntry entry = gson.fromJson(element, RentalEntry.class);
+                if (entry.getRentalId() == (rentalID)) {
+                    return entry;
                 }
             }
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
         }
-        return 0;
+
+        return null;
+    }
+
+    @Override
+    public double getRentRevenueBetweenDate(Date startDate, Date endDate) {
+        double revenue = 0;
+
+        List<RentalEntry> transactions = new ArrayList<>();
+        for (int i = 1; i < RentalEntry.readRentalCount(); i++){
+            transactions.add(getRentalEntry(i));
+        }
+
+        for (RentalEntry rentalEntry : transactions) {
+            if (!startDate.after(rentalEntry.getReturnDate()) && !endDate.before(rentalEntry.getReturnDate())) {
+                revenue += rentalEntry.getCharge();
+            }
+        }
+
+        return revenue;
     }
 }
 

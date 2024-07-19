@@ -52,7 +52,7 @@ public class RentalEntry {
         writeRentalCount(rentalId+1);
     }
 
-    private static int readRentalCount() {
+    public static int readRentalCount() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
             JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
             return jsonObject.get("rentCount").getAsInt();
@@ -126,6 +126,10 @@ public class RentalEntry {
 
     public void setRentalEndDate(Date rentalEndDate) {
         this.rentalEndDate = rentalEndDate;
+    }
+
+    public Date getReturnDate(){
+        return this.returnDate;
     }
 
     public void calculateCharge(){
