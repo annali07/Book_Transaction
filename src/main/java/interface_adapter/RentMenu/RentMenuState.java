@@ -22,6 +22,7 @@ public class RentMenuState {
         this.bookIDError = copy.bookIDError;
     }
 
+    // Because of the previous copy constructor, the default constructor must be explicit.
     /**
      * Constructs a new RentMenuState with default values.
      */
@@ -42,6 +43,14 @@ public class RentMenuState {
      * @param bookID the bookID to set
      */
     public void setBookID(int bookID) {this.bookID = bookID;}
+
+    public int getBookIDError() {
+        return bookIDError;
+    }
+
+    public void setBookIDError(int bookIDError) {
+        this.bookIDError = bookIDError;
+    }
 
 }
 
