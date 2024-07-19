@@ -70,6 +70,8 @@ public class ReturnOrBorrowPresenter implements RobOutputBoundary {
     public void prepareCancelView() {
         viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-        System.out.println("Switched from Return or Borrow View to main main Menu");
+        System.out.println("Switched from Return or Borrow View to rent Menu");
+        
+       
     }
 }
