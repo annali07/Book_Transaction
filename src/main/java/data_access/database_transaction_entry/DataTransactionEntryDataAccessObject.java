@@ -24,12 +24,23 @@ import java.text.SimpleDateFormat;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+
+/**
+ * DataTransactionEntryDataAccessObject is a class that implements DatabaseTransactionEntryDataAccessInterface
+ * for performing CRUD operations on transaction entries stored in a JSON file.
+ */
 public class DataTransactionEntryDataAccessObject implements DatabaseTransactionEntryDataAccessInterface{
     private final String FILE_PATH = FilePathConstants.PURCHASE_TRANSACTION_FILE;
 
+    /**
+     * Retrieves a transaction entry by its ID.
+     *
+     * @param transactionId The ID of the transaction to retrieve.
+     * @return The TransactionEntry object if found, or null if not found.
+     */
     public TransactionEntry getTransactionEntry(int transactionId) {
         Gson gson = new GsonBuilder().create();
-        // Read the existing file and parse it as a JsonArray
+
         try {
             String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
             JsonArray jsonArray = JsonParser.parseString(content).getAsJsonArray();
@@ -44,9 +55,15 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
             e.printStackTrace();
         }
 
-        return null; // Return null if the transaction ID is not found or any exception occurs
+        return null;
     }
 
+    /**
+     * Creates a new transaction entry.
+     *
+     * @param transactionEntry The transaction entry to be created.
+     * @return true if the transaction entry is successfully created, false otherwise.
+     */
     @Override
     public boolean createTransactionEntry(TransactionEntry transactionEntry) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
@@ -90,6 +107,13 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
         return true;
     }
 
+    /**
+     * Calculates the total purchase revenue between two dates.
+     *
+     * @param startDate The start date of the period.
+     * @param endDate   The end date of the period.
+     * @return The total purchase revenue between the given dates.
+     */
     @Override
     public double getPurchaseRevenueBetweenDate(Date startDate, Date endDate) {
         double revenue = 0;
