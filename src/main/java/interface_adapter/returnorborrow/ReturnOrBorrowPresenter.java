@@ -72,6 +72,7 @@ public class ReturnOrBorrowPresenter implements RobOutputBoundary {
         viewManagerModel.firePropertyChanged();
         System.out.println("Switched from Return or Borrow View to rent Menu");
         
-       
+
+        
     }
 }
