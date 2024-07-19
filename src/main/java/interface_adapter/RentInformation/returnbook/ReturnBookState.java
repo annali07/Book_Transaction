@@ -62,6 +62,13 @@ public class ReturnBookState {
         this.bookID = bookID;
     }
 
+    public int getBookIDError() {
+        return this.bookIDError;
+    }
+
+    public void setBookIDError(int bookIDError) {
+        this.bookIDError = bookIDError;
+    }
     /**
      * Returns the book name of this state.
      *
@@ -80,6 +87,14 @@ public class ReturnBookState {
 
     public void setBookName(String bookName) {
         this.bookName = bookName;
+    }
+
+    public String getBookNameError() {
+        return this.bookNameError;
+    }
+
+    public void setBookNameError(String bookNameError) {
+        this.bookNameError = bookNameError;
     }
 
     /**
@@ -102,6 +117,14 @@ public class ReturnBookState {
         this.rentStartDate = rentStartDate;
     }
 
+    public Date getStartDateError() {
+        return this.rentStartDateError;
+    }
+
+    public void setStartDateError(Date rentStartDateError) {
+        this.rentStartDateError = rentStartDateError;
+    }
+
     /**
      * Returns the end date of this state.
      *
@@ -122,6 +145,14 @@ public class ReturnBookState {
         this.rentEndDate = rentEndDate;
     }
 
+    public Date getRentEndDateError() {
+        return this.rentEndDateError;
+    }
+
+    public void setEndDateError(Date rentEndDateError) {
+        this.rentEndDateError = rentEndDateError;
+    }
+
     /**
      * Returns the return date of this state.
      *
@@ -140,5 +171,14 @@ public class ReturnBookState {
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
     }
+
+    public Date getReturnDateError() {
+        return this.returnDateError;
+    }
+
+    public void setReturnDateError(Date returnDateError) {
+        this.returnDateError = returnDateError;
+    }
+
 
 }
