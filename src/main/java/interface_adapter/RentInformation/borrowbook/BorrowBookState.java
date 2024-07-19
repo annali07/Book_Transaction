@@ -18,7 +18,6 @@ public class BorrowBookState{
     private String borrowerNumber = "";
     private String borrowerNameError = null;
     private String borrowerNumberError = null;
-    
     private String bookName = "";
     private String bookNameError = null;
 
@@ -137,8 +136,14 @@ public class BorrowBookState{
     public void setRentEndDate(Date rentEndDate) {
         this.rentEndDate = rentEndDate;
     }
+
+    // Getters and Setters for rentEndDateError
+    public Date getRentEndDateError() {
+        return rentEndDateError;
+    }
     
     public void setRentEndDateError(Date rentEndDateError) {
+        this.rentEndDateError = rentEndDateError;
     }
 
     // Getters and Setters for borrowerName
@@ -178,6 +183,20 @@ public class BorrowBookState{
     public void setBorrowerNumber(String borrowerNumber) {
         this.borrowerNumber = borrowerNumber;
     }
+
+    // Getters and Setters for borrowerNameError
+    public String getBorrowerNameError() {
+        return borrowerNameError;
+    }
+
+    public void setBorrowerNameError(String borrowerNameError) {
+        this.borrowerNameError = borrowerNameError;
+    }
+
+    // Getters and Setters for borrowerNumberError
+    public String getBorrowerNumberError() {
+        return borrowerNumberError;
+    }
     
     public void setBorrowerNumberError(String borrowerNumberError) {
         this.borrowerNumberError = borrowerNumberError;
@@ -200,6 +219,11 @@ public class BorrowBookState{
     public void setBookName(String bookName) {
         this.bookName = bookName;
     }
+
+    public String getBookNameError(){
+        return bookNameError;
+    }
+    
     
     public void setBookNameError(String bookNameError) {
         this.bookNameError = bookNameError;
