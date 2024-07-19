@@ -6,6 +6,12 @@ import interface_adapter.view.ViewModel;
 import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
+/**
+ * ViewModel for the Borrow Book view, managing the state and labels for the view components.
+ * Provides methods for updating the state and notifying listeners of property changes.
+ *
+ */
+
 public class BorrowBookViewModel extends ViewModel {
 
     public final String TITLE_LABEL = "Borrow Book";
@@ -23,22 +29,43 @@ public class BorrowBookViewModel extends ViewModel {
 
     private BorrowBookState state = new BorrowBookState();
 
-
+    /**
+     * Constructs an BorrowBookModel with a default view name of "borrow book".
+     */
     public BorrowBookViewModel() {super("borrow book");}
+
+    /**
+     * Sets the state of this view model.
+     *
+     * @param state the new state to set
+     */
     public void setState(BorrowBookState state) {
         this.state = state;
     }
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
-    // This is what the MainMenu Presenter will call to let the ViewModel know to alert the View
+    /**
+     * Notifies listeners that the state property has changed.
+     */
     public void firePropertyChanged() {
         support.firePropertyChange("state", null, this.state);
     }
 
+    /**
+     * Adds a PropertyChangeListener to the listener list.
+     *
+     * @param listener the PropertyChangeListener to be added
+     */
     public void addPropertyChangeListener(PropertyChangeListener listener) {
         support.addPropertyChangeListener(listener);
     }
+
+    /**
+     * Returns the current state of this view model.
+     *
+     * @return the current BorrowBookState
+     */
     public BorrowBookState getState() {
         return this.state;
     }

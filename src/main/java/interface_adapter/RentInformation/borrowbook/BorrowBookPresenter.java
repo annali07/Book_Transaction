@@ -8,6 +8,11 @@ import interface_adapter.view.ViewManagerModel;
 import use_case.rent_book.BorrowBook.BorrowBookOutputBoundary;
 import use_case.rent_book.BorrowBook.BorrowBookOutputData;
 
+/**
+ * Presenter for handling the output of the borrow book use case.
+ * It updates the view models and manages view transitions based on the result of the use case execution.
+ *
+ */
 public class BorrowBookPresenter implements BorrowBookOutputBoundary {
     private final ViewManagerModel viewManagerModel;
     private final MainMenuViewModel mainMenuViewModel;
@@ -16,6 +21,14 @@ public class BorrowBookPresenter implements BorrowBookOutputBoundary {
 
     private final ReturnOrBorrowViewModel returnOrBorrowViewModel;
 
+    /**
+     * Constructs an BorrowBookPresenter with the specified view models.
+     *
+     * @param borrowBookViewModel the view model for the borrow book view
+     * @param viewManagerModel the view manager model for managing view transitions
+     * @param mainMenuViewModel the view model for the main menu view
+     * @param returnOrBorrowViewModel the view model for the return or borrow book view
+     */
     public BorrowBookPresenter(ViewManagerModel viewManagerModel, MainMenuViewModel mainMenuViewModel, BorrowBookViewModel borrowBookViewModel, ReturnOrBorrowViewModel returnOrBorrowViewModel) {
         this.viewManagerModel = viewManagerModel;
         this.mainMenuViewModel = mainMenuViewModel;
@@ -23,6 +36,10 @@ public class BorrowBookPresenter implements BorrowBookOutputBoundary {
         this.returnOrBorrowViewModel = returnOrBorrowViewModel;
     }
 
+    /**
+     * Prepares the view for a successful borrow book operation.
+     * Switches the active view to the main menu view.
+     */
     @Override
     public void prepareSuccessView(BorrowBookOutputData borrowBookOutputData) {
         BorrowBookState borrowBookState = borrowBookViewModel.getState();
@@ -36,6 +53,10 @@ public class BorrowBookPresenter implements BorrowBookOutputBoundary {
 
     }
 
+    /**
+     * Prepares the view for a canceled borrow book operation.
+     * Switches the active view to the return or borrow book view.
+     */
     @Override
     public void prepareCancelView() {
         viewManagerModel.setActiveView(returnOrBorrowViewModel.getViewName());

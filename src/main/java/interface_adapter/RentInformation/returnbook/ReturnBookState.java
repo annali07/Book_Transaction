@@ -2,6 +2,11 @@ package interface_adapter.RentInformation.returnbook;
 
 import java.util.Date;
 
+/**
+ * Represents the state of the return book operation, including the bookID, bookName, rentStartDate, rentEndDate,
+ * and returnDate.
+ *
+ */
 public class ReturnBookState {
     private int bookID = 0;
     private int bookIDError = 0;
@@ -14,6 +19,11 @@ public class ReturnBookState {
     private Date returnDate = null;
     private Date returnDateError = null;
 
+    /**
+     * Constructs a new ReturnBookState by copying another ReturnBookState.
+     *
+     * @param copy the ReturnBookState to copy
+     */
     public ReturnBookState(ReturnBookState copy){
         this.bookID = copy.bookID;
         this.bookIDError = copy.bookIDError;
@@ -26,86 +36,109 @@ public class ReturnBookState {
         this.returnDate = copy.returnDate;
         this.returnDateError = copy.returnDateError;
     }
+
+    /**
+     * Constructs a new ReturnBookState with default values.
+     */
     public ReturnBookState(){}
+
+    /**
+     * Returns the bookID of this state.
+     *
+     * @return the bookID
+     */
 
     public int getBookID() {
         return this.bookID;
     }
 
+    /**
+     * Sets the bookID for this state.
+     *
+     * @param bookID the bookID to set
+     */
+
     public void setBookID(int bookID) {
         this.bookID = bookID;
     }
 
-    public int getBookIDError() {
-        return this.bookIDError;
-    }
-
-    public void setBookIDError(int bookIDError) {
-        this.bookIDError = bookIDError;
-    }
+    /**
+     * Returns the book name of this state.
+     *
+     * @return the bookName
+     */
 
     public String getBookName() {
         return this.bookName;
     }
 
+    /**
+     * Sets the book name for this state.
+     *
+     * @param bookName the bookName to set
+     */
+
     public void setBookName(String bookName) {
         this.bookName = bookName;
     }
 
-    public String getBookNameError() {
-        return this.bookNameError;
-    }
-
-    public void setBookNameError(String bookNameError) {
-        this.bookNameError = bookNameError;
-    }
+    /**
+     * Returns the rentStartDate of this state.
+     *
+     * @return the rentStartDate
+     */
 
     public Date getStartDate() {
         return this.rentStartDate;
     }
 
+    /**
+     * Sets the rentStartDate for this state.
+     *
+     * @param rentStartDate the rentStartDate to set
+     */
+
     public void setStartDate(Date rentStartDate) {
         this.rentStartDate = rentStartDate;
     }
 
-    public Date getStartDateError() {
-        return this.rentStartDateError;
-    }
-
-    public void setStartDateError(Date rentStartDateError) {
-        this.rentStartDateError = rentStartDateError;
-    }
+    /**
+     * Returns the end date of this state.
+     *
+     * @return the rentEndDate
+     */
 
     public Date getEndDate() {
         return this.rentEndDate;
     }
 
+    /**
+     * Sets the rentEndDate for this state.
+     *
+     * @param rentEndDate the rentEndDate to set
+     */
+
     public void setEndDate(Date rentEndDate) {
         this.rentEndDate = rentEndDate;
     }
 
-    public Date getRentEndDateError() {
-        return this.rentEndDateError;
-    }
-
-    public void setEndDateError(Date rentEndDateError) {
-        this.rentEndDateError = rentEndDateError;
-    }
+    /**
+     * Returns the return date of this state.
+     *
+     * @return the return date
+     */
 
     public Date getReturnDate() {
         return this.returnDate;
     }
 
+    /**
+     * Sets the ReturnDate for this state.
+     *
+     * @param returnDate the return date to set
+     */
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
-    }
-
-    public Date getReturnDateError() {
-        return this.returnDateError;
-    }
-
-    public void setReturnDateError(Date returnDateError) {
-        this.returnDateError = returnDateError;
     }
 
 }

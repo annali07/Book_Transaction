@@ -16,6 +16,11 @@ import java.awt.event.KeyListener;
 import java.beans.PropertyChangeEvent;
 import java.beans.PropertyChangeListener;
 
+/**
+ * A panel representing the rent menu view. It contains input fields for bookID,
+ * and buttons to search book or cancel the process. It listens to property changes
+ * from the RentMenuViewModel and updates the UI accordingly.
+ */
 public class RentMenuView extends JPanel implements ActionListener, PropertyChangeListener {
     public final String viewName = "rent book menu";
     private final RentMenuViewModel rentMenuViewModel;
@@ -27,6 +32,13 @@ public class RentMenuView extends JPanel implements ActionListener, PropertyChan
     final JTextField isbookIDInputField = new JTextField(15);
     private final JTextField isbookIDErrorField = new JTextField(15);
 
+    /**
+     * Constructs a rentMenuView with the specified rentMenuViewModel and rentMenuController.
+     * Initializes the UI components and sets up listeners.
+     *
+     * @param rentMenuViewModel the view model for the rent menu view
+     * @param rentMenuController the controller to handle rent menu actions
+     */
     public RentMenuView(RentMenuViewModel rentMenuViewModel, RentMenuController rentMenuController) {
         this.rentMenuViewModel = rentMenuViewModel;
         this.rentMenuViewModel.addPropertyChangeListener(this);
@@ -99,6 +111,12 @@ public class RentMenuView extends JPanel implements ActionListener, PropertyChan
         return new Dimension(400, 250);
     }
 
+    /**
+     * Reacts to a button click that results in an ActionEvent.
+     * Handles search and cancel actions.
+     *
+     * @param e the action event triggered by button clicks
+     */
     @Override
     public void actionPerformed(ActionEvent e) {
         if (rentMenuViewModel.SEARCH_LABEL.equals(e.getActionCommand())) {
@@ -126,16 +144,32 @@ public class RentMenuView extends JPanel implements ActionListener, PropertyChan
 
     }
 
+    /**
+     * Reacts to property changes in the RentMenuViewModel.
+     * Updates the UI fields based on the new state.
+     *
+     * @param evt the property change event
+     */
     @Override
     public void propertyChange(PropertyChangeEvent evt) {
         RentMenuState state = (RentMenuState) evt.getNewValue();
         setFields(state);
     }
+
+    /**
+     * Updates the input fields based on the provided RentMenuState.
+     *
+     * @param state the new state to set in the input fields
+     */
     private void setFields(RentMenuState state) {
         isbookIDInputField.setText(String.valueOf(state.getBookID()));
 
     }
 
+    /**
+     * Clear the input fields
+     *
+     */
     private void resetFields() {
         this.isbookIDInputField.setText("");
         this.isbookIDErrorField.setText("");

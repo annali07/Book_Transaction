@@ -9,9 +9,18 @@ import java.util.Iterator;
 import java.util.Set;
 import data.misc_info.FilePathConstants;
 
+/**
+ * A data access object (DAO) implementation for returning book.
+ */
 public class DataBaseReturnObejct implements DatabaseReturnInterface{
     private static final String FILE_PATH_BOOK = FilePathConstants.TOTAL_BOOKS_FILE;
     private static final String RENTAL_FILE_PATH = FilePathConstants.RENTAL_FILE;
+
+    /**
+     * Update book information; set EndDate, StartDate to null, isRented to false, BorrowerName, BorrowerNumber to ""
+     *
+     * @param bookID the bookID of the book
+     */
     @Override
     public void editBookFile(int bookID) {
 
@@ -50,6 +59,12 @@ public class DataBaseReturnObejct implements DatabaseReturnInterface{
         }
     }
 
+    /**
+     * Saves the given return book information to the JSON file.
+     *
+     * @param bookID the bookID to the book
+     * @param charge the charge given the returnDate and EndDate
+     */
     @Override
     public void writeReturnFile(int bookID, int charge) {
         JSONObject rentalData = readBookData(RENTAL_FILE_PATH);
@@ -76,6 +91,12 @@ public class DataBaseReturnObejct implements DatabaseReturnInterface{
             e.printStackTrace();
         }
     }
+
+    /**
+     * helper method to read file
+     *
+     * @param filePath filePath
+     */
     private JSONObject readBookData(String filePath) {
         JSONParser parser = new JSONParser();
         try {
