@@ -48,6 +48,7 @@ public class ReturnBookViewModel extends ViewModel {
 
     private final PropertyChangeSupport support = new PropertyChangeSupport(this);
 
+    // This is what the MainMenu Presenter will call to let the ViewModel know to alert the View
     /**
      * Notifies listeners that the state property has changed.
      */
