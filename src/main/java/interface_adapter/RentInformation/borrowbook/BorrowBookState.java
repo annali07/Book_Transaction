@@ -47,7 +47,8 @@ public class BorrowBookState{
      */
     public BorrowBookState(){}
 
-
+    // Getters and Setters for bookID
+    
     /**
      * Returns the bookID of this state.
      *
