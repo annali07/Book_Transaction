@@ -8,7 +8,15 @@ import data_access.database_rental_entry.DatabaseRentalEntryDataAccessInterface;
  *
  */
 public class RentMenuInteractor implements RentMenuInputBoundary{
+
+    /**
+     * The user gateway for accessing relevant book information.
+     */
     private final DatabaseRentalEntryDataAccessInterface userGateway;
+
+    /**
+     * The presenter to prepare the output data for the view.
+     */
     private final RentMenuOutputBoundary presenter;
 
     /**

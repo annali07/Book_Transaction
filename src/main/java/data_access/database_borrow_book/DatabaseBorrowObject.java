@@ -12,8 +12,23 @@ import java.util.Iterator;
 import java.util.Set;
 import data.misc_info.FilePathConstants;
 
+/**
+ * A data access object (DAO) implementation for borrowing book.
+ */
 public class DatabaseBorrowObject implements DatabaseBorrowInterface{
     private static final String FILE_PATH_BOOK = FilePathConstants.TOTAL_BOOKS_FILE;
+
+    /**
+     * Update book information; set EndDate, StartDate to startDate, endDate, isRented to ture,
+     * BorrowerName, BorrowerNumber to borrowerName, borrowerNumber
+     *
+     * @param bookID the bookID of the book
+     * @param startDate the start date of the borrow
+     * @param endDate the end date of the borrow
+     * @param borrowerName the name of the borrower
+     * @param borrowerNumber the phone number of the borrower
+     *
+     */
     @Override
     public void writeBorrowFile(int bookID, Date startDate, Date endDate, String borrowerName, String borrowerNumber) {
         JSONObject bookData = readBookData(FILE_PATH_BOOK);
@@ -51,7 +66,12 @@ public class DatabaseBorrowObject implements DatabaseBorrowInterface{
         }
     }
 
-
+    
+    /**
+     * helper method to read file
+     *
+     * @param filePath filePath
+     */
     private JSONObject readBookData(String filePath) {
         JSONParser parser = new JSONParser();
         try {
