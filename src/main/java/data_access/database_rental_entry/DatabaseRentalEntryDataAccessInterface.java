@@ -18,6 +18,6 @@ public interface DatabaseRentalEntryDataAccessInterface{
     boolean validatebook(int bookID);
 //    public boolean createTransactionEntry(TransactionEntry transactionEntry);
 //    public int createTransactionID();
-    public ArrayList<RentalEntry> getRentalEntryBetweenDate(Date startDate, Date endDate);
+    public long getRentRevenueBetweenDate(Date startDate, Date endDate);
 
 }

@@ -37,6 +37,16 @@ public class RentalEntry {
         calculateCharge();
     }
 
+    public RentalEntry(int rentalId, int bookId, int charge, Date rentalStartDate, Date rentalEndDate, Date returnDate, int maxCharge) {
+        this.rentalId = rentalId;
+        this.bookId = bookId;
+        this.charge = charge;
+        this.rentalStartDate = rentalStartDate;
+        this.rentalEndDate = rentalEndDate;
+        this.returnDate = returnDate;
+        this.maxCharge = maxCharge;
+    }
+
     public void setRentalID() {
         this.rentalId = readRentalCount();
         writeRentalCount(rentalId+1);

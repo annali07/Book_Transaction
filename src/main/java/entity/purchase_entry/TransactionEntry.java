@@ -1,7 +1,9 @@
 package entity.purchase_entry;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import data.misc_info.FilePathConstants;
+import com.fasterxml.jackson.databind.annotation.JsonSerialize;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,10 +19,13 @@ public class TransactionEntry {
     private static final String FILE_PATH = FilePathConstants.BOOK_COUNT_FILE;
     private static final Gson gson = new Gson();
 
+    @JsonProperty("transactionId")  // Make sure this annotation is correct
     private int transactionId;
     private int bookId;
     private String bookName;
     private double soldPrice;
+
+    @JsonSerialize(using = CustomDateSerializer.class)
     private Date date;
 
     public TransactionEntry(int bookId, String bookName, double soldPrice, Date date) {
@@ -28,23 +33,11 @@ public class TransactionEntry {
         this.bookName = bookName;
         this.soldPrice = soldPrice;
         this.date = date;
-        setTransactionID();
-    }
-
-    public TransactionEntry(int transactionId, int bookId, String bookName, double soldPrice, Date date) {
-        this.transactionId = transactionId;
-        this.bookId = bookId;
-        this.bookName = bookName;
-        this.soldPrice = soldPrice;
-        this.date = date;
+        setTransactionId();
     }
 
     public int getTransactionId() {
         return transactionId;
-    }
-
-    public void setTransactionId(int transactionId) {
-        this.transactionId = transactionId;
     }
 
     public int getBookId() {
@@ -79,16 +72,12 @@ public class TransactionEntry {
         this.date = date;
     }
 
-    public int getTransactionID(){
-        return transactionId;
-    }
-
-    public void setTransactionID(){
+    public void setTransactionId(){
         this.transactionId = readTransactionCount();
         writeTransactionCount(transactionId+1);
     }
 
-    private static int readTransactionCount() {
+    public static int readTransactionCount() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
             JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
             return jsonObject.get("transactionCount").getAsInt();

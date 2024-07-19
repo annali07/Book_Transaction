@@ -2,7 +2,7 @@ package use_case.calculate_revenue;
 
 import java.util.Date;
 
-public class RevenueData {
+public class RevenueInputData {
     /*
     Represents the data needed to calculate revenue for a given time period.
      */
@@ -12,14 +12,14 @@ public class RevenueData {
     private boolean purchase;
 
     /**
-     * Constructs a RevenueData object with the specified start date, end date, rental status, and purchase status.
+     * Constructs a RevenueInputData object with the specified start date, end date, rental status, and purchase status.
      *
      * @param startDate the start date of the revenue period
      * @param endDate the end date of the revenue period
      * @param rental whether the revenue includes rentals
      * @param purchase whether the revenue includes purchases
      */
-    public RevenueData (Date startDate,Date endDate,boolean rental,boolean purchase){
+    public RevenueInputData (Date startDate,Date endDate,boolean rental,boolean purchase){
         this.startDate = startDate;
         this.endDate = endDate;
         this.rental = rental;

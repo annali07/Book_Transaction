@@ -18,6 +18,7 @@ public class Book {
     private static final Gson gson = new Gson();
     public static final int RENTAL_PRICE = 1;
 
+    private int rentalPrice = RENTAL_PRICE;
     private String BorrowerNumber;
     private String isRented = "false";
     private double bookPrice;
@@ -28,8 +29,6 @@ public class Book {
     private String author;
     private Date rentalStartDate;
     private Date rentalEndDate;
-
-
 
     // Constructor with parameters and default values
     public Book(String bookName, double bookPrice) {

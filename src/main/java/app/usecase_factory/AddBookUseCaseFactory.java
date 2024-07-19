@@ -22,7 +22,6 @@ public class AddBookUseCaseFactory {
     private AddBookUseCaseFactory() {}
 
     public static AddBookView create(ViewManagerModel viewManagerModel, AddBookViewModel addBookViewModel, MainMenuViewModel mainMenuViewModel) {
-
         try {
             AddBookController addBookController = createAddBookUsecase(viewManagerModel, addBookViewModel, mainMenuViewModel);
             return new AddBookView(addBookViewModel, addBookController);

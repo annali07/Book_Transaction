@@ -52,7 +52,7 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
     }
 
     @Override
-    public ArrayList<RentalEntry> getRentalEntryBetweenDate(Date startDate, Date endDate) {
+    public long getRentRevenueBetweenDate(Date startDate, Date endDate) {
         ArrayList<RentalEntry> rentalTransactions = new ArrayList<>();
         JSONParser parser = new JSONParser();
         try {
@@ -67,26 +67,25 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
                     // Parse individual fields
                     int rentalId = ((Long) transaction.get("rentalId")).intValue();
                     int bookId = ((Long) transaction.get("bookId")).intValue();
-                    String bookName = (String) transaction.get("bookName");
-                    String borrowerName = (String) transaction.get("borrowerName");
-                    String borrowerPhoneNumber = (String) transaction.get("borrowerPhoneNumber");
 
                     // Parsing dates assuming the dates are stored as strings in "yyyy-MM-dd" format
                     SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
                     String rentalStartDateString = (String) transaction.get("rentalStartDate");
                     String rentalEndDateString = (String) transaction.get("rentalEndDate");
+                    String rentalReturnDateString = (String) transaction.get("rentalReturnDate");
                     Date rentalStartDate = formatter.parse(rentalStartDateString);
                     Date rentalEndDate = formatter.parse(rentalEndDateString);
+                    Date returnDate = formatter.parse(rentalReturnDateString);
 
-                    double charge = (Double) transaction.get("charge");
-
-//                    rentalTransactions.add(new RentalEntry(rentalId, bookId, charge, bookName, borrowerName, borrowerPhoneNumber, rentalStartDate, rentalEndDate));
+                    int charge = ((Long) transaction.get("charge")).intValue();
+                    int maxCharge = ((Long) transaction.get("maxCharge")).intValue();
+                    rentalTransactions.add(new RentalEntry(rentalId, bookId, charge, rentalStartDate, rentalEndDate, returnDate, maxCharge));
                 }
             }
         } catch (Exception e) {
             e.printStackTrace();
         }
-        return rentalTransactions;
+        return 0;
     }
 }
 

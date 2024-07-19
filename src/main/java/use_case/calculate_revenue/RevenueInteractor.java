@@ -9,57 +9,57 @@ import entity.rent_entry.RentalEntry;
 import interface_adapter.calculate_revenue.RevenuePresenter;
 
 import java.util.ArrayList;
+import java.util.Date;
 
 /**
- * The RevenueInteractor class implements the RevenueDataBoundary interface and handles the business logic for calculating revenue.
+ * The RevenueInteractor class implements the RevenueInputBoundary interface and handles the business logic for calculating revenue.
  *
  */
-public class RevenueInteractor implements RevenueDataBoundary {
-    private RevenueOutputDataBoundary revenuePresenter;
+public class RevenueInteractor implements RevenueInputBoundary {
 
+    private final DatabaseTransactionEntryDataAccessInterface databaseTransactionEntryDataAccessObject;
+    private final DatabaseRentalEntryDataAccessInterface databaseRentalEntryDataAccessObject;
+    private final RevenueOutputDataBoundary revenuePresenter;
 
     /**
      * Constructs a RevenueInteractor object with the specified revenue presenter.
      *
      * @param revenuePresenter the RevenueOutputDataBoundary object that handles the presentation of revenue data
      */
-    public RevenueInteractor(RevenueOutputDataBoundary revenuePresenter) {
+    public RevenueInteractor(DatabaseRentalEntryDataAccessInterface databaseRentalEntryDataAccessObject, DatabaseTransactionEntryDataAccessInterface databaseTransactionEntryDataAccessObject, RevenueOutputDataBoundary revenuePresenter) {
+        this.databaseRentalEntryDataAccessObject = databaseRentalEntryDataAccessObject;
+        this.databaseTransactionEntryDataAccessObject = databaseTransactionEntryDataAccessObject;
         this.revenuePresenter = revenuePresenter;
     }
 
     /**
-     * Calculates the revenue based on the provided RevenueData.
+     * Calculates the revenue based on the provided RevenueInputData.
      * It sums up the charges from rental entries and sold prices from transaction entries within the specified date range.
      *
      * @param revenueData the RevenueData object containing the start date, end date, and flags for rental and purchase inclusion
      */
     @Override
-    public void calculateRevenue(RevenueData revenueData) {
+    public void calculateRevenue(RevenueInputData revenueData) {
+        Date startDate = revenueData.getStartDate();
+        Date endDate = revenueData.getEndDate();
+
         double revenue = 0;
+        double purchaseRevenue = 0;
+        double rentRevenue = 0;
 
-       if (revenueData.isRental()) {
-           DatabaseRentalEntryDataAccessInterface databaseRentalEntryDataAccessInterface = new DatabaseRentalEntryDataAccessObject();
-           ArrayList<RentalEntry> rentalEntries = databaseRentalEntryDataAccessInterface.getRentalEntryBetweenDate(revenueData.getStartDate(), revenueData.getEndDate());
-           if (rentalEntries == null) {
-               System.out.println("rentel entry is null");
-           } else {
-               for (RentalEntry rentalEntry : rentalEntries) {
-                    revenue += rentalEntry.getCharge();
-               }
-           }
-       }
-       if (revenueData.isPurchase()) {
-           DatabaseTransactionEntryDataAccessInterface databaseTransactionEntryDataAccessInterface = new DataTransactionEntryDataAccessObject();
-           ArrayList<TransactionEntry> transactionEntries = databaseTransactionEntryDataAccessInterface.getTransactionEntriesBetweenDate(revenueData.getStartDate(), revenueData.getEndDate());
-           if (transactionEntries == null) {
-               revenuePresenter.prepareFailView("Error: transaction entry is null");
-           } else {
-               for (TransactionEntry transactionEntry : transactionEntries) {
-                    revenue += transactionEntry.getSoldPrice();
-               }
-           }
-       }
+        // Calculate From Purchase
+        purchaseRevenue = databaseTransactionEntryDataAccessObject.getPurchaseRevenueBetweenDate(startDate, endDate);
 
+        // Calculate From Rent
+        rentRevenue = databaseRentalEntryDataAccessObject.getRentRevenueBetweenDate(startDate, endDate);
+
+        if (revenueData.isRental()) {
+            revenue += rentRevenue;
+        }
+        if (revenueData.isPurchase()) {
+            revenue += purchaseRevenue;
+        }
+        System.out.println(revenue);
        revenuePresenter.prepareSuccessView("Revenue: " + revenue);
     }
 

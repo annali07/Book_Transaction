@@ -8,6 +8,5 @@ import java.util.Date;
 public interface DatabaseTransactionEntryDataAccessInterface {
     public TransactionEntry getTransactionEntry(int id);
     public boolean createTransactionEntry(TransactionEntry transactionEntry);
-    public ArrayList<TransactionEntry> getTransactionEntriesBetweenDate(Date startDate, Date endDate);
-
+    public double getPurchaseRevenueBetweenDate(Date startDate, Date endDate);
 }
