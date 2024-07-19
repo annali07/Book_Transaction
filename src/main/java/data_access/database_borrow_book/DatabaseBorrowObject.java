@@ -65,7 +65,6 @@ public class DatabaseBorrowObject implements DatabaseBorrowInterface{
             e.printStackTrace();
         }
     }
-
     /**
      * helper method to read file
      *
