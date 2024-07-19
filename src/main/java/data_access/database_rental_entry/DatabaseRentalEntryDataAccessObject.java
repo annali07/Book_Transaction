@@ -13,15 +13,21 @@ import java.nio.file.Paths;
 import java.util.*;
 
 import java.text.SimpleDateFormat;
-
 import data.misc_info.FilePathConstants;
 
 
 /**
- * Implementation of DatabaseRentalEntryDataAccessInterface for validating bookID.
+ * Implementation of DatabaseRentalEntryDataAccessInterface for performing operations on rental entries,
+ * such as validating book IDs, retrieving rental entries, and calculating rental revenue.
  */
 public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryDataAccessInterface {
 
+    /**
+     * Validates the bookID by checking the provided bookID against stored book data.
+     *
+     * @param bookID the bookID to validate
+     * @return true if the bookID matches a stored book, false otherwise
+     */
     @Override
     public boolean validatebook(int bookID) {
         JSONObject bookData = readBookData();
@@ -43,6 +49,11 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
         return false;
     }
 
+    /**
+     * Reads the book data from a JSON file.
+     *
+     * @return A JSONObject containing the book data, or null if an error occurs.
+     */
     private JSONObject readBookData() {
         JSONParser parser = new JSONParser();
         try {
@@ -54,6 +65,12 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
         }
     }
 
+    /**
+     * Retrieves a rental entry by its ID.
+     *
+     * @param rentalID The ID of the rental entry to retrieve.
+     * @return The RentalEntry object if found, or null if not found.
+     */
     @Override
     public RentalEntry getRentalEntry(int rentalID) {
         Gson gson = new GsonBuilder().create();
@@ -75,6 +92,13 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
         return null;
     }
 
+    /**
+     * Calculates the total rental revenue between two dates.
+     *
+     * @param startDate The start date of the period.
+     * @param endDate   The end date of the period.
+     * @return The total rental revenue between the given dates.
+     */
     @Override
     public double getRentRevenueBetweenDate(Date startDate, Date endDate) {
         double revenue = 0;
