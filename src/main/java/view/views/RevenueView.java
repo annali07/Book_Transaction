@@ -39,11 +39,6 @@ public class RevenueView extends JPanel implements ActionListener, PropertyChang
     final JTextField endDateField = new JTextField(15);
 
     /**
-     * Field for displaying error messages related to the dates.
-     */
-    private final JLabel dateErrorField = new JLabel();
-
-    /**
      * Constructs a RevenueView object with the specified view model and controller.
      *
      * @param revenueViewModel the view model for calculating revenue
@@ -61,9 +56,9 @@ public class RevenueView extends JPanel implements ActionListener, PropertyChang
         this.add(title);
 
         LabelTextPanel startDate = new LabelTextPanel(
-                new JLabel("Start Date in yyyy/mm/dd"), startDateField);
+                new JLabel("Start Date in yyyy-mm-dd"), startDateField);
         LabelTextPanel endDate = new LabelTextPanel(
-                new JLabel("End Date in yyyy/mm/dd"), endDateField);
+                new JLabel("End Date in yyyy-mm-dd"), endDateField);
         this.add(startDate);
         this.add(endDate);
 
@@ -139,54 +134,34 @@ public class RevenueView extends JPanel implements ActionListener, PropertyChang
      */
     @Override
     public void actionPerformed(ActionEvent evt) {
-        if ("Total Revenue".equals(evt.getActionCommand())) {
-            System.out.println("Total Revenue button clicked");
-            RevenueState state = revenueViewModel.getState();
-            if (state == null) {
-                throw new IllegalStateException("RevenueViewModel is null");
-            }
-            String startDate1 = state.getStartDateString();
-            String endDate1 = state.getEndDateString();
-            if (startDate1 == null || startDate1.isEmpty() || endDate1 == null || endDate1.isEmpty()) {
-                System.out.println("Date is empty or null");
-                return;
-            }
-            Date startDate = stringToDate(startDate1);
-            Date endDate = stringToDate(endDate1);
-            revenueController.execute(startDate, endDate, true, true);
-        } else if ("Purchase Revenue".equals(evt.getActionCommand())) {
-            System.out.println("Purchase Revenue button clicked");
-            RevenueState state = revenueViewModel.getState();
-            if (state == null) {
-                throw new IllegalStateException("RevenueViewModel is null");
-            }
-            String startDate1 = state.getStartDateString();
-            String endDate1 = state.getEndDateString();
-
-            if (startDate1 == null || startDate1.isEmpty() || endDate1 == null || endDate1.isEmpty()) {
-                System.out.println("Date is empty or null");
-                return;
-            }
-            Date startDate = stringToDate(startDate1);
-            Date endDate = stringToDate(endDate1);
-            revenueController.execute(startDate, endDate, false, true);
-        } else if ("Rental Revenue".equals(evt.getActionCommand())) {
-            System.out.println("Rental Revenue button clicked");
-            RevenueState state = revenueViewModel.getState();
-            if (state == null) {
-                throw new IllegalStateException("RevenueViewModel is null");
-            }
-            String startDate1 = state.getStartDateString();
-            String endDate1 = state.getEndDateString();
-            if (startDate1 == null || startDate1.isEmpty() || endDate1 == null || endDate1.isEmpty()) {
-                System.out.println("Date is empty or null");
-                return;
-            }
-            Date startDate = stringToDate(startDate1);
-            Date endDate = stringToDate(endDate1);
-            revenueController.execute(startDate, endDate, true, false);
-        } else if ("Cancel".equals(evt.getActionCommand())) {
+        if (revenueViewModel.CANCEL.equals(evt.getActionCommand())) {
             revenueController.cancel();
+        }
+
+        RevenueState state = revenueViewModel.getState();
+        if (state == null) {
+            throw new IllegalStateException("RevenueViewModel is null");
+        }
+
+        String startDate = startDateField.getText();
+        String endDate = endDateField.getText();
+        if (startDate == null || startDate.isEmpty() || endDate == null || endDate.isEmpty()) {
+            System.out.println("Date is empty or null");
+            return;
+        }
+
+        if (revenueViewModel.TOTAL_REVENUE.equals(evt.getActionCommand())) {
+            System.out.println("Total Revenue button clicked");
+            revenueController.execute(startDate, endDate, true, true);
+
+        } else if (revenueViewModel.PURCHASE_REVENUE.equals(evt.getActionCommand())) {
+            System.out.println("Purchase Revenue button clicked");
+            revenueController.execute(startDate, endDate, false, true);
+
+        } else if (revenueViewModel.RENT_REVENUE.equals(evt.getActionCommand())) {
+            System.out.println("Rental Revenue button clicked");
+            revenueController.execute(startDate, endDate, true, false);
+
         }
     }
 
@@ -209,24 +184,6 @@ public class RevenueView extends JPanel implements ActionListener, PropertyChang
     private void setFields(RevenueState state) {
         startDateField.setText(state.getStartDateString());
         endDateField.setText(state.getEndDateString());
-    }
-
-    /**
-     * Converts a string in the format yyyy/MM/dd to a Date object.
-     *
-     * @param dateStr the date string to convert
-     * @return the Date object, or null if the format is invalid
-     */
-    public static Date stringToDate( String dateStr ) {
-        SimpleDateFormat formatter = new SimpleDateFormat("yyyy/MM/dd");
-
-        try {
-            Date date = formatter.parse(dateStr);
-            return date;
-        } catch (ParseException e) {
-            e.printStackTrace();
-        }
-        return null;
     }
 
 }

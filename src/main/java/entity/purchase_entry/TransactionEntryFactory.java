@@ -7,7 +7,7 @@ public class TransactionEntryFactory {
         if (!validate(bookId, soldPrice, transactionId)){
             throw new IllegalArgumentException("Invalid arguments for creating RentalHistory");
         }
-        return new TransactionEntry(transactionId, bookId, bookName, soldPrice, date);
+        return new TransactionEntry(bookId, bookName, soldPrice, date);
     }
 
     public static boolean validate(int bookId, double soldPrice, int transactionId) {

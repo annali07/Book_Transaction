@@ -30,8 +30,8 @@ public class ReturnBookController {
      * @param date_return the return date of the book
      * @param date_end the end date of the borrowing period
      */
-    public void execute(int bookID, Date date_return, Date date_end) {
-        ReturnBookInputData returnBookInputData = new ReturnBookInputData(bookID, date_return, date_end);
+    public void execute(int bookID, Date date_return, Date date_end, Date date_start) {
+        ReturnBookInputData returnBookInputData = new ReturnBookInputData(bookID, date_return, date_end, date_start);
         returnBookInteractor.execute(returnBookInputData);
 
     }

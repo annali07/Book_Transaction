@@ -1,6 +1,12 @@
-use_case/add_book/AddBookInteractorTest.class
+app/usecase_factory/PurchaseBookCaseFactoryTest.class
+interface_adapter/login/LoginPresenterTest.class
+use_case/purchase_book/PurchaseInputDataTest.class
 app/usecase_factory/AddBookUseCaseFactoryTest.class
-data_access/data_base_return_book/DataBaseReturnObejctTest.class
-data_access/login_validation/UserLoginDataAccessTest.class
-data_access/api/ExternalBookApiTest.class
-data_access/add_book_repository/BookRepositoryDataAccessObjectTest.class
+use_case/login/LoginInputDataTest.class
+use_case/add_book/AddBookInputDataTest.class
+use_case/login/LoginInteractorTest.class
+interface_adapter/add_book/AddBookPresenterTest.class
+use_case/add_book/AddBookInteractorTest.class
+use_case/login/LoginOutputDataTest.class
+app/usecase_factory/LoginUseCaseFactoryTest.class
+use_case/purchase_book/PurchaseInteractorTest.class

@@ -10,6 +10,7 @@ public class ReturnBookInputData {
     private int bookID;
     private Date returnDate;
     private Date endDate;
+    private Date startDate;
 
     /**
      * Constructs a ReturnBookInputData object with the specified book ID, return date, and end date.
@@ -18,10 +19,11 @@ public class ReturnBookInputData {
      * @param returnDate the date when the book is returned
      * @param endDate the end date of the borrowing period
      */
-    public ReturnBookInputData(int bookID, Date returnDate, Date endDate){
+    public ReturnBookInputData(int bookID, Date returnDate, Date endDate, Date startDate){
         this.bookID = bookID;
         this.returnDate = returnDate;
         this.endDate = endDate;
+        this.startDate = startDate;
     }
 
     /**
@@ -77,5 +79,7 @@ public class ReturnBookInputData {
     public void setReturnDate(Date returnDate) {
         this.returnDate = returnDate;
     }
+
+    public Date getStartDate() {return startDate;}
 }
 

@@ -32,6 +32,9 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
      * Input ISBN given to the manager
      */
     final JTextField isbnInputField = new JTextField(15);
+    /**
+     * Input field for price of the book
+     */
     final JTextField priceInputField = new JTextField(15);
     private final JLabel isbnErrorField = new JLabel();
 
@@ -116,7 +119,8 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
                 throw new IllegalStateException("AddBookState is null");
             }
 
-            String isbn = state.getISBN();
+//            String isbn = state.getISBN();
+            String isbn = isbnInputField.getText();
             if (isbn == null || isbn.isEmpty()) {
                 System.out.println("ISBN is empty or null");
                 return;

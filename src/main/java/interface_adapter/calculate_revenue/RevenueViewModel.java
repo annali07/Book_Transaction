@@ -8,6 +8,11 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 public class RevenueViewModel extends ViewModel {
+    public final String TOTAL_REVENUE = "Total Revenue";
+    public final String RENT_REVENUE = "Rental Revenue";
+    public final String PURCHASE_REVENUE = "Purchase Revenue";
+    public final String CANCEL = "Cancel";
+
 
     private RevenueState state = new RevenueState();
 

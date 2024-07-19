@@ -1,74 +1,79 @@
 package data_access.database_transaction_entry;
 
+import com.google.gson.*;
+import data.misc_info.FilePathConstants;
+import com.fasterxml.jackson.databind.JsonNode;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.module.SimpleModule;
+import com.fasterxml.jackson.databind.node.ArrayNode;
+import com.fasterxml.jackson.databind.type.CollectionType;
+import entity.purchase_entry.CustomDateSerializer;
 import entity.purchase_entry.TransactionEntry;
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
 
-import com.google.gson.JsonArray;
+import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
 import java.io.IOException;
+import java.text.DateFormat;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Set;
 import java.text.SimpleDateFormat;
-
-import data.misc_info.FilePathConstants;
-import com.google.gson.Gson;
-import com.google.gson.GsonBuilder;
-import com.google.gson.JsonElement;
-import com.google.gson.JsonParser;
 
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+
+/**
+ * DataTransactionEntryDataAccessObject is a class that implements DatabaseTransactionEntryDataAccessInterface
+ * for performing CRUD operations on transaction entries stored in a JSON file.
+ */
 public class DataTransactionEntryDataAccessObject implements DatabaseTransactionEntryDataAccessInterface{
+    private final String FILE_PATH = FilePathConstants.PURCHASE_TRANSACTION_FILE;
 
-    @Override
-     //input the transaction id and return TransactionEntry
-    public TransactionEntry getTransactionEntry(int id) {
-        JSONParser parser = new JSONParser();
+    /**
+     * Retrieves a transaction entry by its ID.
+     *
+     * @param transactionId The ID of the transaction to retrieve.
+     * @return The TransactionEntry object if found, or null if not found.
+     */
+    public TransactionEntry getTransactionEntry(int transactionId) {
+        Gson gson = new GsonBuilder().create();
+
         try {
-            Object obj = parser.parse(new FileReader(FilePathConstants.PURCHASE_TRANSACTION_FILE));
-            JSONObject jsonObject = (JSONObject) obj;
-            // convert the int to string
-            String key = Integer.toString(id);
+            String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
+            JsonArray jsonArray = JsonParser.parseString(content).getAsJsonArray();
 
-            // check if the id inside the json file
-            if (jsonObject.containsKey(key)) {
-                JSONObject transaction = (JSONObject) jsonObject.get(key);
-                // Parse individual fields
-                int transactionId = ((Long) transaction.get("transactionId")).intValue();
-                int bookId = ((Long) transaction.get("bookId")).intValue();
-                String bookName = (String) transaction.get("bookName");
-                double soldPrice = (Double) transaction.get("soldPrice");
-
-                // Parsing date assuming the date is stored as a string in "yyyy-MM-dd" format
-                String dateString = (String) transaction.get("date");
-                SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
-                Date date = formatter.parse(dateString);
-
-                return new TransactionEntry(transactionId, bookId, bookName, soldPrice, date);
+            for (JsonElement element : jsonArray) {
+                TransactionEntry entry = gson.fromJson(element, TransactionEntry.class);
+                if (entry.getTransactionId() == (transactionId)) {
+                    return entry;
+                }
             }
-            else{
-                return null;
-            }
-
-        } catch (Exception e) {
+        } catch (IOException e) {
             e.printStackTrace();
-            return null;
         }
+
+        return null;
     }
 
+    /**
+     * Creates a new transaction entry.
+     *
+     * @param transactionEntry The transaction entry to be created.
+     * @return true if the transaction entry is successfully created, false otherwise.
+     */
     @Override
     public boolean createTransactionEntry(TransactionEntry transactionEntry) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
+
 
         // Read the existing file and parse it as a JsonArray
         JsonArray jsonArray;
 
         try {
-            String content = new String(Files.readAllBytes(Paths.get(FilePathConstants.PURCHASE_TRANSACTION_FILE)));
+            String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
             JsonElement jsonElement = JsonParser.parseString(content);
 
             // Check if the existing content is an array or an object
@@ -92,7 +97,7 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
         jsonArray.add(transactionElement);
 
         // Write the updated JsonArray back to the file
-        try (FileWriter writer = new FileWriter(FilePathConstants.PURCHASE_TRANSACTION_FILE)) {
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
             gson.toJson(jsonArray, writer);
         } catch (IOException e) {
             e.printStackTrace();
@@ -102,25 +107,28 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
         return true;
     }
 
+    /**
+     * Calculates the total purchase revenue between two dates.
+     *
+     * @param startDate The start date of the period.
+     * @param endDate   The end date of the period.
+     * @return The total purchase revenue between the given dates.
+     */
     @Override
-    public ArrayList<TransactionEntry> getTransactionEntriesBetweenDate(Date startDate, Date endDate) {
-        ArrayList<TransactionEntry> transactions = new ArrayList<>();
-        JSONParser parser = new JSONParser();
-        try {
-            Object obj = parser.parse(new FileReader(FilePathConstants.PURCHASE_TRANSACTION_FILE));
-            JSONObject jsonObject = (JSONObject) obj;
+    public double getPurchaseRevenueBetweenDate(Date startDate, Date endDate) {
+        double revenue = 0;
 
-            Set<String> keys = jsonObject.keySet();
-            for (String key: keys) {
-                JSONObject transaction = (JSONObject) jsonObject.get(key);
-                Date date = (Date) transaction.get("date");
-                if (date.after(startDate) && date.before(endDate)) {
-                    transactions.add(new TransactionEntry(Integer.parseInt(key), (int) transaction.get("bookid"), "noName", (double) transaction.get("price"), date));
-                }
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
+        List<TransactionEntry> transactions = new ArrayList<>();
+        for (int i = 1; i < TransactionEntry.readTransactionCount(); i++){
+            transactions.add(getTransactionEntry(i));
         }
-        return transactions;
+
+        for (TransactionEntry transactionEntry : transactions) {
+            if (!startDate.after(transactionEntry.getDate()) && !endDate.before(transactionEntry.getDate())) {
+                revenue += transactionEntry.getSoldPrice();
+            }
+        }
+
+        return revenue;
     }
 }

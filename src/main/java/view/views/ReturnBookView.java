@@ -368,7 +368,7 @@ public class ReturnBookView extends JPanel implements ActionListener, PropertyCh
                 isbookNameField.setText("");
                 isbookEndDate.setText("");
                 isErrorMessage.setText("");
-                returnBookController.execute(bookID, date_return, date_end);
+                returnBookController.execute(bookID, date_return, date_end, date_start);
 
             } else {
                 System.out.println("the book is not rented");

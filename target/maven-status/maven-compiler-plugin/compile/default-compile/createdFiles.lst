@@ -7,7 +7,6 @@ interface_adapter/purchase_book/PurchaseState.class
 use_case/rent_book/BorrowBook/BorrowBookInteractor.class
 use_case/book_info/BookInformationDataBoundary.class
 view/helper_functions/IntegerDocumentFilter.class
-data_access/database_book/DatabaseBookDataAccessInterface.class
 data_access/validate_book/validateBookDataAccessInterface.class
 entity/manager/ManagerFactory.class
 interface_adapter/add_book/AddBookPresenter.class
@@ -26,6 +25,7 @@ interface_adapter/purchase_book/SuccessfullyPurchaseViewModel.class
 use_case/purchase_book/PurchaseOutputDataBoundary.class
 view/views/BorrowBookView$2.class
 interface_adapter/login/LoginState.class
+use_case/calculate_revenue/RevenueInputBoundary.class
 interface_adapter/purchase_book/PurchaseControllor.class
 interface_adapter/RentInformation/returnbook/ReturnBookState.class
 view/views/ReturnBookView.class
@@ -35,6 +35,7 @@ use_case/add_book/AddBookInteractor.class
 use_case/calculate_revenue/RevenueInteractor.class
 view/views/ReturnBookView$5.class
 interface_adapter/main_menu/MainMenuViewModel.class
+use_case/calculate_revenue/RevenueInputData.class
 interface_adapter/RentInformation/returnbook/ReturnBookViewModel.class
 interface_adapter/login/LoginPresenter.class
 view/views/SuccessfullyPurchaseTheBookView.class
@@ -57,13 +58,12 @@ use_case/book_info/BookInformationData.class
 use_case/manager/CreateManagerDataBoundary.class
 view/views/RevenueView$1.class
 view/views/RentMenuView$1.class
+entity/purchase_entry/CustomDateSerializer.class
 interface_adapter/login/LoginViewModel.class
 use_case/rent_book/ReturnBook/ReturnBookInputBoundary.class
 view/views/ReturnBookView$3.class
 data_access/login_validation/UserLoginDataAccessInterface.class
-use_case/calculate_revenue/RevenueDataBoundary.class
 use_case/login/LoginInteractor.class
-use_case/calculate_revenue/RevenueData.class
 view/views/AddBookView$1.class
 data_access/validate_book/validateBookDataAccessObject.class
 use_case/purchase_book/PurchaseInteractor.class
@@ -89,7 +89,6 @@ use_case/rent_book/RentMenu/RentMenuInteractor.class
 use_case/rent_book/RentMenu/RentMenuOutputBoundary.class
 interface_adapter/main_menu/MainMenuState.class
 interface_adapter/returnorborrow/ReturnOrBorrowController.class
-entity/rent_entry/RentalEntryFactory.class
 view/views/BorrowBookView.class
 view/views/LoginView.class
 view/views/LoginView$1.class
@@ -116,7 +115,6 @@ interface_adapter/RentInformation/returnbook/ReturnBookController.class
 use_case/rent_book/ReturnBook/ReturnBookOutputData.class
 view/helper_functions/LabelTextPanelInt.class
 interface_adapter/RentMenu/RentMenuPresenter.class
-data_access/database_book/DatabaseBookDataAccessObject.class
 interface_adapter/RentInformation/borrowbook/BorrowBookViewModel.class
 entity/book/Book.class
 use_case/rent_book/ReturnBook/ReturnBookInputData.class
