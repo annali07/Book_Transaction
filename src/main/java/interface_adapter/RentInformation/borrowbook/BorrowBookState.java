@@ -67,14 +67,15 @@ public class BorrowBookState{
     public void setBookID(int bookID) {
         this.bookID = bookID;
     }
+    
+    public void setRentStartDate(Date rentStartDate) {
+        this.rentStartDate = rentStartDate;
+    }
+
 
     // Getters and Setters for bookIDError
     public int getBookIDError() {
         return bookIDError;
-    }
-
-    public void setBookIDError(int bookIDError) {
-        this.bookIDError = bookIDError;
     }
 
     // Getters and Setters for rentStartDate
