@@ -7,7 +7,7 @@ public class LoginOutputData {
     /**
      * Indicates whether the login attempt failed.
      */
-    private boolean loginFailed;
+    public boolean loginFailed;
 
     /**
      * The username of the user attempting to log in.

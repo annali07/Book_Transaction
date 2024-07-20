@@ -5,14 +5,14 @@ package use_case.add_book;
  */
 public class AddBookInputData {
     final private String isbn;
-    final private int price;
+    final private double price;
 
     /**
      * Constructs an AddBookInputData instance with the specified ISBN.
      *
      * @param isbn The ISBN of the book.
      */
-    public AddBookInputData(String isbn, int price) {
+    public AddBookInputData(String isbn, double price) {
         this.isbn = isbn;
         this.price = price;
     }
@@ -31,5 +31,5 @@ public class AddBookInputData {
      *
      * @return the price as an integer
      */
-    int getPrice() {return this.price;}
+    double getPrice() {return this.price;}
 }
