@@ -19,10 +19,21 @@ import view.views.SuccessfullyPurchaseTheBookView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Factory class for creating instances related to the PurchaseBook use case.
+ */
 public class PurchaseBookCaseFactory {
     private PurchaseBookCaseFactory() {
     }
 
+    /**
+     * Creates an instance of PurchaseView.
+     *
+     * @param viewManagerModel the model managing views
+     * @param purchaseViewModel the view model for purchase
+     * @param mainMenuViewModel the view model for the main menu
+     * @return an instance of PurchaseView, or null if an IOException occurs
+     */
     public static PurchaseView create(ViewManagerModel viewManagerModel, PurchaseViewModel purchaseViewModel, MainMenuViewModel mainMenuViewModel) {
 
         try {
@@ -37,6 +48,15 @@ public class PurchaseBookCaseFactory {
 
     }
 
+    /**
+     * Creates an instance of PurchaseControllor.
+     *
+     * @param viewManagerModel the model managing views
+     * @param purchaseViewModel the view model for purchase
+     * @param mainMenuViewModel the view model for the main menu
+     * @return an instance of PurchaseControllor
+     * @throws IOException if an error occurs while creating the data access objects
+     */
     private static PurchaseControllor createPurchaseUseCase(ViewManagerModel viewManagerModel, PurchaseViewModel purchaseViewModel, MainMenuViewModel mainMenuViewModel) throws IOException {
         BookRepositoryDataAccessInterface bookRepositoryDataAccessObj = new BookRepositoryDataAccessObject();
         DatabaseTransactionEntryDataAccessInterface dataTransactionEntryDataAccessObject = new DataTransactionEntryDataAccessObject();
@@ -47,6 +67,14 @@ public class PurchaseBookCaseFactory {
         return new PurchaseControllor(purchaseInteractor);
     }
 
+    /**
+     * Creates an instance of SuccessfullyPurchaseTheBookView.
+     *
+     * @param viewManagerModel the model managing views
+     * @param purchaseViewModel the view model for purchase
+     * @param mainMenuViewModel the view model for the main menu
+     * @return an instance of SuccessfullyPurchaseTheBookView, or null if an IOException occurs
+     */
     public static SuccessfullyPurchaseTheBookView createSuccessfully(ViewManagerModel viewManagerModel, PurchaseViewModel purchaseViewModel, MainMenuViewModel mainMenuViewModel) {
 
         try {
@@ -60,6 +88,14 @@ public class PurchaseBookCaseFactory {
         return null;
     }
 
+    /**
+     * Creates an instance of FailedToPurchaseView.
+     *
+     * @param viewManagerModel the model managing views
+     * @param purchaseViewModel the view model for purchase
+     * @param mainMenuViewModel the view model for the main menu
+     * @return an instance of FailedToPurchaseView, or null if an IOException occurs
+     */
     public static FailedToPurchaseView failedCreate(ViewManagerModel viewManagerModel, PurchaseViewModel purchaseViewModel, MainMenuViewModel mainMenuViewModel) {
 
         try {

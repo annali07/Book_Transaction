@@ -117,18 +117,3 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
         return revenue;
     }
 }
-
-
-
-
-//import entity.rent_entry.RentalEntry;
-//
-//import java.util.ArrayList;
-//import java.util.Date;
-//
-//public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryDataAccessInterface {
-//    @Override
-//    public ArrayList<RentalEntry> getRentalEntriesBetweenDate(Date startDate, Date endDate){
-//        return null;
-//    }
-//}

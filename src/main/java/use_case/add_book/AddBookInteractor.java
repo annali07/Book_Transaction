@@ -31,7 +31,10 @@ public class AddBookInteractor implements AddBookInputBoundary{
         Book book = new Book(apiResponse.getBookName(), addBookInputData.getPrice());
 
         // Store data in the database
-        bookRepositoryDataAccessObject.saveBook(book);
+        boolean result = bookRepositoryDataAccessObject.saveBook(book);
+        if (!result){
+            presenter.prepareFailView("Failed to save to DB");
+        }
 
         System.out.println("Saved to DB\n");
         // Prepare the response

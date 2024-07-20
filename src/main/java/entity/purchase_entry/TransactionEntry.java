@@ -15,11 +15,14 @@ import com.google.gson.JsonParser;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 
+/**
+ * Represents a transaction entry for a book purchase.
+ */
 public class TransactionEntry {
     private static final String FILE_PATH = FilePathConstants.BOOK_COUNT_FILE;
     private static final Gson gson = new Gson();
 
-    @JsonProperty("transactionId")  // Make sure this annotation is correct
+    @JsonProperty("transactionId")
     private int transactionId;
     private int bookId;
     private String bookName;
@@ -28,6 +31,14 @@ public class TransactionEntry {
     @JsonSerialize(using = CustomDateSerializer.class)
     private Date date;
 
+    /**
+     * Constructs a new TransactionEntry with the specified details.
+     *
+     * @param bookId the ID of the book
+     * @param bookName the name of the book
+     * @param soldPrice the sold price of the book
+     * @param date the date of the transaction
+     */
     public TransactionEntry(int bookId, String bookName, double soldPrice, Date date) {
         this.bookId = bookId;
         this.bookName = bookName;
@@ -77,6 +88,11 @@ public class TransactionEntry {
         writeTransactionCount(transactionId+1);
     }
 
+    /**
+     * Reads the current transaction count from the file.
+     *
+     * @return the current transaction count
+     */
     public static int readTransactionCount() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
             JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
@@ -86,6 +102,11 @@ public class TransactionEntry {
         }
     }
 
+    /**
+     * Writes the updated transaction count to the file.
+     *
+     * @param transactionCount the updated transaction count
+     */
     private static void writeTransactionCount(int transactionCount) {
         JsonObject jsonObject;
 
@@ -97,10 +118,7 @@ public class TransactionEntry {
             jsonObject.addProperty("bookCount", 0); // Initialize with default value if file does not exist
         }
 
-        // Update the transactionCount field
         jsonObject.addProperty("transactionCount", transactionCount);
-
-        // Write the updated JsonObject back to the file
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
             gson.toJson(jsonObject, writer);
         } catch (IOException e) {

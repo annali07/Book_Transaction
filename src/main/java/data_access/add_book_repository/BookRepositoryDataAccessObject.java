@@ -31,23 +31,42 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
      * @param book the book to be saved
      */
     @Override
-    public void saveBook(Book book) {
+    public boolean saveBook(Book book) {
         Map<String, JsonObject> books = readBooksFromFile();
         books.put(String.valueOf(book.getBookID()), gson.toJsonTree(book).getAsJsonObject());
-        writeBooksToFile(books);
+        return writeBooksToFile(books);
     }
 
+    /**
+     * Updates an existing book in the repository.
+     *
+     * @param book the book object containing updated information
+     * @return true if the book was successfully updated, false otherwise
+     */
     @Override
-    public void updateBook(Book book) {
-
+    public boolean updateBook(Book book) {
+        // #TODO Implementation
+        return true;
     }
 
+    /**
+     * Deletes a book from the repository.
+     *
+     * @param bookId the ID of the book to delete
+     * @return true if the book was successfully deleted, false otherwise
+     */
     @Override
     public boolean deleteBook(int bookId) {
         // #TODO Implementation
         return true;
     }
 
+    /**
+     * Retrieves a book from the repository.
+     *
+     * @param bookId the ID of the book to retrieve
+     * @return a JsonObject representing the book, or null if the book is not found
+     */
     @Override
     public JsonObject getBook(int bookId) {
         Map<String, JsonObject> books = readBooksFromFile();
@@ -73,11 +92,13 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
      *
      * @param books the map of books to be written to the file
      */
-    private void writeBooksToFile(Map<String, JsonObject> books) {
+    private boolean writeBooksToFile(Map<String, JsonObject> books) {
         try (FileWriter writer = new FileWriter(FILE_PATH)) {
             gson.toJson(books, writer);
+            return true;
         } catch (IOException e) {
             e.printStackTrace();
+            return false;
         }
     }
 }
