@@ -18,9 +18,22 @@ import view.views.RentMenuView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * A use case factory for creating RentMenuView
+ */
 public class RentMenuUseCaseFactory {
     private RentMenuUseCaseFactory(){}
 
+    /**
+     * Creates the RentMenuView with viewManagerModel, returnOrBorrowViewModel,
+     * rentMenuViewModel, and mainMenuViewModel
+     * @param viewManagerModel
+     * @param returnOrBorrowViewModel
+     * @param rentMenuViewModel
+     * @param mainMenuViewModel
+     *
+     * @return ReturnBookView
+     */
     public static RentMenuView create(ViewManagerModel viewManagerModel, RentMenuViewModel rentMenuViewModel, MainMenuViewModel mainMenuViewModel, ReturnOrBorrowViewModel returnOrBorrowViewModel) {
         try {
             RentMenuController rentMenuController = createUserRentMenuUseCase(viewManagerModel, rentMenuViewModel, mainMenuViewModel, returnOrBorrowViewModel);
@@ -30,6 +43,17 @@ public class RentMenuUseCaseFactory {
         }
         return null;
     }
+
+    /**
+     * Creates the RentMenuController with viewManagerModel, returnOrBorrowViewModel,
+     * rentMenuViewModel, and mainMenuViewModel
+     * @param viewManagerModel
+     * @param returnOrBorrowViewModel
+     * @param rentMenuViewModel
+     * @param mainMenuViewModel
+     *
+     * @return RentMenuController
+     */
     private static RentMenuController createUserRentMenuUseCase(ViewManagerModel viewManagerModel, RentMenuViewModel rentMenuViewModel, MainMenuViewModel mainMenuViewModel, ReturnOrBorrowViewModel returnOrBorrowViewModel) throws IOException {
         BookRepositoryDataAccessInterface bookRepositoryDataAccessObj = new BookRepositoryDataAccessObject();
         DatabaseRentalEntryDataAccessInterface userGateway = new DatabaseRentalEntryDataAccessObject();

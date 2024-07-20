@@ -15,9 +15,24 @@ import view.views.ReturnOrBorrowView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * A use case factory for creating ReturnOrBorrowView
+ */
 public class RobUseCaseFactory {
     private RobUseCaseFactory(){}
 
+    /**
+     * Creates the ReturnOrBorrowView with viewManagerModel, returnOrBorrowViewModel,
+     * rentMenuViewModel, returnBookViewModel, borrowBookViewModel, and mainMenuViewModel
+     * @param viewManagerModel
+     * @param returnOrBorrowViewModel
+     * @param rentMenuViewModel
+     * @param returnBookViewModel
+     * @param borrowBookViewModel
+     * @param mainMenuViewModel
+     *
+     * @return ReturnOrBorrowView
+     */
     public static ReturnOrBorrowView create(ViewManagerModel viewManagerModel, ReturnOrBorrowViewModel returnOrBorrowViewModel, RentMenuViewModel rentMenuViewModel, ReturnBookViewModel returnBookViewModel, BorrowBookViewModel borrowBookViewModel, MainMenuViewModel mainMenuViewModel) {
         try {
             ReturnOrBorrowController returnOrBorrowController = createUserRobUseCase(viewManagerModel, returnOrBorrowViewModel, rentMenuViewModel, returnBookViewModel, borrowBookViewModel, mainMenuViewModel);
@@ -28,6 +43,18 @@ public class RobUseCaseFactory {
         return null;
     }
 
+    /**
+     * Creates the ReturnOrBorrowController with viewManagerModel, returnOrBorrowViewModel,
+     * rentMenuViewModel, returnBookViewModel, borrowBookViewModel, and mainMenuViewModel
+     * @param viewManagerModel
+     * @param returnOrBorrowViewModel
+     * @param rentMenuViewModel
+     * @param returnBookViewModel
+     * @param borrowBookViewModel
+     * @param mainMenuViewModel
+     *
+     * @return ReturnOrBorrowController
+     */
     private static ReturnOrBorrowController createUserRobUseCase(ViewManagerModel viewManagerModel, ReturnOrBorrowViewModel returnOrBorrowViewModel, RentMenuViewModel rentMenuViewModel, ReturnBookViewModel returnBookViewModel, BorrowBookViewModel borrowBookViewModel, MainMenuViewModel mainMenuViewModel) throws IOException {
         RobOutputBoundary returnOrBorrowPresenter = new ReturnOrBorrowPresenter(returnOrBorrowViewModel, viewManagerModel, rentMenuViewModel, returnBookViewModel, borrowBookViewModel, mainMenuViewModel);
         RobInteractor robInteractor = new RobInteractor(returnOrBorrowPresenter);

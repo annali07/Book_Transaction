@@ -8,12 +8,25 @@ import interface_adapter.view.ViewManagerModel;
 import use_case.rent_book.RentMenu.RentMenuOutputBoundary;
 import use_case.rent_book.RentMenu.RentMenuOutputData;
 
+/**
+ * Presenter for handling the output of the rent menu use case.
+ * It updates the view models and manages view transitions based on the result of the use case execution.
+ *
+ */
 public class RentMenuPresenter implements RentMenuOutputBoundary {
     private final RentMenuViewModel rentMenuViewModel;
     private final ViewManagerModel viewManagerModel;
     private final MainMenuViewModel mainMenuViewModel;
     private final ReturnOrBorrowViewModel returnOrBorrowViewModel;
 
+    /**
+     * Constructs an RentMenuPresenter with the specified view models.
+     *
+     * @param rentMenuViewModel the view model for the rent menu view
+     * @param viewManagerModel the view manager model for managing view transitions
+     * @param mainMenuViewModel the view model for the main menu view
+     * @param returnOrBorrowViewModel the view model for return or borrow view
+     */
     public RentMenuPresenter(ViewManagerModel viewManagerModel, RentMenuViewModel rentMenuViewModel, MainMenuViewModel mainMenuViewModel, ReturnOrBorrowViewModel returnOrBorrowViewModel) {
         this.rentMenuViewModel = rentMenuViewModel;
         this.viewManagerModel = viewManagerModel;
@@ -21,6 +34,11 @@ public class RentMenuPresenter implements RentMenuOutputBoundary {
         this.returnOrBorrowViewModel = returnOrBorrowViewModel;
     }
 
+    /**
+     * Prepares the view for a successful search book operation.
+     * Store the temporary variable for bookID
+     * Switches the active view to the return or borrow view.
+     */
     @Override
     public void prepareSuccessView(RentMenuOutputData rentMenuOutputData) {
         RentMenuState rentMenuState = rentMenuViewModel.getState();
@@ -40,11 +58,21 @@ public class RentMenuPresenter implements RentMenuOutputBoundary {
         System.out.println("Found the book");
     }
 
+    /**
+     * Prepares the view for a failed search book operation.
+     * Displays an error message.
+     *
+     * @param error the error message to display
+     */
     @Override
     public void prepareFailView(String error) {
         System.out.println("cannot find the book");
     }
 
+    /**
+     * Prepares the view for a canceled search book operation.
+     * Switches the active view to the main menu view.
+     */
     @Override
     public void prepareCancelView() {
         viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
