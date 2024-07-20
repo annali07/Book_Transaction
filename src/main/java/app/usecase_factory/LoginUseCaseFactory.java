@@ -15,9 +15,20 @@ import view.views.LoginView;
 import javax.swing.*;
 import java.io.IOException;
 
+/**
+ * Factory class for creating instances related to the Login use case.
+ */
 public class LoginUseCaseFactory {
     private LoginUseCaseFactory(){}
 
+    /**
+     * Creates an instance of LoginView.
+     *
+     * @param viewManagerModel the model managing views
+     * @param loginViewModel the view model for login
+     * @param mainMenuViewModel the view model for the main menu
+     * @return an instance of LoginView, or null if an IOException occurs
+     */
     public static LoginView create(ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, MainMenuViewModel mainMenuViewModel) {
         try {
             LoginController loginController = createUserLoginUseCase(viewManagerModel, loginViewModel, mainMenuViewModel);
@@ -27,6 +38,16 @@ public class LoginUseCaseFactory {
         }
         return null;
     }
+
+    /**
+     * Creates an instance of LoginController.
+     *
+     * @param viewManagerModel the model managing views
+     * @param loginViewModel the view model for login
+     * @param mainMenuViewModel the view model for the main menu
+     * @return an instance of LoginController
+     * @throws IOException if an error occurs while creating the data access objects
+     */
     private static LoginController createUserLoginUseCase(ViewManagerModel viewManagerModel, LoginViewModel loginViewModel, MainMenuViewModel mainMenuViewModel) throws IOException {
         UserLoginDataAccessInterface userGateway = new UserLoginDataAccess();
 

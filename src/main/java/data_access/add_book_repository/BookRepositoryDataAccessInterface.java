@@ -11,8 +11,8 @@ public interface BookRepositoryDataAccessInterface {
      *
      * @param book the book to be updated
      */
-    void saveBook(Book book);
-    void updateBook(Book book);
+    boolean saveBook(Book book);
+    boolean updateBook(Book book);
     boolean deleteBook(int bookId);
     JsonObject getBook(int bookId);
 }

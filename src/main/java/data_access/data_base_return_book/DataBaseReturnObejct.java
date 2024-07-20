@@ -14,16 +14,25 @@ import java.util.Iterator;
 import java.util.Set;
 import data.misc_info.FilePathConstants;
 
+/**
+ * Implementation of DatabaseReturnInterface for handling book return operations.
+ */
 public class DataBaseReturnObejct implements DatabaseReturnInterface{
     private static final String FILE_PATH_BOOK = FilePathConstants.TOTAL_BOOKS_FILE;
     private static final String RENTAL_FILE_PATH = FilePathConstants.RENTAL_TRANSACTION_FILE;
+
+    /**
+     * Updates the book file to mark the book as not rented.
+     *
+     * @param bookID the ID of the book to update
+     */
     @Override
     public void editBookFile(int bookID) {
 
-        JSONObject bookData = readBookData(FILE_PATH_BOOK);
+        JSONObject bookData = readBookData();
         if (bookData == null) return;
 
-        Set keys = bookData.keySet();  // Get all keys from the JSONObject
+        Set keys = bookData.keySet();
         Iterator<String> it = keys.iterator();
         boolean bookFound = false;
 
@@ -55,22 +64,23 @@ public class DataBaseReturnObejct implements DatabaseReturnInterface{
         }
     }
 
+    /**
+     * Writes the return transaction to the rental transaction file.
+     *
+     * @param rentalEntry the rental entry to write
+     */
     @Override
     public void writeReturnFile(RentalEntry rentalEntry) {
         Gson gson = new GsonBuilder().setPrettyPrinting().create();
-
-        // Read the existing file and parse it as a JsonArray
         JsonArray jsonArray;
 
         try {
             String content = new String(Files.readAllBytes(Paths.get(RENTAL_FILE_PATH)));
             JsonElement jsonElement = JsonParser.parseString(content);
 
-            // Check if the existing content is an array or an object
             if (jsonElement.isJsonArray()) {
                 jsonArray = jsonElement.getAsJsonArray();
             } else if (jsonElement.isJsonObject()) {
-                // If it's an object, create a new array and add the object to it
                 jsonArray = new JsonArray();
                 jsonArray.add(jsonElement.getAsJsonObject());
             } else{
@@ -92,36 +102,17 @@ public class DataBaseReturnObejct implements DatabaseReturnInterface{
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-//        JSONObject rentalData = readBookData(RENTAL_FILE_PATH);
-//        if (rentalData == null) {
-//            rentalData = new JSONObject();
-//        }
-//
-//        // Determine the next key for the new entry
-//        int nextKey = rentalData.size() + 1;
-//
-//        // Create the new entry
-//        JSONObject newEntry = new JSONObject();
-//        newEntry.put("bookID", bookID);
-//        newEntry.put("charge", charge);
-//
-//        // Add the new entry to the rental data
-//        rentalData.put(String.valueOf(nextKey), newEntry);
-//
-//        // Write the updated rental data back to the file
-//        try (FileWriter writer = new FileWriter(RENTAL_FILE_PATH)) {
-//            writer.write(rentalData.toJSONString());
-//            writer.flush();
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
     }
 
-    private JSONObject readBookData(String filePath) {
+    /**
+     * Reads the book data from the file.
+     *
+     * @return a JSONObject representing the book data, or null if an error occurs
+     */
+    private JSONObject readBookData() {
         JSONParser parser = new JSONParser();
         try {
-            Object obj = parser.parse(new FileReader(filePath));
+            Object obj = parser.parse(new FileReader(FILE_PATH_BOOK));
             return (JSONObject) obj;
         } catch (Exception e) {
             e.printStackTrace();

@@ -18,15 +18,33 @@ import view.views.RevenueView;
 import javax.swing.*;
 import java.io.IOException;
 
-
+/**
+ * Factory class for creating instances related to the Revenue use case.
+ */
 public class RevenueUseCaseFactory {
     private RevenueUseCaseFactory() {}
 
+    /**
+     * Creates an instance of RevenueView.
+     *
+     * @param viewManagerModel the model managing views
+     * @param revenueViewModel the view model for revenue
+     * @param mainMenuViewModel the view model for the main menu
+     * @return an instance of RevenueView
+     */
     public static RevenueView create(ViewManagerModel viewManagerModel, RevenueViewModel revenueViewModel, MainMenuViewModel mainMenuViewModel) {
         RevenueController revenueController = createRevenueUsecase(viewManagerModel, revenueViewModel, mainMenuViewModel);
         return new RevenueView(revenueViewModel, revenueController);
     }
 
+    /**
+     * Creates an instance of RevenueController.
+     *
+     * @param viewManagerModel the model managing views
+     * @param revenueViewModel the view model for revenue
+     * @param mainMenuViewModel the view model for the main menu
+     * @return an instance of RevenueController
+     */
     private static RevenueController createRevenueUsecase(ViewManagerModel viewManagerModel, RevenueViewModel revenueViewModel, MainMenuViewModel mainMenuViewModel) {
         DatabaseRentalEntryDataAccessInterface databaseRentalEntryDataAccessInterface = new DatabaseRentalEntryDataAccessObject();
         DatabaseTransactionEntryDataAccessInterface databaseTransactionEntryDataAccessInterface = new DataTransactionEntryDataAccessObject();

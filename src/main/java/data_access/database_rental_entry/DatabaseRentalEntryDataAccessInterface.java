@@ -18,8 +18,6 @@ public interface DatabaseRentalEntryDataAccessInterface{
      * @return true if the bookID matches a stored book, false otherwise
      */
     boolean validatebook(int bookID);
-//    public boolean createTransactionEntry(TransactionEntry transactionEntry);
-//    public int createTransactionID();
 
     /**
      * Retrieves a rental entry by its ID.

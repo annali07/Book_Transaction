@@ -16,28 +16,46 @@ public class AddBookInteractor implements AddBookInputBoundary{
     private final ExternalBookApiInterface externalBookApi;
     private final AddBookOutputBoundary presenter;
 
+    /**
+     * Constructs a new AddBookInteractor with the specified data access object, external API interface, and presenter.
+     *
+     * @param bookRepositoryDataAccessObject the data access object for book repository
+     * @param externalBookAPI the interface for external book API
+     * @param presenter the presenter to update the view
+     */
     public AddBookInteractor(BookRepositoryDataAccessInterface bookRepositoryDataAccessObject, ExternalBookApiInterface externalBookAPI, AddBookOutputBoundary presenter) {
         this.bookRepositoryDataAccessObject = bookRepositoryDataAccessObject;
         this.externalBookApi = externalBookAPI;
         this.presenter = presenter;
     }
 
+    /**
+     * Adds a book based on the provided input data.
+     * Fetches book details from an external API and stores the book in the database.
+     * Notifies the presenter about the success or failure of the operation.
+     *
+     * @param addBookInputData the input data for adding a book
+     */
     @Override
     public void addBook(AddBookInputData addBookInputData) {
-        // Make API call
-        ApiResponse apiResponse = externalBookApi.fetchBookDetails(addBookInputData.getIsbn());
 
-        // Process API response
+        ApiResponse apiResponse = externalBookApi.fetchBookDetails(addBookInputData.getIsbn());
         Book book = new Book(apiResponse.getBookName(), addBookInputData.getPrice());
 
-        // Store data in the database
-        bookRepositoryDataAccessObject.saveBook(book);
+        boolean result = bookRepositoryDataAccessObject.saveBook(book);
+        if (!result){
+            presenter.prepareFailView("Failed to save to DB");
+        }
 
         System.out.println("Saved to DB\n");
-        // Prepare the response
         presenter.prepareSuccessView();
-
     }
+
+    /**
+     * Cancels the current add book operation.
+     * Notifies the presenter to update the view accordingly.
+     */
+    @Override
     public void cancel(){
         presenter.prepareCancelView();
     }

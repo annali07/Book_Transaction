@@ -52,42 +52,6 @@ public class RentalEntry {
         writeRentalCount(rentalId+1);
     }
 
-    public static int readRentalCount() {
-        try (FileReader reader = new FileReader(FILE_PATH)) {
-            JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
-            return jsonObject.get("rentCount").getAsInt();
-        } catch (IOException e) {
-            return 0;
-        }
-    }
-
-    private static void writeRentalCount(int rentalCount) {
-        JsonObject jsonObject;
-
-        // Read the existing file and parse it as a JsonObject
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
-            jsonObject = JsonParser.parseString(content).getAsJsonObject();
-        } catch (IOException e) {
-            jsonObject = new JsonObject();
-            jsonObject.addProperty("transactionCount", 0);
-        }
-
-        // Update the bookCount field
-        jsonObject.addProperty("rentCount", rentalCount);
-
-        // Write the updated JsonObject back to the file
-        try (FileWriter writer = new FileWriter(FILE_PATH)) {
-            gson.toJson(jsonObject, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
-
-    public double getMaxCharge(){return this.maxCharge; }
-
-    public void setMaxCharge(int maxCharge){this.maxCharge = maxCharge; }
-
     public int getRentalId() {
         return rentalId;
     }
@@ -132,6 +96,49 @@ public class RentalEntry {
         return this.returnDate;
     }
 
+    /**
+     * Reads the current rental count from the file.
+     *
+     * @return the current rental count, or 0 if an error occurs
+     */
+    public static int readRentalCount() {
+        try (FileReader reader = new FileReader(FILE_PATH)) {
+            JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
+            return jsonObject.get("rentCount").getAsInt();
+        } catch (IOException e) {
+            return 0;
+        }
+    }
+
+    /**
+     * Writes the updated rental count to the file.
+     *
+     * @param rentalCount the updated rental count
+     */
+    private static void writeRentalCount(int rentalCount) {
+        JsonObject jsonObject;
+
+        // Read the existing file and parse it as a JsonObject
+        try {
+            String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
+            jsonObject = JsonParser.parseString(content).getAsJsonObject();
+        } catch (IOException e) {
+            jsonObject = new JsonObject();
+            jsonObject.addProperty("transactionCount", 0);
+        }
+
+        jsonObject.addProperty("rentCount", rentalCount);
+        try (FileWriter writer = new FileWriter(FILE_PATH)) {
+            gson.toJson(jsonObject, writer);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+    }
+
+    /**
+     * Calculates the rental and overdue charges based on the rental period and return date.
+     * The total charge is the sum of the rental charge and any overdue charge, capped at a maximum charge.
+     */
     public void calculateCharge(){
         long diffInMillies = Math.abs(rentalEndDate.getTime() - rentalStartDate.getTime());
         long diffInDays = TimeUnit.DAYS.convert(diffInMillies, TimeUnit.MILLISECONDS);
