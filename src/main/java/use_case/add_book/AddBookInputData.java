@@ -4,9 +4,6 @@ package use_case.add_book;
  * Represents the input data required to add a book, specifically the ISBN.
  */
 public class AddBookInputData {
-    /**
-     * The ISBN of the book to be added.
-     */
     final private String isbn;
     final private int price;
 
@@ -29,6 +26,10 @@ public class AddBookInputData {
         return this.isbn;
     }
 
+    /**
+     * Retrieves the price.
+     *
+     * @return the price as an integer
+     */
     int getPrice() {return this.price;}
-
 }

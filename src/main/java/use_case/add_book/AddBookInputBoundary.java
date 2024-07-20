@@ -11,5 +11,8 @@ public interface AddBookInputBoundary {
      */
     void addBook(AddBookInputData addBookInputData);
 
+    /**
+     * Cancels the current operation or action.
+     */
     void cancel();
 }
