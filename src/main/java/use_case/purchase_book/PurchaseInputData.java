@@ -5,15 +5,13 @@ package use_case.purchase_book;
  *
  */
 public class PurchaseInputData {
-        final private int bookId;
+        final private int bookId ;
 
         /**
          * Constructs a PurchaseInputData object with the specified book ID.
-         *
-         * @param bookId the ID of the book to be purchased
          */
-        public PurchaseInputData(int bookId) {
-            this.bookId = bookId;
+        public PurchaseInputData() {
+            this.bookId = getBookId();
         }
 
         /**

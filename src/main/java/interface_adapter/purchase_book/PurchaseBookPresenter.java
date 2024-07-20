@@ -16,6 +16,10 @@ public class PurchaseBookPresenter implements PurchaseOutputDataBoundary{
     private final ViewManagerModel viewManagerModel;
     private final MainMenuViewModel mainMenuViewModel;
 
+    private int CANCELLED = 0;
+    private int SUCCESS = 1;
+    private int FAILED = 2;
+
 
     /**
      * Constructs a PurchaseBookPresenter object.
@@ -34,26 +38,29 @@ public class PurchaseBookPresenter implements PurchaseOutputDataBoundary{
      * Handles the view for a successful purchase.
      */
     @Override
-    public void prepareSuccessView(){
+    public int prepareSuccessView(){
         viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
         System.out.println("Purchase Success");
+        return SUCCESS;
     }
 
     /**
      * Handles the view for a failed purchase.
      */
     @Override
-    public void prepareFailView(){
+    public int prepareFailView(){
         System.out.println("Failed to find the book");
+        return FAILED;
     }
 
     /**
      * Handles the view for a canceled purchase.
      */
-    public void prepareCancelView(){
+    public int prepareCancelView(){
         viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
         System.out.println("Cancel Purchase");
+        return CANCELLED;
     }
 }
