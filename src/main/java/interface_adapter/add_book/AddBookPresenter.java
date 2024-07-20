@@ -31,9 +31,9 @@ public class AddBookPresenter implements AddBookOutputBoundary {
      * Switches the active view to the add book view.
      */
     public void prepareSuccessView(){
-        viewManagerModel.setActiveView(addBookViewModel.getViewName());
+        viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-        System.out.println("Switched to Add Book View");
+        System.out.println("Successfully added book");
     }
 
     /**

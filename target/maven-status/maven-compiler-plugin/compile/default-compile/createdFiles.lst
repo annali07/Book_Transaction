@@ -49,7 +49,6 @@ app/usecase_factory/rent/ReturnBookUseCaseFactory.class
 entity/book/BookFactory.class
 interface_adapter/main_menu/MainMenuPresenter.class
 interface_adapter/login/UserLoginFailed.class
-data_access/fetch_book/FetchBookViaAPIDataAccessObject.class
 use_case/manager/CreateManagerData.class
 interface_adapter/add_book/AddBookController.class
 view/views/FailedToPurchaseView.class
@@ -97,7 +96,6 @@ use_case/add_book/AddBookInputData.class
 use_case/calculate_revenue/RevenueOutputDataBoundary.class
 interface_adapter/purchase_book/FailedPurchaseViewModel.class
 app/usecase_factory/rent/RobUseCaseFactory.class
-data_access/manager/ManagerDataAccessInterface.class
 view/views/ReturnBookView$1.class
 data_access/data_base_return_book/DataBaseReturnObejct.class
 use_case/rent_book/RentMenu/RentMenuOutputData.class
@@ -106,7 +104,6 @@ use_case/add_book/AddBookOutputBoundary.class
 use_case/rent_book/ReturnOrBorrow/RobInteractor.class
 entity/manager/Manager.class
 view/helper_functions/LabelTextPanel.class
-data_access/fetch_book/FetchBookViaAPIAccessInterface.class
 view/views/BorrowBookView$6.class
 use_case/rent_book/BorrowBook/BorrowBookInputData.class
 interface_adapter/RentInformation/borrowbook/BorrowBookController.class
