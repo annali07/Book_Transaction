@@ -126,9 +126,9 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
                 return;
             }
 
-            int price;
+            double price;
             try {
-                price = Integer.parseInt(priceInputField.getText());
+                price = Double.parseDouble(priceInputField.getText());
             } catch (NumberFormatException e) {
                 System.out.println("Invalid price input");
                 return;

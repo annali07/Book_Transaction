@@ -12,5 +12,19 @@
     "bookName": "A Game of Thrones",
     "soldPrice": 99.0,
     "date": "Jul 18, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 3,
+    "bookId": 2,
+    "bookName": "Teias de charlotte",
+    "soldPrice": 56.0,
+    "date": "Jul 20, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 4,
+    "bookId": 3,
+    "bookName": "Fear no evil",
+    "soldPrice": 44.0,
+    "date": "Jul 20, 2024, 12:00:00 AM"
   }
 ]

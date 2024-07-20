@@ -26,7 +26,7 @@ public class AddBookController {
      * @param isbn the ISBN of the book to add
      * @param price the price of the book to add
      */
-    public void execute (String isbn, int price){
+    public void execute (String isbn, double price){
         AddBookInputData addBookInputData = new AddBookInputData(isbn, price);
         addBookUsecaseInteractor.addBook(addBookInputData);
     }

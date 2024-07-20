@@ -8,23 +8,28 @@ import static org.junit.jupiter.api.Assertions.*;
 
 class LoginOutputDataTest {
 
+    private LoginOutputData loginOutputData;
+    private final String username = "testuser";
+    private final boolean loginFailed = false;
+
     @BeforeEach
     void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
+        loginOutputData = new LoginOutputData(username, loginFailed);
     }
 
     @Test
     void getUsername() {
+        assertEquals(username, loginOutputData.getUsername());
     }
 
     @Test
     void setSuccess() {
+        loginOutputData.setSuccess(true);
+        assertEquals(true, loginOutputData.loginFailed);
     }
 
     @Test
     void defaultButton() {
+        assertEquals("none", loginOutputData.defaultButton());
     }
 }
