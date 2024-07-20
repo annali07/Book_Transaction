@@ -2,12 +2,13 @@
 
 The Book Transaction software allows book managers to manage books inside database.
 
-There are 5 use cases:
-1. Add book to database via an ISBN number, automatically generating a bookID
-2. Purchase book from database via a bookID
-3. Handle rent out book request via bookID
-4. Handle rent return book request via book id
-5. Calculate revenue between 2 dates via 2 dates in the form yyyy-mm-dd
+There are 6 use cases:
+1. Manager logs in with username and password
+2. Add book to database via an ISBN number, automatically generating a bookID
+3. Purchase book from database via a bookID
+4. Handle rent out book request via bookID
+5. Handle rent return book request via book id
+6. Calculate revenue between 2 dates via 2 dates in the form yyyy-mm-dd
 
 ## Installation
 
