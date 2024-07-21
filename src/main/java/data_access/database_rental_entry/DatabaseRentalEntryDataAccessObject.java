@@ -54,7 +54,7 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
      *
      * @return A JSONObject containing the book data, or null if an error occurs.
      */
-    private JSONObject readBookData() {
+    public JSONObject readBookData() {
         JSONParser parser = new JSONParser();
         try {
             Object obj = parser.parse(new FileReader(FilePathConstants.TOTAL_BOOKS_FILE));

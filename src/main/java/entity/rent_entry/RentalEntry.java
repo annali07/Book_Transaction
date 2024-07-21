@@ -152,4 +152,33 @@ public class RentalEntry {
         this.maxCharge = rental_charge * 5;
         this.charge = Math.min(maxCharge, overdue_charge + rental_charge);
     }
+
+    /**
+     * Return bookID
+     *
+     * @return bookID
+     */
+    public int getBookID() {
+        return this.bookId;
+    }
+
+    /**
+     * Return StartDate of the entry
+     *
+     * @return start date
+     */
+
+    public Date getStartDate() {
+        return this.rentalStartDate;
+    }
+
+    /**
+     * Return EndDate of the entry
+     *
+     * @return end date
+     */
+
+    public Date getEndDate() {
+        return this.rentalEndDate;
+    }
 }

@@ -72,7 +72,7 @@ public class DatabaseBorrowObject implements DatabaseBorrowInterface{
      *
      * @param filePath filePath
      */
-    private JSONObject readBookData(String filePath) {
+    public JSONObject readBookData(String filePath) {
         JSONParser parser = new JSONParser();
         try {
             Object obj = parser.parse(new FileReader(filePath));

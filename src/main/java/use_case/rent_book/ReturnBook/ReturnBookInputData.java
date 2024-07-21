@@ -80,6 +80,18 @@ public class ReturnBookInputData {
         this.returnDate = returnDate;
     }
 
+    /**
+     * Return the start date of the returned book
+     * @return start date of the book
+     */
     public Date getStartDate() {return startDate;}
+
+    /**
+     * Set the start date of the returned book
+     * @param newStartDate new start date to be set
+     */
+    public void setStartDate(Date newStartDate) {
+        this.startDate = newStartDate;
+    }
 }
 
