@@ -26,4 +26,14 @@ public class ReturnOrBorrowState {
     public  void setBookId(int bookId) {
         this.bookId = bookId;
     }
+
+    /**
+     * Return the bookID for this state
+     *
+     * @return bookID
+     */
+
+    public int getBookId() {
+        return this.bookId;
+    }
 }

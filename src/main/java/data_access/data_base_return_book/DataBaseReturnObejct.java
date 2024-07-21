@@ -109,7 +109,7 @@ public class DataBaseReturnObejct implements DatabaseReturnInterface{
      *
      * @return a JSONObject representing the book data, or null if an error occurs
      */
-    private JSONObject readBookData() {
+    public JSONObject readBookData() {
         JSONParser parser = new JSONParser();
         try {
             Object obj = parser.parse(new FileReader(FILE_PATH_BOOK));
