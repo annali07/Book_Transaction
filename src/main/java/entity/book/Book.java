@@ -41,6 +41,15 @@ public class Book {
         setBookID();
     }
 
+    public Book(int bookID, String bookName, double bookPrice) {
+        this.bookName = bookName;
+        this.bookPrice = bookPrice;
+        this.rentalStartDate = null; // default value
+        this.rentalEndDate = null; //
+        this.BorrowerName = "";
+        this.BorrowerNumber = "";
+        this.bookID = bookID;
+    }
 
     // Getter and Setter for bookName
     public String getBookName() {

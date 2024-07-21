@@ -59,6 +59,7 @@ public class PurchaseInteractor implements PurchaseInputDataBoundary{
             }
         }
         else{
+            System.out.println("found object is null");
             presenter.prepareFailView();
         }
      }

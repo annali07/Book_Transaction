@@ -70,6 +70,8 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
     @Override
     public JsonObject getBook(int bookId) {
         Map<String, JsonObject> books = readBooksFromFile();
+        System.out.println(books);
+        System.out.println(books.get(String.valueOf(bookId)));
         return books.get(String.valueOf(bookId));
     }
 
