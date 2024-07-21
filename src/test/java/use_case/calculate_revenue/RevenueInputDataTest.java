@@ -1,3 +1,5 @@
+package use_case.calculate_revenue;
+
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import use_case.calculate_revenue.RevenueInputData;
