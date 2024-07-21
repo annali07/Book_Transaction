@@ -38,6 +38,13 @@ public class RentMenuOutputData {
     }
 
     /**
+     * Gets the success state of finding the book
+     *
+     * @return success the success status
+     */
+    public boolean getSuccess(){return this.notFindBook;}
+
+    /**
      * Gets the default button status, which is "none".
      *
      * @return the default button status
