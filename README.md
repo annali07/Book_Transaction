@@ -19,7 +19,7 @@ There are 6 use cases:
 ## Usage
 
 1. The API used is provided by Open Library. So, only ISBN of books recorded in https://openlibrary.org/ can be detected inside the Add Book usecase.
-2. Valid login username and password are kept in `managers.json` inside `main > java > data > db`.
+2. Valid login username and password are kept in `managers.json` inside `main > java > data > db`
 
 ## Note
 
