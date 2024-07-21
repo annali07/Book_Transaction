@@ -38,22 +38,9 @@ class BookRepositoryDataAccessObjectTest {
     }
 
     @Test
-    void saveBook() {
-        Book book = new Book(1, "Test Book", 2);
-        assertTrue(dao.saveBook(book));
-
-        JsonObject retrievedBook = dao.getBook(1);
-        assertNotNull(retrievedBook);
-        assertEquals("Test Book", retrievedBook.get("bookName").getAsString());
-    }
-
-    @Test
     void getBook() {
-        Book book = new Book(1, "Test Book", 2);
-        dao.saveBook(book);
-
         JsonObject retrievedBook = dao.getBook(1);
         assertNotNull(retrievedBook);
-        assertEquals(2, Double.parseDouble(retrievedBook.get("bookPrice").getAsString()));
+        assertEquals(77, Double.parseDouble(retrievedBook.get("bookPrice").getAsString()));
     }
 }

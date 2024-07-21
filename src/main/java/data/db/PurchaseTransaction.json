@@ -1,3 +1,16 @@
 [
-
+  {
+    "transactionId": 1,
+    "bookId": 1,
+    "bookName": "Tractatus logico-philosophicus",
+    "soldPrice": 77.0,
+    "date": "Jul 21, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 2,
+    "bookId": 1,
+    "bookName": "Tractatus logico-philosophicus",
+    "soldPrice": 77.0,
+    "date": "Jul 21, 2024, 12:00:00 AM"
+  }
 ]

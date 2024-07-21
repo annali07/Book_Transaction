@@ -6,6 +6,7 @@ import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
 import entity.book.Book;
 
+import java.io.FileNotFoundException;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -70,8 +71,6 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
     @Override
     public JsonObject getBook(int bookId) {
         Map<String, JsonObject> books = readBooksFromFile();
-        System.out.println(books);
-        System.out.println(books.get(String.valueOf(bookId)));
         return books.get(String.valueOf(bookId));
     }
 
@@ -81,13 +80,18 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
      * @return a map of books with their IDs as keys and their JSON representations as values
      */
     private Map<String, JsonObject> readBooksFromFile() {
+        Gson gson = new Gson(); // Ensure Gson instance is created if not already available
         try (FileReader reader = new FileReader(FILE_PATH)) {
             Type type = new TypeToken<HashMap<String, JsonObject>>() {}.getType();
             return gson.fromJson(reader, type);
+        } catch (FileNotFoundException e) {
+            System.err.println("The file was not found: " + e.getMessage());
         } catch (IOException e) {
-            return new HashMap<>();
+            System.err.println("An IO exception occurred: " + e.getMessage());
         }
+        return new HashMap<>();
     }
+
 
     /**
      * Writes the given books map to the JSON file.

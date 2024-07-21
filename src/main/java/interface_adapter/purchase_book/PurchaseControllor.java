@@ -27,7 +27,7 @@ public class PurchaseControllor {
      * @param bookid the ID of the book to be purchased
      */
     public void execute(int bookid) {
-        PurchaseInputData purchaseInputData = new PurchaseInputData();
+        PurchaseInputData purchaseInputData = new PurchaseInputData(bookid);
         addBookUsecaseInteractor.purchase(purchaseInputData);
     }
 

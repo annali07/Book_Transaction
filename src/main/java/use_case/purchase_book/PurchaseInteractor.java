@@ -41,7 +41,7 @@ public class PurchaseInteractor implements PurchaseInputDataBoundary{
      */
     @Override
      public void purchase(PurchaseInputData purchaseInputData){
-
+        System.out.println(purchaseInputData.getBookId());
         JsonObject foundObject = bookRepositoryDataAccessObject.getBook(purchaseInputData.getBookId());
 
         if(foundObject != null){

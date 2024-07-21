@@ -10,8 +10,8 @@ public class PurchaseInputData {
         /**
          * Constructs a PurchaseInputData object with the specified book ID.
          */
-        public PurchaseInputData() {
-            this.bookId = getBookId();
+        public PurchaseInputData(int bookId) {
+            this.bookId = bookId;
         }
 
         /**

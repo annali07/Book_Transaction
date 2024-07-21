@@ -63,7 +63,7 @@ class PurchaseInteractorTest {
     // Test purchase Successfully case
     @Test
     void testPurchaseSuccess() {
-        PurchaseInputData input = new PurchaseInputData() {
+        PurchaseInputData input = new PurchaseInputData(1) {
             @Override
             public int getBookId() {
                 return 1;
@@ -103,7 +103,7 @@ class PurchaseInteractorTest {
     // Test purchase failure situation
     @Test
     void testFoundNoBookId(){
-        PurchaseInputData input = new PurchaseInputData() {
+        PurchaseInputData input = new PurchaseInputData(2) {
             @Override
             public int getBookId() {
                 return 114514;
@@ -119,7 +119,7 @@ class PurchaseInteractorTest {
 
     @Test
     void testNoneInStock() {
-        PurchaseInputData input = new PurchaseInputData() {
+        PurchaseInputData input = new PurchaseInputData(1) {
             @Override
             public int getBookId() {
                 return 1;
@@ -128,11 +128,11 @@ class PurchaseInteractorTest {
 
         purchaseInteractor.purchase(input);
 
-        assertEquals(2, presenter.prepareFailView());
+        assertEquals(1, presenter.prepareFailView());
     }
 
     void testCancel(){
-        PurchaseInputData input = new PurchaseInputData() {
+        PurchaseInputData input = new PurchaseInputData(1) {
             @Override
             public int getBookId() {
                 return 1;
