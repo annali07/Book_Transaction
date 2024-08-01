@@ -6,6 +6,8 @@
 /Users/nana/Desktop/BookTransaction/src/test/java/app/usecase_factory/rent/ReturnBookUseCaseFactoyTest.java
 /Users/nana/Desktop/BookTransaction/src/test/java/app/usecase_factory/rent/RobUseCaseFactoryTest.java
 /Users/nana/Desktop/BookTransaction/src/test/java/data_access/add_book_repository/BookRepositoryDataAccessObjectTest.java
+/Users/nana/Desktop/BookTransaction/src/test/java/data_access/api/ExternalBookApiTest.java
+/Users/nana/Desktop/BookTransaction/src/test/java/data_access/login_validation/UserLoginDataAccessTest.java
 /Users/nana/Desktop/BookTransaction/src/test/java/interface_adapter/RentInformation/borrowbook/BorrowBookControllerTest.java
 /Users/nana/Desktop/BookTransaction/src/test/java/interface_adapter/RentInformation/borrowbook/BorrowBookPresenterTest.java
 /Users/nana/Desktop/BookTransaction/src/test/java/interface_adapter/RentInformation/borrowbook/BorrowBookStateTest.java

@@ -12,5 +12,19 @@
     "bookName": "Tractatus logico-philosophicus",
     "soldPrice": 77.0,
     "date": "Jul 21, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 3,
+    "bookId": 2,
+    "bookName": "114514",
+    "soldPrice": 1111.0,
+    "date": "Jul 14, 1923, 12:00:00 AM"
+  },
+  {
+    "transactionId": 4,
+    "bookId": 8,
+    "bookName": "A Game of Thrones",
+    "soldPrice": 99.0,
+    "date": "Jul 25, 2024, 12:00:00 AM"
   }
 ]

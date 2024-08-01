@@ -1,5 +1,12 @@
 package app;
 
+import static com.mongodb.client.model.Filters.eq;
+import org.bson.Document;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
 import app.usecase_factory.AddBookUseCaseFactory;
 import app.usecase_factory.LoginUseCaseFactory;
 import app.usecase_factory.PurchaseBookCaseFactory;
@@ -26,9 +33,25 @@ import javax.swing.*;
 import java.awt.*;
 import java.io.IOException;
 import java.text.ParseException;
+import io.github.cdimascio.dotenv.Dotenv;
 
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
+
+        Dotenv dotenv = Dotenv.load();
+        String mongoUri = dotenv.get("MONGO_URI");
+
+        String uri = mongoUri;
+        try (MongoClient mongoClient = MongoClients.create(uri)) {
+            MongoDatabase database = mongoClient.getDatabase("sample_mflix");
+            MongoCollection<Document> collection = database.getCollection("comments");
+            Document doc = collection.find(eq("name", "Mercedes Tyler")).first();
+            if (doc != null) {
+                System.out.println(doc.toJson());
+            } else {
+                System.out.println("No matching documents found.");
+            }
+        }
 
         // Main Application Window
         JFrame application = new JFrame("Book Transaction");
