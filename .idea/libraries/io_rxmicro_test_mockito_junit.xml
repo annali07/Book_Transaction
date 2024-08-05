@@ -1,0 +1,76 @@
+<component name="libraryTable">
+  <library name="io.rxmicro.test.mockito.junit" type="repository">
+    <properties maven-id="io.rxmicro:rxmicro-test-mockito-junit:0.11" />
+    <CLASSES>
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-test-mockito-junit-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-test-junit-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-test-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-tool-common-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-common-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-json-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-data-mongo-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-data-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-model-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/reactive-streams-1.0.4.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-logger-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-reflection-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-resource-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-config-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-netty-runtime-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mongodb-driver-reactivestreams-4.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/reactor-core-3.5.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mongodb-driver-core-4.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/bson-record-codec-4.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/bson-4.8.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-slf4j-proxy-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-data-sql-r2dbc-postgresql-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-data-sql-r2dbc-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/r2dbc-spi-1.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/r2dbc-pool-1.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/reactor-pool-1.0.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-data-sql-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/r2dbc-postgresql-1.0.0.RELEASE.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/client-2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/common-2.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/saslprep-1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/stringprep-1.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/reactor-netty-core-1.1.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-resolver-dns-native-macos-4.1.84.Final-osx-x86_64.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-resolver-dns-classes-macos-4.1.84.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-common-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-codec-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-buffer-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-codec-dns-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-handler-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-handler-proxy-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-codec-socks-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-codec-http-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-resolver-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-resolver-dns-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-transport-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/netty-transport-native-unix-common-4.1.85.Final.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-rest-client-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-rest-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-http-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-runtime-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-rest-server-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-exchange-json-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-cdi-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/rxmicro-test-mockito-0.11.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mockito-core-4.9.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/byte-buddy-1.12.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/byte-buddy-agent-1.12.16.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/objenesis-3.3.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-jupiter-api-5.9.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/opentest4j-1.2.0.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/apiguardian-api-1.1.2.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-jupiter-engine-5.9.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-jupiter-params-5.9.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-platform-commons-1.9.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/junit-platform-engine-1.9.1.jar!/" />
+      <root url="jar://$PROJECT_DIR$/lib/mockito-junit-jupiter-4.9.0.jar!/" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+  </library>
+</component>

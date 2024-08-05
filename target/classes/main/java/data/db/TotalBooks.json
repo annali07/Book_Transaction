@@ -1,1 +1,1 @@
-{"1":{"BorrowerNumber":"","isRented":"false","BorrowerName":"","bookID":1},"8":{"rentalPrice":1,"BorrowerNumber":"","isRented":"false","bookPrice":99.0,"bookName":"A Game of Thrones","BorrowerName":"","bookID":8},"9":{"rentalPrice":1,"Start Date":null,"End Date":null,"BorrowerNumber":"","isRented":"false","bookPrice":78.0,"bookName":"Teias de charlotte","BorrowerName":"","bookID":9}}
+{"1":{"Start Date":null,"End Date":null,"BorrowerNumber":"","isRented":"false","BorrowerName":"","bookID":1}}

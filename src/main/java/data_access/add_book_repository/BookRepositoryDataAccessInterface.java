@@ -2,6 +2,8 @@ package data_access.add_book_repository;
 import com.google.gson.JsonObject;
 import entity.book.Book;
 
+import java.util.Date;
+
 /**
  * Interface for a data access object that provides methods to save books.
  */
@@ -12,8 +14,7 @@ public interface BookRepositoryDataAccessInterface {
      * @param book the book to be updated
      */
     boolean saveBook(Book book);
-    boolean updateBook(Book book);
-    boolean deleteBook(int bookId);
+    public boolean updateBook(int bookID, Date startDate, Date endDate, String borrowerName, String borrowerNumber);    boolean deleteBook(int bookId);
     boolean findBook(int bookId);
     Book getBook(int bookId);
 }
