@@ -43,22 +43,26 @@ public class PurchaseInteractor implements PurchaseInputDataBoundary{
     @Override
      public void purchase(PurchaseInputData purchaseInputData){
         System.out.println("The bookID of the book to purchase is: " + purchaseInputData.getBookId());
-        Book book = bookRepositoryDataAccessObject.getBook(purchaseInputData.getBookId());
+        boolean isFound  = bookRepositoryDataAccessObject.findBook(purchaseInputData.getBookId());
+        if(isFound){
+            Book book = bookRepositoryDataAccessObject.getBook(purchaseInputData.getBookId());
 
-        int bookID = book.getBookID();
-        double bookPrice = book.getBookPrice();
-        String bookName = book.getBookName();
-        LocalDate localDate = LocalDate.now();
-        Date today = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-        TransactionEntry transaction = new TransactionEntry(bookID, bookName, bookPrice, today);
+            int bookID = book.getBookID();
+            double bookPrice = book.getBookPrice();
+            String bookName = book.getBookName();
+            LocalDate localDate = LocalDate.now();
+            Date today = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
+            TransactionEntry transaction = new TransactionEntry(bookID, bookName, bookPrice, today);
 
-        boolean db = databaseTransactionEntryDataAccessObject.createTransactionEntry(transaction);
-        boolean del = bookRepositoryDataAccessObject.deleteBook(bookID);
-        if (db && del) {
-            System.out.println("The book is purchased and deleted from db.");
-            presenter.prepareSuccessView();
-        } else{
-            System.out.println("found object is null");
+            boolean db = databaseTransactionEntryDataAccessObject.createTransactionEntry(transaction);
+            boolean del = bookRepositoryDataAccessObject.deleteBook(bookID);
+            if (db && del) {
+                System.out.println("The book is purchased and deleted from db.");
+                presenter.prepareSuccessView();
+            }
+        }
+        else{
+            System.out.println("The book of book id " + purchaseInputData.getBookId() + " is not found.");
             presenter.prepareFailView();
         }
      }

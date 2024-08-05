@@ -1,5 +1,6 @@
 package use_case.rent_book.ReturnBook;
 
+import data_access.add_book_repository.BookRepositoryDataAccessInterface;
 import data_access.data_base_return_book.DatabaseReturnInterface;
 import entity.rent_entry.RentalEntry;
 
@@ -14,6 +15,7 @@ import java.util.concurrent.locks.AbstractOwnableSynchronizer;
  */
 public class ReturnBookInteractor implements ReturnBookInputBoundary {
 
+    private final BookRepositoryDataAccessInterface bookRepositoryDataAccessObject;
     private final DatabaseReturnInterface userGateway;
     private final ReturnBookOutputBoundary presenter;
 
@@ -23,7 +25,8 @@ public class ReturnBookInteractor implements ReturnBookInputBoundary {
      * @param userGateway the database gateway for handling return information
      * @param presenter the presenter for preparing views
      */
-    public ReturnBookInteractor(DatabaseReturnInterface userGateway, ReturnBookOutputBoundary presenter) {
+    public ReturnBookInteractor(BookRepositoryDataAccessInterface bookRepositoryDataAccessObj, DatabaseReturnInterface userGateway, ReturnBookOutputBoundary presenter) {
+        this.bookRepositoryDataAccessObject = bookRepositoryDataAccessObj;
         this.userGateway = userGateway;
         this.presenter = presenter;
     }
@@ -37,14 +40,20 @@ public class ReturnBookInteractor implements ReturnBookInputBoundary {
      */
     @Override
     public void execute(ReturnBookInputData borrowBookInputData) {
-        userGateway.editBookFile(borrowBookInputData.getBookID());
+//        userGateway.editBookFile(borrowBookInputData.getBookID());
+        boolean isBookFound = bookRepositoryDataAccessObject.findBook(borrowBookInputData.getBookID());
+        if (isBookFound) {
+            RentalEntry rentalEntry = new RentalEntry(borrowBookInputData.getBookID(), borrowBookInputData.getStartDate(), borrowBookInputData.getEndDate(), borrowBookInputData.getReturnDate());
 
-        RentalEntry rentalEntry = new RentalEntry(borrowBookInputData.getBookID(), borrowBookInputData.getStartDate(), borrowBookInputData.getEndDate(), borrowBookInputData.getReturnDate());
+            userGateway.writeReturnFile(rentalEntry);
+            ReturnBookOutputData response = new ReturnBookOutputData(borrowBookInputData.getBookID(), rentalEntry.getCharge());
+            presenter.prepareSuccessView(response);
+            System.out.println("The book has been returned.");
+        } else{
+            System.out.println("The bookID is invalid");
+        }
 
-        userGateway.writeReturnFile(rentalEntry);
-        ReturnBookOutputData response = new ReturnBookOutputData(borrowBookInputData.getBookID(), rentalEntry.getCharge());
-        presenter.prepareSuccessView(response);
-        System.out.println("I have returned the book");
+
     }
 
     /**

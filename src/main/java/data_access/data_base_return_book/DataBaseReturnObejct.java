@@ -1,8 +1,16 @@
 package data_access.data_base_return_book;
 import com.google.gson.*;
 import entity.rent_entry.RentalEntry;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
+
+import static com.mongodb.client.model.Filters.eq;
+import org.bson.Document;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -20,6 +28,9 @@ import data.misc_info.FilePathConstants;
 public class DataBaseReturnObejct implements DatabaseReturnInterface{
     private static final String FILE_PATH_BOOK = FilePathConstants.TOTAL_BOOKS_FILE;
     private static final String RENTAL_FILE_PATH = FilePathConstants.RENTAL_TRANSACTION_FILE;
+
+    Dotenv dotenv = Dotenv.load();
+    String mongoUri = dotenv.get("MONGO_URI");
 
     /**
      * Updates the book file to mark the book as not rented.
@@ -71,37 +82,58 @@ public class DataBaseReturnObejct implements DatabaseReturnInterface{
      */
     @Override
     public void writeReturnFile(RentalEntry rentalEntry) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
-        JsonArray jsonArray;
+        try (MongoClient mongoClient = MongoClients.create(mongoUri)) {
+            MongoDatabase database = mongoClient.getDatabase("Elysia");
+            MongoCollection<Document> collection = database.getCollection("rentalhistory");
 
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(RENTAL_FILE_PATH)));
-            JsonElement jsonElement = JsonParser.parseString(content);
+            // Convert the rentalEntry to a Document
+            Document rentalDoc = new Document("transactionId", rentalEntry.getRentalId())
+                    .append("bookId", rentalEntry.getBookId())
+                    .append("charge", rentalEntry.getCharge())
+                    .append("rentalStartDate", rentalEntry.getRentalStartDate())
+                    .append("rentalEndDate", rentalEntry.getRentalEndDate())
+                    .append("returnDate", rentalEntry.getReturnDate())
+                    .append("maxCharge", rentalEntry.getMaxCharge());
 
-            if (jsonElement.isJsonArray()) {
-                jsonArray = jsonElement.getAsJsonArray();
-            } else if (jsonElement.isJsonObject()) {
-                jsonArray = new JsonArray();
-                jsonArray.add(jsonElement.getAsJsonObject());
-            } else{
-                jsonArray = new JsonArray();
-            }
-        } catch (IOException e) {
-            jsonArray = new JsonArray();
-        }
+            // Insert the Document into the collection
+            collection.insertOne(rentalDoc);
 
-        // Convert the transactionEntry to a JsonElement
-        JsonElement transactionElement = gson.toJsonTree(rentalEntry);
-
-        // Add the transaction to the JsonArray
-        jsonArray.add(transactionElement);
-
-        // Write the updated JsonArray back to the file
-        try (FileWriter writer = new FileWriter(RENTAL_FILE_PATH)) {
-            gson.toJson(jsonArray, writer);
-        } catch (IOException e) {
+            System.out.println("Rental entry saved successfully.");
+        } catch (Exception e) {
             e.printStackTrace();
         }
+
+//        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+//        JsonArray jsonArray;
+//
+//        try {
+//            String content = new String(Files.readAllBytes(Paths.get(RENTAL_FILE_PATH)));
+//            JsonElement jsonElement = JsonParser.parseString(content);
+//
+//            if (jsonElement.isJsonArray()) {
+//                jsonArray = jsonElement.getAsJsonArray();
+//            } else if (jsonElement.isJsonObject()) {
+//                jsonArray = new JsonArray();
+//                jsonArray.add(jsonElement.getAsJsonObject());
+//            } else{
+//                jsonArray = new JsonArray();
+//            }
+//        } catch (IOException e) {
+//            jsonArray = new JsonArray();
+//        }
+//
+//        // Convert the transactionEntry to a JsonElement
+//        JsonElement transactionElement = gson.toJsonTree(rentalEntry);
+//
+//        // Add the transaction to the JsonArray
+//        jsonArray.add(transactionElement);
+//
+//        // Write the updated JsonArray back to the file
+//        try (FileWriter writer = new FileWriter(RENTAL_FILE_PATH)) {
+//            gson.toJson(jsonArray, writer);
+//        } catch (IOException e) {
+//            e.printStackTrace();
+//        }
     }
 
     /**
