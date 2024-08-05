@@ -93,6 +93,23 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
         return true;
     }
 
+    @Override
+    public boolean findBook(int bookId){
+        try (MongoClient mongoClient = MongoClients.create(mongoUri)) {
+            MongoDatabase database = mongoClient.getDatabase("Elysia");
+            MongoCollection<Document> collection = database.getCollection("books");
+
+            // Find the document with the specified bookId
+            Document doc = collection.find(eq("bookID", bookId)).first();
+
+            // Return true if the document exists, false otherwise
+            return doc != null;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
     /**
      * Deletes a book from the repository.
      *

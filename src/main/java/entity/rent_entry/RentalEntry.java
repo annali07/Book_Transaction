@@ -96,6 +96,10 @@ public class RentalEntry {
         return this.returnDate;
     }
 
+    public int getMaxCharge() {
+        return maxCharge;
+    }
+
     /**
      * Reads the current rental count from the file.
      *
