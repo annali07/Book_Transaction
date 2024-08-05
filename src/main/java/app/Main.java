@@ -38,20 +38,6 @@ import io.github.cdimascio.dotenv.Dotenv;
 public class Main {
     public static void main(String[] args) throws IOException, ParseException {
 
-//        Dotenv dotenv = Dotenv.load();
-//        String mongoUri = dotenv.get("MONGO_URI");
-//
-//        try (MongoClient mongoClient = MongoClients.create(mongoUri)) {
-//            MongoDatabase database = mongoClient.getDatabase("sample_mflix");
-//            MongoCollection<Document> collection = database.getCollection("comments");
-//            Document doc = collection.find(eq("name", "Mercedes Tyler")).first();
-//            if (doc != null) {
-//                System.out.println(doc.toJson());
-//            } else {
-//                System.out.println("No matching documents found.");
-//            }
-//        }
-
         // Main Application Window
         JFrame application = new JFrame("Book Transaction");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);

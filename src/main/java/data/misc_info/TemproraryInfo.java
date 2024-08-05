@@ -94,7 +94,7 @@ public class TemproraryInfo {
                 dictionary.put("bookName", bookDoc.getString("bookName"));
                 dictionary.put("Start Date", bookDoc.getString("rentalStartDate"));
                 dictionary.put("End Date", bookDoc.getString("rentalEndDate"));
-                dictionary.put("isRented", String.valueOf(bookDoc.getBoolean("isRented")));
+                dictionary.put("isRented", bookDoc.getString("isRented"));
                 dictionary.put("borrowerName", bookDoc.getString("borrowerName"));
                 dictionary.put("borrowerNumber", bookDoc.getString("borrowerNumber"));
             }

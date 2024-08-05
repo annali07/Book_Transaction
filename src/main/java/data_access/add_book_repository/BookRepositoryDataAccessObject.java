@@ -121,7 +121,7 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
                 // Update the document with borrowing information
                 bookDoc.put("rentalStartDate", formattedStartDate);
                 bookDoc.put("rentalEndDate", formattedEndDate);
-                bookDoc.put("isRented", true);
+                bookDoc.put("isRented", "true");
                 bookDoc.put("borrowerName", borrowerName);
                 bookDoc.put("borrowerNumber", borrowerNumber);
 
@@ -211,8 +211,10 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
                         doc.getInteger("bookID"),
                         doc.getString("bookName"),
                         doc.getDouble("bookPrice"),
-                        doc.getDate("rentalStartDate"),
-                        doc.getDate("rentalEndDate"),
+//                        doc.getDate("rentalStartDate"),
+//                        doc.getDate("rentalEndDate"),
+                        null,
+                        null,
                         doc.getString("isRented"),
                         doc.getString("borrowerName"),
                         doc.getString("borrowerNumber")
