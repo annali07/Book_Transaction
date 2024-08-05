@@ -25,8 +25,6 @@ public class Book {
     private String bookName;
     private String BorrowerName;
     private int bookID;
-    private String rentalOrPurchase;
-    private String author;
     private Date rentalStartDate;
     private Date rentalEndDate;
 
@@ -39,6 +37,18 @@ public class Book {
         this.BorrowerName = "";
         this.BorrowerNumber = "";
         setBookID();
+    }
+
+    // Used in GetBook
+    public Book(int bookID, String bookName, double bookPrice, Date rentalStartDate, Date rentalEndDate, String isRented, String borrowerName, String borrowerNumber) {
+        this.bookID = bookID;
+        this.bookName = bookName;
+        this.bookPrice = bookPrice;
+        this.rentalStartDate = rentalStartDate;
+        this.rentalEndDate = rentalEndDate;
+        this.isRented = isRented;
+        this.BorrowerName = borrowerName;
+        this.BorrowerNumber = borrowerNumber;
     }
 
     public Book(int bookID, String bookName, double bookPrice) {
@@ -69,6 +79,8 @@ public class Book {
         this.bookID = readBookCount();
         writeBookCount(bookID+1);
     }
+
+    public String getIsRented() {return isRented; }
 
     // Getter and Setter for bookPrice
     public double getBookPrice() {

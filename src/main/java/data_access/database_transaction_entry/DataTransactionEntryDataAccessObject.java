@@ -10,6 +10,15 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 import entity.purchase_entry.CustomDateSerializer;
 import entity.purchase_entry.TransactionEntry;
 
+import static com.mongodb.client.model.Filters.eq;
+
+import io.github.cdimascio.dotenv.Dotenv;
+import org.bson.Document;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
 import java.io.File;
 import java.io.FileWriter;
 import java.io.FileReader;
@@ -31,6 +40,8 @@ import java.nio.file.Paths;
  */
 public class DataTransactionEntryDataAccessObject implements DatabaseTransactionEntryDataAccessInterface{
     private final String FILE_PATH = FilePathConstants.PURCHASE_TRANSACTION_FILE;
+    Dotenv dotenv = Dotenv.load();
+    String mongoUri = dotenv.get("MONGO_URI");
 
     /**
      * Retrieves a transaction entry by its ID.
@@ -39,23 +50,32 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
      * @return The TransactionEntry object if found, or null if not found.
      */
     public TransactionEntry getTransactionEntry(int transactionId) {
-        Gson gson = new GsonBuilder().create();
+        try (MongoClient mongoClient = MongoClients.create(mongoUri)) {
+            MongoDatabase database = mongoClient.getDatabase("Elysia");
+            MongoCollection<Document> collection = database.getCollection("purchasehistory");
 
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
-            JsonArray jsonArray = JsonParser.parseString(content).getAsJsonArray();
+            // Find the document with the specified transactionId
+            Document doc = collection.find(eq("transactionId", transactionId)).first();
 
-            for (JsonElement element : jsonArray) {
-                TransactionEntry entry = gson.fromJson(element, TransactionEntry.class);
-                if (entry.getTransactionId() == (transactionId)) {
-                    return entry;
-                }
+            if (doc != null) {
+                // Parse the Document into a TransactionEntry object
+                TransactionEntry entry = new TransactionEntry(
+                        doc.getInteger("transactionId"),
+                        doc.getInteger("bookId"),
+                        doc.getString("bookName"),
+                        doc.getDouble("soldPrice"),
+                        doc.getDate("date")
+                );
+                return entry;
+
+            } else {
+                System.out.println("No transaction entry found with transactionId: " + transactionId);
+                return null;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
     /**
@@ -66,45 +86,26 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
      */
     @Override
     public boolean createTransactionEntry(TransactionEntry transactionEntry) {
-        Gson gson = new GsonBuilder().setPrettyPrinting().create();
+        try (MongoClient mongoClient = MongoClients.create(mongoUri)) {
+            MongoDatabase database = mongoClient.getDatabase("Elysia");
+            MongoCollection<Document> collection = database.getCollection("purchasehistory");
 
+            // Convert the transactionEntry to a Document
+            Document transactionDoc = new Document("transactionId", transactionEntry.getTransactionId())
+                    .append("bookId", transactionEntry.getBookId())
+                    .append("bookName", transactionEntry.getBookName())
+                    .append("soldPrice", transactionEntry.getSoldPrice())
+                    .append("date", transactionEntry.getDate());
 
-        // Read the existing file and parse it as a JsonArray
-        JsonArray jsonArray;
+            // Insert the Document into the collection
+            collection.insertOne(transactionDoc);
 
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(FILE_PATH)));
-            JsonElement jsonElement = JsonParser.parseString(content);
-
-            // Check if the existing content is an array or an object
-            if (jsonElement.isJsonArray()) {
-                jsonArray = jsonElement.getAsJsonArray();
-            } else if (jsonElement.isJsonObject()) {
-                // If it's an object, create a new array and add the object to it
-                jsonArray = new JsonArray();
-                jsonArray.add(jsonElement.getAsJsonObject());
-            } else{
-                jsonArray = new JsonArray();
-            }
-        } catch (IOException e) {
-            jsonArray = new JsonArray();
-        }
-
-        // Convert the transactionEntry to a JsonElement
-        JsonElement transactionElement = gson.toJsonTree(transactionEntry);
-
-        // Add the transaction to the JsonArray
-        jsonArray.add(transactionElement);
-
-        // Write the updated JsonArray back to the file
-        try (FileWriter writer = new FileWriter(FILE_PATH)) {
-            gson.toJson(jsonArray, writer);
-        } catch (IOException e) {
+            System.out.println("Transaction entry saved successfully to MongoDB.");
+            return true;
+        } catch (Exception e) {
             e.printStackTrace();
             return false;
         }
-
-        return true;
     }
 
     /**

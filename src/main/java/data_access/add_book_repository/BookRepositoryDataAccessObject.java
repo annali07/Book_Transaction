@@ -1,9 +1,20 @@
 package data_access.add_book_repository;
 
+import static com.mongodb.client.model.Filters.eq;
+import org.bson.Document;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
+
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 import entity.book.Book;
 
 import java.io.FileNotFoundException;
@@ -14,6 +25,10 @@ import java.lang.reflect.Type;
 import java.util.HashMap;
 import java.util.Map;
 import data.misc_info.FilePathConstants;
+import io.github.cdimascio.dotenv.Dotenv;
+import org.bson.Document;
+
+import static com.mongodb.client.model.Filters.eq;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.stereotype.Repository;
 //import org.springframework.data.mongodb.core.MongoTemplate;
@@ -28,6 +43,9 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
 
     private static final String FILE_PATH = FilePathConstants.TOTAL_BOOKS_FILE;
 
+    Dotenv dotenv = Dotenv.load();
+    String mongoUri = dotenv.get("MONGO_URI");
+
     private final Gson gson = new GsonBuilder()
             .setDateFormat("yyyy-MM-dd'T'HH:mm:ss.SSSZ")
             .create();
@@ -39,9 +57,28 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
      */
     @Override
     public boolean saveBook(Book book) {
-        Map<String, JsonObject> books = readBooksFromFile();
-        books.put(String.valueOf(book.getBookID()), gson.toJsonTree(book).getAsJsonObject());
-        return writeBooksToFile(books);
+        try (MongoClient mongoClient = MongoClients.create(mongoUri)) {
+            MongoDatabase database = mongoClient.getDatabase("Elysia");
+            MongoCollection<Document> collection = database.getCollection("books");
+
+            // Create a Document from the Book object
+            Document doc = new Document("bookID", book.getBookID())
+                    .append("bookName", book.getBookName())
+                    .append("bookPrice", book.getBookPrice())
+                    .append("rentalStartDate", book.getRentalStartDate())
+                    .append("rentalEndDate", book.getRentalEndDate())
+                    .append("borrowerName", "")
+                    .append("borrowerNumber", "")
+                    .append("isRented", book.getIsRented());
+
+            // Insert the Document into the collection
+            collection.insertOne(doc);
+            System.out.println("Book saved successfully to MongoDB.");
+            return true;
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
@@ -64,8 +101,24 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
      */
     @Override
     public boolean deleteBook(int bookId) {
-        // #TODO Implementation
-        return true;
+        try (MongoClient mongoClient = MongoClients.create(mongoUri)) {
+            MongoDatabase database = mongoClient.getDatabase("Elysia");
+            MongoCollection<Document> collection = database.getCollection("books");
+
+            // Delete the document with the specified bookID
+            Document deletedBook = collection.findOneAndDelete(eq("bookID", bookId));
+
+            if (deletedBook != null) {
+                System.out.println("Book deleted successfully.");
+                return true;
+            } else {
+                System.out.println("No book found with bookID: " + bookId);
+                return false;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return false;
+        }
     }
 
     /**
@@ -75,9 +128,34 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
      * @return a JsonObject representing the book, or null if the book is not found
      */
     @Override
-    public JsonObject getBook(int bookId) {
-        Map<String, JsonObject> books = readBooksFromFile();
-        return books.get(String.valueOf(bookId));
+    public Book getBook(int bookId) {
+        try (MongoClient mongoClient = MongoClients.create(mongoUri)) {
+            MongoDatabase database = mongoClient.getDatabase("Elysia");
+            MongoCollection<Document> collection = database.getCollection("books");
+
+            // Find the document with the specified bookID
+            Document doc = collection.find(eq("bookID", bookId)).first();
+
+            if (doc != null) {
+                Book book = new Book(
+                        doc.getInteger("bookID"),
+                        doc.getString("bookName"),
+                        doc.getDouble("bookPrice"),
+                        doc.getDate("rentalStartDate"),
+                        doc.getDate("rentalEndDate"),
+                        doc.getString("isRented"),
+                        doc.getString("borrowerName"),
+                        doc.getString("borrowerNumber")
+                );
+                return book;
+            } else {
+                System.out.println("No book found with bookID: " + bookId);
+                return null;
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+            return null;
+        }
     }
 
     /**
