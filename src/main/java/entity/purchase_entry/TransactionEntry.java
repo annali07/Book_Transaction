@@ -47,6 +47,14 @@ public class TransactionEntry {
         setTransactionId();
     }
 
+    public TransactionEntry(int transactionId, int bookId, String bookName, double soldPrice, Date date) {
+        this.transactionId = transactionId;
+        this.bookId = bookId;
+        this.bookName = bookName;
+        this.soldPrice = soldPrice;
+        this.date = date;
+    }
+
     public int getTransactionId() {
         return transactionId;
     }

@@ -26,5 +26,12 @@
     "bookName": "A Game of Thrones",
     "soldPrice": 99.0,
     "date": "Jul 25, 2024, 12:00:00 AM"
+  },
+  {
+    "transactionId": 5,
+    "bookId": 3,
+    "bookName": "The Bachman Books",
+    "soldPrice": 55.0,
+    "date": "Aug 5, 2024, 12:00:00 AM"
   }
 ]

@@ -14,5 +14,5 @@ public interface BookRepositoryDataAccessInterface {
     boolean saveBook(Book book);
     boolean updateBook(Book book);
     boolean deleteBook(int bookId);
-    JsonObject getBook(int bookId);
+    Book getBook(int bookId);
 }

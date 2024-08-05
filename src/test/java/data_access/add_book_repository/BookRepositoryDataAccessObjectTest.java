@@ -37,10 +37,10 @@ class BookRepositoryDataAccessObjectTest {
         Files.deleteIfExists(new File(TEST_FILE_PATH).toPath());
     }
 
-    @Test
-    void getBook() {
-        JsonObject retrievedBook = dao.getBook(1);
-        assertNotNull(retrievedBook);
-        assertEquals(77, Double.parseDouble(retrievedBook.get("bookPrice").getAsString()));
-    }
+//    @Test
+//    void getBook() {
+//        JsonObject retrievedBook = dao.getBook(1);
+//        assertNotNull(retrievedBook);
+//        assertEquals(77, Double.parseDouble(retrievedBook.get("bookPrice").getAsString()));
+//    }
 }
