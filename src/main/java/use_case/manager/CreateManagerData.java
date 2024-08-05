@@ -1,4 +1,4 @@
-package use_case.manager;
-
-public class CreateManagerData {
-}
+//package use_case.manager;
+//
+//public class CreateManagerData {
+//}

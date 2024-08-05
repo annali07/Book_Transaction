@@ -1,5 +1,6 @@
 package use_case.rent_book.BorrowBook;
 
+import data_access.add_book_repository.BookRepositoryDataAccessInterface;
 import data_access.database_borrow_book.DatabaseBorrowInterface;
 
 import java.util.Date;
@@ -10,7 +11,7 @@ import java.util.Date;
  *
  */
 public class BorrowBookInteractor implements BorrowBookInputBoundary {
-
+    private final BookRepositoryDataAccessInterface bookRepositoryDataAccessObject;
     private final DatabaseBorrowInterface userGateway;
     private final BorrowBookOutputBoundary presenter;
 
@@ -20,7 +21,8 @@ public class BorrowBookInteractor implements BorrowBookInputBoundary {
      * @param userGateway the database gateway for writing borrow information
      * @param presenter the presenter for preparing views
      */
-    public BorrowBookInteractor(DatabaseBorrowInterface userGateway, BorrowBookOutputBoundary presenter) {
+    public BorrowBookInteractor(BookRepositoryDataAccessInterface bookRepositoryDataAccessObject, DatabaseBorrowInterface userGateway, BorrowBookOutputBoundary presenter) {
+        this.bookRepositoryDataAccessObject = bookRepositoryDataAccessObject;
         this.userGateway = userGateway;
         this.presenter = presenter;
     }
@@ -33,15 +35,26 @@ public class BorrowBookInteractor implements BorrowBookInputBoundary {
     @Override
     public void execute(BorrowBookInputData returnBookInputData) {
         int bookID = returnBookInputData.getBookID();
-        Date startDate = returnBookInputData.getStartDate();
-        Date endDate = returnBookInputData.getEndDate();
-        String borrowerName = returnBookInputData.getBorrowerName();
-        String borrowerNumber = returnBookInputData.getBorrowerNumber();
+        boolean isFound = bookRepositoryDataAccessObject.findBook(bookID);
+        if (isFound){
+            Date startDate = returnBookInputData.getStartDate();
+            Date endDate = returnBookInputData.getEndDate();
+            String borrowerName = returnBookInputData.getBorrowerName();
+            String borrowerNumber = returnBookInputData.getBorrowerNumber();
 
-        userGateway.writeBorrowFile(bookID, startDate,endDate,borrowerName,borrowerNumber);
-        BorrowBookOutputData borrowBookOutputData = new BorrowBookOutputData(bookID, startDate, endDate, borrowerName, borrowerNumber);
-        presenter.prepareSuccessView(borrowBookOutputData);
-        System.out.println("I have borrowed the book");
+//            userGateway.writeBorrowFile(bookID, startDate,endDate,borrowerName,borrowerNumber);
+            boolean success = bookRepositoryDataAccessObject.updateBook(bookID, startDate,endDate,borrowerName,borrowerNumber);
+            if (success){
+                BorrowBookOutputData borrowBookOutputData = new BorrowBookOutputData(bookID, startDate, endDate, borrowerName, borrowerNumber);
+                presenter.prepareSuccessView(borrowBookOutputData);
+                System.out.println("The book with bookID " + bookID + " has been successfully borrowed.");
+            } else {
+                System.out.println("The book with bookID " + bookID + " could not be borrowed.");
+            }
+
+        } else {
+            System.out.println("The book with bookID " + bookID + " is not found.");
+        }
     }
 
     /**
