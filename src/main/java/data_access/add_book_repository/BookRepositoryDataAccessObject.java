@@ -44,6 +44,17 @@ import static com.mongodb.client.model.Filters.eq;
 public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessInterface {
 
     private static final String FILE_PATH = FilePathConstants.TOTAL_BOOKS_FILE;
+    public MongoClient mongoClient;
+    public MongoDatabase database;
+    public MongoCollection<Document> bookCollection;
+
+//    public BookRepositoryDataAccessObject() {
+//        Dotenv dotenv = Dotenv.load();
+//        String mongoUri = dotenv.get("MONGO_URI");
+//        this.mongoClient = MongoClients.create(mongoUri);
+//        this.database = mongoClient.getDatabase("Elysia");
+//        this.bookCollection = database.getCollection("books");
+//    }
 
     Dotenv dotenv = Dotenv.load();
     String mongoUri = dotenv.get("MONGO_URI");
@@ -84,10 +95,14 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
     }
 
     /**
-     * Updates an existing book in the repository.
+     * Updates the book record with borrowing information in the MongoDB collection.
      *
-     * @param bookID the book object containing updated information
-     * @return true if the book was successfully updated, false otherwise
+     * @param bookID         The ID of the book to update.
+     * @param startDate      The start date of the borrowing period.
+     * @param endDate        The end date of the borrowing period.
+     * @param borrowerName   The name of the borrower.
+     * @param borrowerNumber The number of the borrower.
+     * @return true if the book is updated successfully, false otherwise.
      */
     @Override
     public boolean updateBook(int bookID, Date startDate, Date endDate, String borrowerName, String borrowerNumber) {
@@ -125,6 +140,12 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
         }
     }
 
+    /**
+     * Checks if a book with the given bookId exists in the MongoDB collection.
+     *
+     * @param bookId The book ID to search for.
+     * @return true if the book exists, false otherwise.
+     */
     @Override
     public boolean findBook(int bookId){
         try (MongoClient mongoClient = MongoClients.create(mongoUri)) {

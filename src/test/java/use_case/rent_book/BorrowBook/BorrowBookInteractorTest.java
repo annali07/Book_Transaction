@@ -1,5 +1,6 @@
 package use_case.rent_book.BorrowBook;
 
+import data_access.add_book_repository.BookRepositoryDataAccessObject;
 import data_access.database_borrow_book.DatabaseBorrowInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -16,12 +17,13 @@ public class BorrowBookInteractorTest {
     private DatabaseBorrowInterface mockDatabase;
     private BorrowBookOutputBoundary mockPresenter;
     private BorrowBookInteractor interactor;
+    private BookRepositoryDataAccessObject mockBookRepository;
 
     @BeforeEach
     void setUp() {
         mockDatabase = mock(DatabaseBorrowInterface.class);
         mockPresenter = mock(BorrowBookOutputBoundary.class);
-        interactor = new BorrowBookInteractor(mockDatabase, mockPresenter);
+        interactor = new BorrowBookInteractor(mockBookRepository, mockDatabase, mockPresenter);
     }
 
     @Test
