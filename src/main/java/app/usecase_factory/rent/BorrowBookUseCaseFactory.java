@@ -1,5 +1,7 @@
 package app.usecase_factory.rent;
 
+import data_access.add_book_repository.BookRepositoryDataAccessInterface;
+import data_access.add_book_repository.BookRepositoryDataAccessObject;
 import data_access.database_borrow_book.DatabaseBorrowInterface;
 import data_access.database_borrow_book.DatabaseBorrowObject;
 import interface_adapter.RentInformation.borrowbook.BorrowBookController;
@@ -48,8 +50,10 @@ public class BorrowBookUseCaseFactory {
      */
     private static BorrowBookController createReturnBookUseCase(ViewManagerModel viewManagerModel, BorrowBookViewModel borrowBookViewModel, MainMenuViewModel mainMenuViewModel, ReturnOrBorrowViewModel returnOrBorrowViewModel){
         DatabaseBorrowInterface databaseBorrow = new DatabaseBorrowObject();
+        BookRepositoryDataAccessInterface bookRepositoryDataAccessObj = new BookRepositoryDataAccessObject();
+
         BorrowBookOutputBoundary borrowPresenter = new BorrowBookPresenter(viewManagerModel, mainMenuViewModel, borrowBookViewModel, returnOrBorrowViewModel);
-        BorrowBookInputBoundary borrowBookInteractor = new BorrowBookInteractor(databaseBorrow, borrowPresenter);
+        BorrowBookInputBoundary borrowBookInteractor = new BorrowBookInteractor(bookRepositoryDataAccessObj, databaseBorrow, borrowPresenter);
         return new BorrowBookController(borrowBookInteractor);
     }
 }
