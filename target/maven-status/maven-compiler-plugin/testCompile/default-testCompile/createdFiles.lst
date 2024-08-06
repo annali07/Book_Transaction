@@ -45,7 +45,6 @@ interface_adapter/RentInformation/returnbook/ReturnBookViewModelTest$1.class
 use_case/purchase_book/PurchaseInteractorTest$2.class
 interface_adapter/add_book/AddBookStateTest.class
 interface_adapter/RentMenu/RentMenuControllerTest.class
-data_access/add_book_repository/BookRepositoryDataAccessObjectTest.class
 interface_adapter/add_book/AddBookControllerTest.class
 interface_adapter/returnorborrow/ReturnOrBorrowStateTest.class
 interface_adapter/login/LoginPresenterTest.class
