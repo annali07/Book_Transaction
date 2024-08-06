@@ -52,7 +52,7 @@ public class AddBookUseCaseFactory {
      * @return an instance of AddBookController
      * @throws IOException if an error occurs while creating the data access objects
      */
-    private static AddBookController createAddBookUsecase(ViewManagerModel viewManagerModel, AddBookViewModel addBookViewModel, MainMenuViewModel mainMenuViewModel) throws IOException {
+    static AddBookController createAddBookUsecase(ViewManagerModel viewManagerModel, AddBookViewModel addBookViewModel, MainMenuViewModel mainMenuViewModel) throws IOException {
         BookRepositoryDataAccessInterface bookRepositoryDataAccessObj = new BookRepositoryDataAccessObject();
         ExternalBookApi externalBookApi = new ExternalBookApi();
 
