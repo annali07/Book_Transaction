@@ -124,11 +124,10 @@ public class DataTransactionEntryDataAccessObject implements DatabaseTransaction
             transactions.add(getTransactionEntry(i));
         }
 
-        for (TransactionEntry transactionEntry : transactions) {
+        for (TransactionEntry transactionEntry : transactions)
             if (!startDate.after(transactionEntry.getDate()) && !endDate.before(transactionEntry.getDate())) {
                 revenue += transactionEntry.getSoldPrice();
             }
-        }
 
         return revenue;
     }
