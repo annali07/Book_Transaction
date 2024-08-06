@@ -422,10 +422,10 @@ public class BorrowBookView extends JPanel implements ActionListener, PropertyCh
                 isErrorMessage.setText("");
                 borrowBookController.execute(bookID, date_start, date_end, borrowerNumber, borrowerName);
             }
-                else {
-                    System.out.println("the book has been rented and not returned");
-                }
-            } else if (borrowBookViewModel.CANCEL_LABEL.equals(e.getActionCommand())) {
+            else {
+                System.out.println("the book has been rented and not returned");
+            }
+        } else if (borrowBookViewModel.CANCEL_LABEL.equals(e.getActionCommand())) {
             isbookIDInputField.setText("");
             isbookStartDate.setText("");
             isbookNameField.setText("");
@@ -435,14 +435,14 @@ public class BorrowBookView extends JPanel implements ActionListener, PropertyCh
             isErrorMessage.setText("");
 
             borrowBookController.cancel();
-            }
+        }
     }
 
 
 
     public void propertyChange(PropertyChangeEvent evt) {
-            BorrowBookState state = (BorrowBookState) evt.getNewValue();
-            setFields(state);
+        BorrowBookState state = (BorrowBookState) evt.getNewValue();
+        setFields(state);
     }
 
     private void setFields(BorrowBookState state) {

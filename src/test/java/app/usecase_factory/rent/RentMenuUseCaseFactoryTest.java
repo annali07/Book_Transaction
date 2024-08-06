@@ -1,23 +1,25 @@
 package app.usecase_factory.rent;
 
-import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeEach;
+import static org.junit.jupiter.api.Assertions.*;
+
+import interface_adapter.RentMenu.RentMenuViewModel;
+import interface_adapter.main_menu.MainMenuViewModel;
+import interface_adapter.returnorborrow.ReturnOrBorrowViewModel;
+import interface_adapter.view.ViewManagerModel;
 import org.junit.jupiter.api.Test;
+import view.views.RentMenuView;
 
-public class RentMenuUseCaseFactoryTest {
-    @BeforeEach
-    void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
-    }
+class RentMenuUseCaseFactoryTest {
 
     @Test
-    void create() {
-    }
+    void testCreateRentMenuViewSuccess() {
+        // Assuming dependencies internally are properly set up to not throw exceptions
+        ViewManagerModel viewManagerModel = new ViewManagerModel();
+        RentMenuViewModel rentMenuViewModel = new RentMenuViewModel();
+        MainMenuViewModel mainMenuViewModel = new MainMenuViewModel();
+        ReturnOrBorrowViewModel returnOrBorrowViewModel = new ReturnOrBorrowViewModel();
 
-    @Test
-    void testCreate() {
+        RentMenuView result = RentMenuUseCaseFactory.create(viewManagerModel, rentMenuViewModel, mainMenuViewModel, returnOrBorrowViewModel);
+        assertNotNull(result, "RentMenuView should not be null on successful creation");
     }
 }

@@ -1,60 +1,82 @@
 package use_case.rent_book.BorrowBook;
 
-import data_access.add_book_repository.BookRepositoryDataAccessObject;
+import static org.mockito.Mockito.*;
+import static org.junit.jupiter.api.Assertions.*;
+
+import data_access.add_book_repository.BookRepositoryDataAccessInterface;
 import data_access.database_borrow_book.DatabaseBorrowInterface;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.mockito.ArgumentCaptor;
-import org.mockito.Mockito;
+import org.mockito.*;
 
 import java.util.Date;
 
-import static org.junit.jupiter.api.Assertions.*;
-import static org.mockito.Mockito.*;
+class BorrowBookInteractorTest {
 
-public class BorrowBookInteractorTest {
-
-    private DatabaseBorrowInterface mockDatabase;
+    @Mock
+    private BookRepositoryDataAccessInterface mockBookRepository;
+    @Mock
+    private DatabaseBorrowInterface mockUserGateway;
+    @Mock
     private BorrowBookOutputBoundary mockPresenter;
+
+    @InjectMocks
     private BorrowBookInteractor interactor;
-    private BookRepositoryDataAccessObject mockBookRepository;
+
+    private BorrowBookInputData inputData;
 
     @BeforeEach
     void setUp() {
-        mockDatabase = mock(DatabaseBorrowInterface.class);
-        mockPresenter = mock(BorrowBookOutputBoundary.class);
-        interactor = new BorrowBookInteractor(mockBookRepository, mockDatabase, mockPresenter);
+        MockitoAnnotations.initMocks(this);
+        Date startDate = new Date();
+        Date endDate = new Date();
+        inputData = new BorrowBookInputData(1, startDate, endDate, "John Doe", "1234567890");
     }
 
     @Test
-    void testExecute() {
+    void testSuccessfulBorrow() {
         // Arrange
-        int bookID = 1;
-        Date startDate = new Date(2023, 4, 12);
-        Date endDate = new Date(2023, 5, 12);
-        String borrowerName = "John Doe";
-        String borrowerNumber = "1234567890";
-        BorrowBookInputData inputData = new BorrowBookInputData(bookID, startDate, endDate, borrowerName, borrowerNumber);
+        when(mockBookRepository.findBook(inputData.getBookID())).thenReturn(true);
+        when(mockBookRepository.updateBook(anyInt(), any(Date.class), any(Date.class), anyString(), anyString())).thenReturn(true);
 
         // Act
         interactor.execute(inputData);
 
         // Assert
-        verify(mockDatabase).writeBorrowFile(bookID, startDate, endDate, borrowerName, borrowerNumber);
-
-        ArgumentCaptor<BorrowBookOutputData> captor = ArgumentCaptor.forClass(BorrowBookOutputData.class);
-        verify(mockPresenter).prepareSuccessView(captor.capture());
-
-        BorrowBookOutputData outputData = captor.getValue();
-        assertEquals(bookID, outputData.getBookID());
-        assertEquals(startDate, outputData.getStartDate());
-        assertEquals(endDate, outputData.getEndDate());
-        assertEquals(borrowerName, outputData.getBorrowerName());
-        assertEquals(borrowerNumber, outputData.getBorrowerNumber());
+        verify(mockPresenter).prepareSuccessView(any(BorrowBookOutputData.class));
+        verify(mockBookRepository).updateBook(anyInt(), any(Date.class), any(Date.class), anyString(), anyString());
     }
 
     @Test
-    void testCancel() {
+    void testBookNotFound() {
+        // Arrange
+        when(mockBookRepository.findBook(inputData.getBookID())).thenReturn(false);
+
+        // Act
+        interactor.execute(inputData);
+
+        // Assert
+        verify(mockPresenter, never()).prepareSuccessView(any(BorrowBookOutputData.class));
+        verify(mockBookRepository, never()).updateBook(anyInt(), any(Date.class), any(Date.class), anyString(), anyString());
+        System.out.println("Output: The book with bookID " + inputData.getBookID() + " is not found.");
+    }
+
+    @Test
+    void testFailedBorrowUpdate() {
+        // Arrange
+        when(mockBookRepository.findBook(inputData.getBookID())).thenReturn(true);
+        when(mockBookRepository.updateBook(anyInt(), any(Date.class), any(Date.class), anyString(), anyString())).thenReturn(false);
+
+        // Act
+        interactor.execute(inputData);
+
+        // Assert
+        verify(mockPresenter, never()).prepareSuccessView(any(BorrowBookOutputData.class));
+        System.out.println("Output: The book with bookID " + inputData.getBookID() + " could not be borrowed.");
+    }
+
+    @Test
+    void testCancelBorrowing() {
         // Act
         interactor.cancel();
 

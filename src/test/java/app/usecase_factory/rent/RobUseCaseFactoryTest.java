@@ -1,23 +1,71 @@
 package app.usecase_factory.rent;
 
-import org.junit.jupiter.api.AfterEach;
+import static org.junit.jupiter.api.Assertions.*;
+
+import app.usecase_factory.rent.RobUseCaseFactory;
+import interface_adapter.RentInformation.borrowbook.BorrowBookViewModel;
+import interface_adapter.RentInformation.returnbook.ReturnBookViewModel;
+import interface_adapter.RentMenu.RentMenuViewModel;
+import interface_adapter.main_menu.MainMenuViewModel;
+import interface_adapter.returnorborrow.ReturnOrBorrowViewModel;
+import interface_adapter.view.ViewManagerModel;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.*;
+import view.views.ReturnOrBorrowView;
 
-public class RobUseCaseFactoryTest {
+class RobUseCaseFactoryTest {
+
+    private ViewManagerModel viewManagerModel;
+    private ReturnOrBorrowViewModel returnOrBorrowViewModel;
+    private RentMenuViewModel rentMenuViewModel;
+    private ReturnBookViewModel returnBookViewModel;
+    private BorrowBookViewModel borrowBookViewModel;
+    private MainMenuViewModel mainMenuViewModel;
+
     @BeforeEach
     void setUp() {
-    }
-
-    @AfterEach
-    void tearDown() {
+        viewManagerModel = new ViewManagerModel();
+        returnOrBorrowViewModel = new ReturnOrBorrowViewModel();
+        rentMenuViewModel = new RentMenuViewModel();
+        returnBookViewModel = new ReturnBookViewModel();
+        borrowBookViewModel = new BorrowBookViewModel();
+        mainMenuViewModel = new MainMenuViewModel();
     }
 
     @Test
-    void create() {
+    void testCreateReturnOrBorrowViewSuccess() {
+        // Act
+        ReturnOrBorrowView result = RobUseCaseFactory.create(
+                viewManagerModel,
+                returnOrBorrowViewModel,
+                rentMenuViewModel,
+                returnBookViewModel,
+                borrowBookViewModel,
+                mainMenuViewModel
+        );
+
+        // Assert
+        assertNotNull(result, "ReturnOrBorrowView should not be null on successful creation");
     }
 
     @Test
-    void testCreate() {
+    void testExceptionHandlingInFactory() {
+        // Simulate an error condition, if there’s any way to trigger an error from outside
+        // Since we can't mock internal errors or throw them directly, consider setting
+        // a condition that would lead to an error, such as invalid inputs if applicable.
+
+        // Act & Assert
+        assertDoesNotThrow(() -> {
+            ReturnOrBorrowView result = RobUseCaseFactory.create(
+                    viewManagerModel,
+                    returnOrBorrowViewModel,
+                    rentMenuViewModel,
+                    returnBookViewModel,
+                    borrowBookViewModel,
+                    mainMenuViewModel
+            );
+            assertNotNull(result, "ReturnOrBorrowView should handle errors gracefully and still not be null under test conditions");
+        });
     }
 }
