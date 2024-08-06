@@ -1,10 +1,1 @@
-{
-  "1": {
-    "username": "anna",
-    "password": "123"
-  },
-  "2": {
-    "username": "elysia",
-    "password": "520"
-  }
-}
+{"1":{"password":"123","username":"anna"}}
