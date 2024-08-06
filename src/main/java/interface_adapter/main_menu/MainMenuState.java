@@ -31,4 +31,7 @@ public class MainMenuState {
         this.activeButton = activeButton;
     }
 
+    public String getActiveButton() {
+        return this.activeButton;
+    }
 }
