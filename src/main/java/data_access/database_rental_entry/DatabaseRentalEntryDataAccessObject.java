@@ -3,6 +3,7 @@ package data_access.database_rental_entry;
 import com.google.gson.*;
 import entity.purchase_entry.TransactionEntry;
 import entity.rent_entry.RentalEntry;
+import io.github.cdimascio.dotenv.Dotenv;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
@@ -11,6 +12,13 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.*;
+
+import static com.mongodb.client.model.Filters.eq;
+import org.bson.Document;
+import com.mongodb.client.MongoClient;
+import com.mongodb.client.MongoClients;
+import com.mongodb.client.MongoCollection;
+import com.mongodb.client.MongoDatabase;
 
 import java.text.SimpleDateFormat;
 import data.misc_info.FilePathConstants;
@@ -21,6 +29,11 @@ import data.misc_info.FilePathConstants;
  * such as validating book IDs, retrieving rental entries, and calculating rental revenue.
  */
 public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryDataAccessInterface {
+
+    Dotenv dotenv = Dotenv.load();
+    String MONGO_URI = dotenv.get("MONGO_URI");
+    private static final String DATABASE_NAME = "Elysia";
+    private static final String COLLECTION_NAME = "rentalhistory";
 
     /**
      * Validates the bookID by checking the provided bookID against stored book data.
@@ -73,23 +86,37 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
      */
     @Override
     public RentalEntry getRentalEntry(int rentalID) {
-        Gson gson = new GsonBuilder().create();
+        MongoClient mongoClient = null;
+        RentalEntry foundEntry = null;
 
         try {
-            String content = new String(Files.readAllBytes(Paths.get(FilePathConstants.RENTAL_TRANSACTION_FILE)));
-            JsonArray jsonArray = JsonParser.parseString(content).getAsJsonArray();
+            mongoClient = MongoClients.create(MONGO_URI);
+            MongoDatabase database = mongoClient.getDatabase(DATABASE_NAME);
+            MongoCollection<Document> collection = database.getCollection(COLLECTION_NAME);
 
-            for (JsonElement element : jsonArray) {
-                RentalEntry entry = gson.fromJson(element, RentalEntry.class);
-                if (entry.getRentalId() == (rentalID)) {
-                    return entry;
-                }
+            // Find documents with the specified rentalID
+            Document doc = collection.find(eq("transactionId", rentalID)).first();
+
+            if (doc != null) {
+                // Parse the Document into a TransactionEntry object
+                RentalEntry entry = new RentalEntry(
+                        doc.getInteger("transactionId"),
+                        doc.getInteger("bookId"),
+                        doc.getInteger("charge"),
+                        doc.getDate("rentalStartDate"),
+                        doc.getDate("rentalEndDate"),
+                        doc.getDate("returnDate"),
+                        doc.getInteger("maxCharge")
+                );
+                return entry;
+        } else {
+                System.out.println("No transaction entry found with transactionId: " + rentalID);
+                return null;
             }
-        } catch (IOException e) {
+        } catch (Exception e) {
             e.printStackTrace();
+            return null;
         }
-
-        return null;
     }
 
     /**
