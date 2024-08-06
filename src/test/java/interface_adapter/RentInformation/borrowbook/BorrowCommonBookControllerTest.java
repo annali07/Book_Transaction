@@ -9,7 +9,7 @@ import java.util.Date;
 
 import static org.mockito.Mockito.*;
 
-public class BorrowBookControllerTest {
+public class BorrowCommonBookControllerTest {
     private BorrowBookController borrowBookController;
     private BorrowBookInputBoundary borrowBookInputBoundary;
 

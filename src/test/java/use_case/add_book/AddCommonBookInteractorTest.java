@@ -3,15 +3,15 @@ package use_case.add_book;
 import data_access.add_book_repository.BookRepositoryDataAccessInterface;
 import data_access.api.ExternalBookApiInterface;
 import entity.api.ApiResponse;
-import entity.book.Book;
+import entity.book.CommonBook;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.ArgumentCaptor;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class AddBookInteractorTest {
+class AddCommonBookInteractorTest {
 
     private BookRepositoryDataAccessInterface bookRepositoryDataAccessObject;
     private ExternalBookApiInterface externalBookApi;
@@ -30,17 +30,17 @@ class AddBookInteractorTest {
     @Test
     void addBook() {
         String isbn = "0394558782";
-        String bookName = "Test Book";
+        String bookName = "Test CommonBook";
         double price = 29.99;
 
         AddBookInputData addBookInputData = new AddBookInputData(isbn, price);
         ApiResponse apiResponse = new ApiResponse(bookName, "Some Author");
         when(externalBookApi.fetchBookDetails(isbn)).thenReturn(apiResponse);
-        when(bookRepositoryDataAccessObject.saveBook(any(Book.class))).thenReturn(true);
+        when(bookRepositoryDataAccessObject.saveBook(any(CommonBook.class))).thenReturn(true);
 
         addBookInteractor.addBook(addBookInputData);
 
-        ArgumentCaptor<Book> bookCaptor = ArgumentCaptor.forClass(Book.class);
+        ArgumentCaptor<CommonBook> bookCaptor = ArgumentCaptor.forClass(CommonBook.class);
         verify(bookRepositoryDataAccessObject).saveBook(bookCaptor.capture());
         assertEquals(bookName, bookCaptor.getValue().getBookName());
         assertEquals(price, bookCaptor.getValue().getBookPrice());
@@ -52,13 +52,13 @@ class AddBookInteractorTest {
     @Test
     void addBookFailure() {
         String isbn = "0394558782";
-        String bookName = "Test Book";
+        String bookName = "Test CommonBook";
         double price = 29.99;
 
         AddBookInputData addBookInputData = new AddBookInputData(isbn, price);
         ApiResponse apiResponse = new ApiResponse(bookName, "Some Author");
         when(externalBookApi.fetchBookDetails(isbn)).thenReturn(apiResponse);
-        when(bookRepositoryDataAccessObject.saveBook(any(Book.class))).thenReturn(false);
+        when(bookRepositoryDataAccessObject.saveBook(any(CommonBook.class))).thenReturn(false);
 
         addBookInteractor.addBook(addBookInputData);
         verify(presenter).prepareFailView("Failed to save to DB");

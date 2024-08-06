@@ -55,6 +55,6 @@ public class AddBookPresenter implements AddBookOutputBoundary {
     public void prepareCancelView(){
         viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-        System.out.println("Switched from Add Book View to Main Menu");
+        System.out.println("Switched from Add CommonBook View to Main Menu");
     }
 }

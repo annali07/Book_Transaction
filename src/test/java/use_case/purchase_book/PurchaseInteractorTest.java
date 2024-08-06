@@ -1,9 +1,7 @@
 package use_case.purchase_book;
 
 import com.google.gson.JsonObject;
-import data_access.add_book_repository.BookRepositoryDataAccessInterface;
-import data_access.database_transaction_entry.DatabaseTransactionEntryDataAccessInterface;
-import entity.book.Book;
+import entity.book.CommonBook;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -11,7 +9,6 @@ import org.junit.jupiter.api.Test;
 import data_access.add_book_repository.BookRepositoryDataAccessObject;
 import data_access.database_transaction_entry.DataTransactionEntryDataAccessObject;
 import entity.purchase_entry.TransactionEntry;
-import use_case.purchase_book.PurchaseOutputDataBoundary;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -71,7 +68,7 @@ class PurchaseInteractorTest {
         };
 
         // Assume a mock book in the repository
-        Book mockBook = new Book("A Game of Thrones", 99.0);
+        CommonBook mockBook = new CommonBook("A Game of Thrones", 99.0);
         bookRepositoryDataAccessObject.saveBook(mockBook);
 
         // purchase the book, implement the method

@@ -8,7 +8,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ReturnBookStateTest {
+public class ReturnCommonBookStateTest {
 
     private ReturnBookState returnBookState;
 
@@ -37,8 +37,8 @@ public class ReturnBookStateTest {
 
     @Test
     void testGetAndSetBookNameError() {
-        returnBookState.setBookNameError("Invalid Book Name");
-        assertEquals("Invalid Book Name", returnBookState.getBookNameError());
+        returnBookState.setBookNameError("Invalid CommonBook Name");
+        assertEquals("Invalid CommonBook Name", returnBookState.getBookNameError());
     }
 
     @Test
@@ -90,7 +90,7 @@ public class ReturnBookStateTest {
         originalState.setBookID(123);
         originalState.setBookIDError(1);
         originalState.setBookName("Harry Potter");
-        originalState.setBookNameError("Invalid Book Name");
+        originalState.setBookNameError("Invalid CommonBook Name");
         originalState.setStartDate(date);
         originalState.setStartDateError(date);
         originalState.setEndDate(date);
@@ -103,7 +103,7 @@ public class ReturnBookStateTest {
         assertEquals(123, copiedState.getBookID());
         assertEquals(1, copiedState.getBookIDError());
         assertEquals("Harry Potter", copiedState.getBookName());
-        assertEquals("Invalid Book Name", copiedState.getBookNameError());
+        assertEquals("Invalid CommonBook Name", copiedState.getBookNameError());
         assertEquals(date, copiedState.getStartDate());
         assertEquals(date, copiedState.getStartDateError());
         assertEquals(date, copiedState.getEndDate());

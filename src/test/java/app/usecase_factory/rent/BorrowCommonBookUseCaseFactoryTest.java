@@ -14,7 +14,7 @@ import view.views.BorrowBookView;
 
 import java.beans.PropertyChangeListener;
 
-class BorrowBookUseCaseFactoryTest {
+class BorrowCommonBookUseCaseFactoryTest {
 
     @Mock
     private ViewManagerModel mockViewManagerModel;

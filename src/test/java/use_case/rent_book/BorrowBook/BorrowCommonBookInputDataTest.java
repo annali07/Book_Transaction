@@ -4,7 +4,7 @@ import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import java.util.Date;
 
-public class BorrowBookInputDataTest {
+public class BorrowCommonBookInputDataTest {
 
     @Test
     void testGetBookID() {

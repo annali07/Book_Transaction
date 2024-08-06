@@ -62,7 +62,7 @@ public class BorrowBookPresenter implements BorrowBookOutputBoundary {
     public void prepareCancelView() {
         viewManagerModel.setActiveView(returnOrBorrowViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-        System.out.println("Switched from Borrow Book View to choose Menu");
+        System.out.println("Switched from Borrow CommonBook View to choose Menu");
 
     }
 }

@@ -11,7 +11,7 @@ import org.mockito.*;
 
 import java.util.Date;
 
-class BorrowBookInteractorTest {
+class BorrowCommonBookInteractorTest {
 
     @Mock
     private BookRepositoryDataAccessInterface mockBookRepository;

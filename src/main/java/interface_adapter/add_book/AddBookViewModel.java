@@ -6,15 +6,15 @@ import java.beans.PropertyChangeListener;
 import java.beans.PropertyChangeSupport;
 
 /**
- * ViewModel for the Add Book view, managing the state and labels for the view components.
+ * ViewModel for the Add CommonBook view, managing the state and labels for the view components.
  * Provides methods for updating the state and notifying listeners of property changes.
  */
 public class AddBookViewModel extends ViewModel {
 
-    public final String TITLE_LABEL = "Add Book to Database for Book Store";
+    public final String TITLE_LABEL = "Add CommonBook to Database for CommonBook Store";
     public final String ISBN_LABEL = "Enter ISBN number";
     public final String PRICE_LABEL = "Enter book price";
-    public final String ADD_BOOK_LABEL = "Add Book to Database";
+    public final String ADD_BOOK_LABEL = "Add CommonBook to Database";
     public final String CANCEL_LABEL = "Cancel";
     private AddBookState state = new AddBookState();
 

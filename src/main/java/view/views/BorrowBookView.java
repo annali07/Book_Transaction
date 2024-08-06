@@ -332,7 +332,7 @@ public class BorrowBookView extends JPanel implements ActionListener, PropertyCh
             if (!startDate.isEmpty()) {
                 // isbookReturnDate.setText("1111-11-11");
                 currentState.setRentStartDate(null);
-                isErrorMessage.setText("Book is already rented. You can type in start date, but it does not represent anything");
+                isErrorMessage.setText("CommonBook is already rented. You can type in start date, but it does not represent anything");
             }
         }
     }
@@ -366,7 +366,7 @@ public class BorrowBookView extends JPanel implements ActionListener, PropertyCh
             if (!endDate.isEmpty()) {
                 // isbookReturnDate.setText("1111-11-11");
                 currentState.setRentEndDate(null);
-                isErrorMessage.setText("Book is already rented. You can type in end date, but it does not represent anything");
+                isErrorMessage.setText("CommonBook is already rented. You can type in end date, but it does not represent anything");
             }
         }
     }
@@ -381,7 +381,7 @@ public class BorrowBookView extends JPanel implements ActionListener, PropertyCh
     public void actionPerformed(ActionEvent e) {
         if (borrowBookViewModel.BORROW_BOOK.equals(e.getActionCommand())) {
             if (TemproraryInfo.update().get("isRented").equals("false")) {
-                System.out.println("borrow Book button clicked");
+                System.out.println("borrow CommonBook button clicked");
                 BorrowBookState state = borrowBookViewModel.getState();
                 if (state == null) {
                     throw new IllegalStateException("BorrowBookState is null");

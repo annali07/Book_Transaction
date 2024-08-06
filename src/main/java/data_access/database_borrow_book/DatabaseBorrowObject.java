@@ -55,7 +55,7 @@ public class DatabaseBorrowObject implements DatabaseBorrowInterface{
             }
         }
         if (!bookFound) {
-            System.out.println("Book with ID " + bookID + " not found.");
+            System.out.println("CommonBook with ID " + bookID + " not found.");
             return;
         }
         try (FileWriter writer = new FileWriter(FILE_PATH_BOOK)) {

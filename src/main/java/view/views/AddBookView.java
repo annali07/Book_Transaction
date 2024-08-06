@@ -113,7 +113,7 @@ public class AddBookView extends JPanel implements ActionListener, PropertyChang
     @Override
     public void actionPerformed(ActionEvent evt) {
         if (addBookViewModel.ADD_BOOK_LABEL.equals(evt.getActionCommand())) {
-            System.out.println("Add Book Entry button clicked");
+            System.out.println("Add CommonBook Entry button clicked");
             AddBookState state = addBookViewModel.getState();
             if (state == null) {
                 throw new IllegalStateException("AddBookState is null");

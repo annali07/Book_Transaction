@@ -77,7 +77,7 @@ public class RentMenuPresenter implements RentMenuOutputBoundary {
     public void prepareCancelView() {
         viewManagerModel.setActiveView(mainMenuViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-        System.out.println("Switched from Rent Book View to Main Menu");
+        System.out.println("Switched from Rent CommonBook View to Main Menu");
 
     }
 }

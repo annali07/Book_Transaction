@@ -24,7 +24,7 @@
 //
 //import com.google.gson.JsonObject;
 //import data.misc_info.FilePathConstants;
-//import entity.book.Book;
+//import entity.book.CommonBook;
 //import org.junit.jupiter.api.AfterEach;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.Test;
@@ -70,7 +70,7 @@
 //
 //    @Test
 //    void testSaveBook() {
-//        Book book = new Book(1, "Test Book", 9.99, new Date(), new Date(), "false", "", "");
+//        CommonBook book = new CommonBook(1, "Test CommonBook", 9.99, new Date(), new Date(), "false", "", "");
 //
 //        boolean result = dao.saveBook(book);
 //
@@ -121,7 +121,7 @@
 //    void testGetBook() {
 //        int bookID = 1;
 //        Document doc = new Document("bookID", bookID)
-//                .append("bookName", "Test Book")
+//                .append("bookName", "Test CommonBook")
 //                .append("bookPrice", 9.99)
 //                .append("rentalStartDate", new Date())
 //                .append("rentalEndDate", new Date())
@@ -131,7 +131,7 @@
 //
 //        when(collection.find(eq("bookID", bookID)).first()).thenReturn(doc);
 //
-//        Book book = dao.getBook(bookID);
+//        CommonBook book = dao.getBook(bookID);
 //
 //        assertNotNull(book);
 //        assertEquals(bookID, book.getBookID());

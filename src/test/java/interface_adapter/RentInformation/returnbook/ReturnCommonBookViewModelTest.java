@@ -11,7 +11,7 @@ import java.util.Date;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class ReturnBookViewModelTest {
+public class ReturnCommonBookViewModelTest {
 
     private ReturnBookViewModel viewModel;
 

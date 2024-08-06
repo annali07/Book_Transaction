@@ -1,4 +1,4 @@
-package interface_adapter.RentInformation.returnbook;
+package interface_adapter.RentInformation.borrowbook;
 
 import interface_adapter.main_menu.MainMenuState;
 import interface_adapter.main_menu.MainMenuViewModel;
@@ -7,25 +7,27 @@ import interface_adapter.view.ViewManagerModel;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import use_case.rent_book.ReturnBook.ReturnBookOutputData;
+import org.mockito.Mockito;
+import use_case.rent_book.BorrowBook.BorrowBookOutputData;
 
+import java.util.Date;
 
 import static org.mockito.Mockito.*;
 
-public class ReturnBookPresenterTest {
+public class BorrowCommonBookPresenterTest {
     private ViewManagerModel viewManagerModel;
     private MainMenuViewModel mainMenuViewModel;
-    private ReturnBookViewModel returnBookViewModel;
+    private BorrowBookViewModel borrowBookViewModel;
     private ReturnOrBorrowViewModel returnOrBorrowViewModel;
-    private ReturnBookPresenter returnBookPresenter;
+    private BorrowBookPresenter borrowBookPresenter;
 
     @BeforeEach
     void setUp(){
         viewManagerModel = mock(ViewManagerModel.class);
         mainMenuViewModel = mock(MainMenuViewModel.class);
-        returnBookViewModel = mock(ReturnBookViewModel.class);
+        borrowBookViewModel = mock(BorrowBookViewModel.class);
         returnOrBorrowViewModel = mock(ReturnOrBorrowViewModel.class);
-        returnBookPresenter = new ReturnBookPresenter(viewManagerModel, mainMenuViewModel, returnBookViewModel, returnOrBorrowViewModel);
+        borrowBookPresenter = new BorrowBookPresenter(viewManagerModel, mainMenuViewModel, borrowBookViewModel, returnOrBorrowViewModel);
     }
 
     @AfterEach
@@ -36,15 +38,16 @@ public class ReturnBookPresenterTest {
     @Test
     void prepareSuccessView() {
         // Arrange
-        ReturnBookOutputData outputData = new ReturnBookOutputData(5,10);
-        ReturnBookState returnBookState = mock(ReturnBookState.class);
+        BorrowBookOutputData outputData = new BorrowBookOutputData(5, new Date(2003 - 1900, 4, 25),
+                new Date(2004 - 1900, 5, 15), "Zhenyi", "1800517268");
+        BorrowBookState borrowBookState = mock(BorrowBookState.class);
         MainMenuState mainMenuState = mock(MainMenuState.class);
 
-        when(returnBookViewModel.getState()).thenReturn(returnBookState);
+        when(borrowBookViewModel.getState()).thenReturn(borrowBookState);
         when(mainMenuViewModel.getState()).thenReturn(mainMenuState);
 
         // Act
-        returnBookPresenter.prepareSuccessView(outputData);
+        borrowBookPresenter.prepareSuccessView(outputData);
 
         // Assert
         verify(mainMenuState).setActiveButton(outputData.defaultButton());
@@ -57,7 +60,7 @@ public class ReturnBookPresenterTest {
     @Test
     void prepareCancelView() {
         // Act
-        returnBookPresenter.prepareCancelView();
+        borrowBookPresenter.prepareCancelView();
 
         // Assert
         verify(viewManagerModel).setActiveView(returnOrBorrowViewModel.getViewName());

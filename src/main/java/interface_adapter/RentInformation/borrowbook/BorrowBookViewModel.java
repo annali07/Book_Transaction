@@ -13,7 +13,7 @@ import java.beans.PropertyChangeSupport;
  */
 public class BorrowBookViewModel extends ViewModel {
 
-    public final String TITLE_LABEL = "Borrow Book";
+    public final String TITLE_LABEL = "Borrow CommonBook";
     public final String BOOKID_LABEL = "Enter bookID";
     public final String BOOK_NAME = "Enter bookName";
 

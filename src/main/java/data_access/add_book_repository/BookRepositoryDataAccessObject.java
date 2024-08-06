@@ -1,6 +1,9 @@
 package data_access.add_book_repository;
 
 import static com.mongodb.client.model.Filters.eq;
+
+import entity.book.CommonBook;
+import entity.book.CommonBookFactory;
 import org.bson.Document;
 import com.mongodb.client.MongoClient;
 import com.mongodb.client.MongoClients;
@@ -11,11 +14,6 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonObject;
 import com.google.gson.reflect.TypeToken;
-import com.mongodb.client.MongoClient;
-import com.mongodb.client.MongoClients;
-import com.mongodb.client.MongoCollection;
-import com.mongodb.client.MongoDatabase;
-import entity.book.Book;
 
 import java.io.FileNotFoundException;
 import java.io.FileReader;
@@ -28,7 +26,6 @@ import java.util.HashMap;
 import java.util.Map;
 import data.misc_info.FilePathConstants;
 import io.github.cdimascio.dotenv.Dotenv;
-import org.bson.Document;
 
 import static com.mongodb.client.model.Filters.eq;
 //import org.springframework.beans.factory.annotation.Autowired;
@@ -47,6 +44,7 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
     public MongoClient mongoClient;
     public MongoDatabase database;
     public MongoCollection<Document> bookCollection;
+    private static final CommonBookFactory factory = new CommonBookFactory();
 
 //    public BookRepositoryDataAccessObject() {
 //        Dotenv dotenv = Dotenv.load();
@@ -69,12 +67,12 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
      * @param book the book to be saved
      */
     @Override
-    public boolean saveBook(Book book) {
+    public boolean saveBook(CommonBook book) {
         try (MongoClient mongoClient = MongoClients.create(mongoUri)) {
             MongoDatabase database = mongoClient.getDatabase("Elysia");
             MongoCollection<Document> collection = database.getCollection("books");
 
-            // Create a Document from the Book object
+            // Create a Document from the CommonBook object
             Document doc = new Document("bookID", book.getBookID())
                     .append("bookName", book.getBookName())
                     .append("bookPrice", book.getBookPrice())
@@ -86,7 +84,7 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
 
             // Insert the Document into the collection
             collection.insertOne(doc);
-            System.out.println("Book saved successfully to MongoDB.");
+            System.out.println("CommonBook saved successfully to MongoDB.");
             return true;
         } catch (Exception e) {
             e.printStackTrace();
@@ -128,10 +126,10 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
                 // Update the document in the collection
                 collection.replaceOne(eq("bookID", bookID), bookDoc);
 
-                System.out.println("Book with ID " + bookID + " updated successfully.");
+                System.out.println("CommonBook with ID " + bookID + " updated successfully.");
                 return true;
             } else {
-                System.out.println("Book with ID " + bookID + " not found.");
+                System.out.println("CommonBook with ID " + bookID + " not found.");
                 return false;
             }
         } catch (Exception e) {
@@ -179,7 +177,7 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
             Document deletedBook = collection.findOneAndDelete(eq("bookID", bookId));
 
             if (deletedBook != null) {
-                System.out.println("Book deleted successfully.");
+                System.out.println("CommonBook deleted successfully.");
                 return true;
             } else {
                 System.out.println("No book found with bookID: " + bookId);
@@ -198,7 +196,7 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
      * @return a JsonObject representing the book, or null if the book is not found
      */
     @Override
-    public Book getBook(int bookId) {
+    public CommonBook getBook(int bookId) {
         try (MongoClient mongoClient = MongoClients.create(mongoUri)) {
             MongoDatabase database = mongoClient.getDatabase("Elysia");
             MongoCollection<Document> collection = database.getCollection("books");
@@ -207,12 +205,11 @@ public class BookRepositoryDataAccessObject implements BookRepositoryDataAccessI
             Document doc = collection.find(eq("bookID", bookId)).first();
 
             if (doc != null) {
-                Book book = new Book(
+                CommonBook book = factory.createBook
+                (
                         doc.getInteger("bookID"),
                         doc.getString("bookName"),
                         doc.getDouble("bookPrice"),
-//                        doc.getDate("rentalStartDate"),
-//                        doc.getDate("rentalEndDate"),
                         null,
                         null,
                         doc.getString("isRented"),

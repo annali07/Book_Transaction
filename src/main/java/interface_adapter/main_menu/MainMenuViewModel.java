@@ -12,10 +12,10 @@ import java.beans.PropertyChangeSupport;
  */
 public class MainMenuViewModel extends ViewModel {
 
-    public final String TITLE_LABEL = "Book Transaction Manager for Book Store";
-    public final String ADD_BOOK = "Add Book Entry";
-    public final String ADD_RENT = "Rent Book Entry";
-    public final String ADD_PURCHASE = "Purchase Book Entry";
+    public final String TITLE_LABEL = "CommonBook Transaction Manager for CommonBook Store";
+    public final String ADD_BOOK = "Add CommonBook Entry";
+    public final String ADD_RENT = "Rent CommonBook Entry";
+    public final String ADD_PURCHASE = "Purchase CommonBook Entry";
     public final String CALCULATE_REVENUE = "Calculate Revenue";
 
     private MainMenuState state = new MainMenuState();

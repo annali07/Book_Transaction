@@ -8,7 +8,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class BorrowBookStateTest {
+public class BorrowCommonBookStateTest {
 
     private BorrowBookState borrowBookState;
 
@@ -89,14 +89,14 @@ public class BorrowBookStateTest {
 
     @Test
     void testBookName() {
-        String bookName = "Book Title";
+        String bookName = "CommonBook Title";
         borrowBookState.setBookName(bookName);
         assertEquals(bookName, borrowBookState.getBookName());
     }
 
     @Test
     void testBookNameError() {
-        String bookNameError = "Book Name Error";
+        String bookNameError = "CommonBook Name Error";
         borrowBookState.setBookNameError(bookNameError);
         assertEquals(bookNameError, borrowBookState.getBookNameError());
     }
@@ -115,8 +115,8 @@ public class BorrowBookStateTest {
         original.setBorrowerNameError("Name Error");
         original.setBorrowerNumber("1234567890");
         original.setBorrowerNumberError("Number Error");
-        original.setBookName("Book Title");
-        original.setBookNameError("Book Name Error");
+        original.setBookName("CommonBook Title");
+        original.setBookNameError("CommonBook Name Error");
 
         // Create a copy using the copy constructor
         BorrowBookState copy = new BorrowBookState(original);

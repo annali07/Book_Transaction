@@ -8,7 +8,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class ReturnBookInputDataTest {
+public class ReturnCommonBookInputDataTest {
 
     private ReturnBookInputData inputData;
     private final int bookID = 123;

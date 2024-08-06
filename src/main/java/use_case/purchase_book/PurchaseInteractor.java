@@ -1,9 +1,8 @@
 package use_case.purchase_book;
 
-import com.google.gson.JsonObject;
 import data_access.add_book_repository.BookRepositoryDataAccessInterface;
 import data_access.database_transaction_entry.DatabaseTransactionEntryDataAccessInterface;
-import entity.book.Book;
+import entity.book.CommonBook;
 import entity.purchase_entry.TransactionEntry;
 import java.time.LocalDate;
 import java.time.ZoneId;
@@ -45,7 +44,7 @@ public class PurchaseInteractor implements PurchaseInputDataBoundary{
         System.out.println("The bookID of the book to purchase is: " + purchaseInputData.getBookId());
         boolean isFound  = bookRepositoryDataAccessObject.findBook(purchaseInputData.getBookId());
         if(isFound){
-            Book book = bookRepositoryDataAccessObject.getBook(purchaseInputData.getBookId());
+            CommonBook book = bookRepositoryDataAccessObject.getBook(purchaseInputData.getBookId());
 
             int bookID = book.getBookID();
             double bookPrice = book.getBookPrice();

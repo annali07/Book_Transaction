@@ -62,7 +62,7 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
 
         this.add(Box.createRigidArea(new Dimension(0, 20))); // Add space between title and buttons
 
-        // Add Book Button
+        // Add CommonBook Button
         addBookButton = new JButton(mainMenuViewModel.ADD_BOOK);
         addBookButton.setAlignmentX(Component.CENTER_ALIGNMENT);
         addBookButton.addActionListener(this);
@@ -112,20 +112,20 @@ public class MainMenuView extends JPanel implements ActionListener, PropertyChan
     @Override
     public void actionPerformed(ActionEvent evt) {
         if (mainMenuViewModel.ADD_BOOK.equals(evt.getActionCommand())) {
-            System.out.println("Add Book Entry button clicked");
+            System.out.println("Add CommonBook Entry button clicked");
             viewManagerModel.setActiveView(addBookViewModel.getViewName());
             viewManagerModel.firePropertyChanged();
         } else if (mainMenuViewModel.ADD_RENT.equals(evt.getActionCommand())) {
-            System.out.println("Rent Book Entry button clicked");
+            System.out.println("Rent CommonBook Entry button clicked");
             viewManagerModel.setActiveView(rentMenuViewModel.getViewName());
             viewManagerModel.firePropertyChanged();
-            // Handle Rent Book Entry action
+            // Handle Rent CommonBook Entry action
         } else if (mainMenuViewModel.ADD_PURCHASE.equals(evt.getActionCommand())) {
-            System.out.println("Purchase Book Entry button clicked");
+            System.out.println("Purchase CommonBook Entry button clicked");
             viewManagerModel.setActiveView(purchaseViewModel.getViewName());
             viewManagerModel.firePropertyChanged();
 //            System.out.println(purchaseViewModel.getViewName());
-            // Handle Purchase Book Entry action
+            // Handle Purchase CommonBook Entry action
         } else if (mainMenuViewModel.CALCULATE_REVENUE.equals(evt.getActionCommand())) {
             System.out.println("Calculate Revenue button clicked");
             viewManagerModel.setActiveView(revenueViewModel.getViewName());

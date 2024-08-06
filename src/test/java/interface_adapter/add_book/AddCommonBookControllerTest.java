@@ -8,7 +8,7 @@ import use_case.add_book.AddBookInputData;
 import static org.mockito.Mockito.*;
 import static org.junit.jupiter.api.Assertions.*;
 
-class AddBookControllerTest {
+class AddCommonBookControllerTest {
     private AddBookInputBoundary addBookUsecaseInteractor;
     private AddBookController addBookController;
 

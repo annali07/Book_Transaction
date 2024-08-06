@@ -39,7 +39,7 @@ public class Main {
     public static void main(String[] args) throws IOException, ParseException {
 
         // Main Application Window
-        JFrame application = new JFrame("Book Transaction");
+        JFrame application = new JFrame("CommonBook Transaction");
         application.setDefaultCloseOperation(WindowConstants.EXIT_ON_CLOSE);
 
         CardLayout cardLayout = new CardLayout();

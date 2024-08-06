@@ -10,7 +10,7 @@ import java.beans.PropertyChangeListener;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
-class AddBookViewModelTest {
+class AddCommonBookViewModelTest {
     private AddBookViewModel addBookViewModel;
     private PropertyChangeListener listener;
 
