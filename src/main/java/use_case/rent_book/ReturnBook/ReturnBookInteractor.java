@@ -2,11 +2,7 @@ package use_case.rent_book.ReturnBook;
 
 import data_access.add_book_repository.BookRepositoryDataAccessInterface;
 import data_access.data_base_return_book.DatabaseReturnInterface;
-import entity.rent_entry.RentalEntry;
-
-import java.util.Date;
-import java.util.concurrent.TimeUnit;
-import java.util.concurrent.locks.AbstractOwnableSynchronizer;
+import entity.rent_entry.CommonRentalEntry;
 
 /**
  * The ReturnBookInteractor class handles the business logic for returning a book.
@@ -43,10 +39,10 @@ public class ReturnBookInteractor implements ReturnBookInputBoundary {
 //        userGateway.editBookFile(borrowBookInputData.getBookID());
         boolean isBookFound = bookRepositoryDataAccessObject.findBook(borrowBookInputData.getBookID());
         if (isBookFound) {
-            RentalEntry rentalEntry = new RentalEntry(borrowBookInputData.getBookID(), borrowBookInputData.getStartDate(), borrowBookInputData.getEndDate(), borrowBookInputData.getReturnDate());
+            CommonRentalEntry commonRentalEntry = new CommonRentalEntry(borrowBookInputData.getBookID(), borrowBookInputData.getStartDate(), borrowBookInputData.getEndDate(), borrowBookInputData.getReturnDate());
 
-            userGateway.writeReturnFile(rentalEntry);
-            ReturnBookOutputData response = new ReturnBookOutputData(borrowBookInputData.getBookID(), rentalEntry.getCharge());
+            userGateway.writeReturnFile(commonRentalEntry);
+            ReturnBookOutputData response = new ReturnBookOutputData(borrowBookInputData.getBookID(), commonRentalEntry.getCharge());
             presenter.prepareSuccessView(response);
             System.out.println("The book has been returned.");
         } else{

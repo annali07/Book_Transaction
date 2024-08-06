@@ -1,14 +1,8 @@
 package use_case.calculate_revenue;
 
 import data_access.database_rental_entry.DatabaseRentalEntryDataAccessInterface;
-import data_access.database_rental_entry.DatabaseRentalEntryDataAccessObject;
-import data_access.database_transaction_entry.DataTransactionEntryDataAccessObject;
 import data_access.database_transaction_entry.DatabaseTransactionEntryDataAccessInterface;
-import entity.purchase_entry.TransactionEntry;
-import entity.rent_entry.RentalEntry;
-import interface_adapter.calculate_revenue.RevenuePresenter;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**

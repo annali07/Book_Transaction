@@ -36,4 +36,10 @@ public interface Book {
     public Date getRentalEndDate();
 
     public void setRentalEndDate(Date rentalEndDate);
+
+    public String getBorrowerName();
+
+    public String getBorrowerNumber();
+
+    public int getRentalPrice();
 }

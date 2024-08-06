@@ -1,16 +1,11 @@
 package data_access.database_rental_entry;
 
-import com.google.gson.*;
-import entity.purchase_entry.TransactionEntry;
-import entity.rent_entry.RentalEntry;
+import entity.rent_entry.CommonRentalEntry;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
 
 import java.io.FileReader;
-import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
 import java.util.*;
 
 import static com.mongodb.client.model.Filters.eq;
@@ -20,7 +15,6 @@ import com.mongodb.client.MongoClients;
 import com.mongodb.client.MongoCollection;
 import com.mongodb.client.MongoDatabase;
 
-import java.text.SimpleDateFormat;
 import data.misc_info.FilePathConstants;
 
 
@@ -82,12 +76,12 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
      * Retrieves a rental entry by its ID.
      *
      * @param rentalID The ID of the rental entry to retrieve.
-     * @return The RentalEntry object if found, or null if not found.
+     * @return The CommonRentalEntry object if found, or null if not found.
      */
     @Override
-    public RentalEntry getRentalEntry(int rentalID) {
+    public CommonRentalEntry getRentalEntry(int rentalID) {
         MongoClient mongoClient = null;
-        RentalEntry foundEntry = null;
+        CommonRentalEntry foundEntry = null;
 
         try {
             mongoClient = MongoClients.create(MONGO_URI);
@@ -99,7 +93,7 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
 
             if (doc != null) {
                 // Parse the Document into a TransactionEntry object
-                RentalEntry entry = new RentalEntry(
+                CommonRentalEntry entry = new CommonRentalEntry(
                         doc.getInteger("transactionId"),
                         doc.getInteger("bookId"),
                         doc.getInteger("charge"),
@@ -130,14 +124,14 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
     public double getRentRevenueBetweenDate(Date startDate, Date endDate) {
         double revenue = 0;
 
-        List<RentalEntry> transactions = new ArrayList<>();
-        for (int i = 1; i < RentalEntry.readRentalCount(); i++){
+        List<CommonRentalEntry> transactions = new ArrayList<>();
+        for (int i = 1; i < CommonRentalEntry.readRentalCount(); i++){
             transactions.add(getRentalEntry(i));
         }
 
-        for (RentalEntry rentalEntry : transactions) {
-            if (!startDate.after(rentalEntry.getReturnDate()) && !endDate.before(rentalEntry.getReturnDate())) {
-                revenue += rentalEntry.getCharge();
+        for (CommonRentalEntry commonRentalEntry : transactions) {
+            if (!startDate.after(commonRentalEntry.getReturnDate()) && !endDate.before(commonRentalEntry.getReturnDate())) {
+                revenue += commonRentalEntry.getCharge();
             }
         }
 
