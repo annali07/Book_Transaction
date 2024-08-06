@@ -30,7 +30,7 @@ public class LoginInputData {
      *
      * @return The username.
      */
-    String getUsername() {
+    public String getUsername() {
         return username;
     }
 
@@ -39,7 +39,7 @@ public class LoginInputData {
      *
      * @return The password.
      */
-    String getPassword() {
+    public String getPassword() {
         return password;
     }
 }
