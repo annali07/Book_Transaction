@@ -3,7 +3,9 @@ package use_case.add_book;
 import data_access.add_book_repository.BookRepositoryDataAccessInterface;
 import data_access.api.ExternalBookApiInterface;
 import entity.api.ApiResponse;
-import entity.book.Book;
+import entity.book.BookFactory;
+import entity.book.CommonBook;
+import entity.book.CommonBookFactory;
 
 /**
  * Use case class for adding a book.
@@ -15,6 +17,7 @@ public class AddBookInteractor implements AddBookInputBoundary{
     private final BookRepositoryDataAccessInterface bookRepositoryDataAccessObject;
     private final ExternalBookApiInterface externalBookApi;
     private final AddBookOutputBoundary presenter;
+    private final CommonBookFactory factory = new CommonBookFactory();
 
     /**
      * Constructs a new AddBookInteractor with the specified data access object, external API interface, and presenter.
@@ -40,7 +43,7 @@ public class AddBookInteractor implements AddBookInputBoundary{
     public void addBook(AddBookInputData addBookInputData) {
 
         ApiResponse apiResponse = externalBookApi.fetchBookDetails(addBookInputData.getIsbn());
-        Book book = new Book(apiResponse.getBookName(), addBookInputData.getPrice());
+        CommonBook book = factory.createBook(apiResponse.getBookName(), addBookInputData.getPrice());
 
         boolean result = bookRepositoryDataAccessObject.saveBook(book);
         if (!result){

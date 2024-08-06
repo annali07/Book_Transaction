@@ -12,7 +12,7 @@ import org.mockito.*;
 
 import java.util.Date;
 
-class ReturnBookInteractorTest {
+class ReturnCommonBookInteractorTest {
 
     @Mock
     private BookRepositoryDataAccessInterface mockBookRepository;

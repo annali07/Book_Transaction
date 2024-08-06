@@ -75,10 +75,10 @@ public class ReturnOrBorrowView extends JPanel implements ActionListener, Proper
     @Override
     public void actionPerformed(ActionEvent e) {
         if (returnOrBorrowViewModel.RETURN.equals(e.getActionCommand())) {
-            System.out.println("Return Book button clicked");
+            System.out.println("Return CommonBook button clicked");
             returnOrBorrowController.returnBook();
         }else if (returnOrBorrowViewModel.BORROW.equals(e.getActionCommand())){
-            System.out.println("Return Book button clicked");
+            System.out.println("Return CommonBook button clicked");
             returnOrBorrowController.borrowBook();
         }else if (returnOrBorrowViewModel.CANCEL_LABEL.equals(e.getActionCommand())) {
             returnOrBorrowController.cancel();

@@ -189,7 +189,7 @@ public class ReturnBookView extends JPanel implements ActionListener, PropertyCh
                         isbookStartDate.setText("");
                         currentState.setStartDate(null);
                         //isbookStartDate.setEditable(false);
-                        isErrorMessage.setText("Book is not rented");
+                        isErrorMessage.setText("CommonBook is not rented");
                     }
 
                 }
@@ -232,7 +232,7 @@ public class ReturnBookView extends JPanel implements ActionListener, PropertyCh
                         isbookEndDate.setText("");
                         currentState.setEndDate(null);
                         //isbookEndDate.setEditable(false);
-                        isErrorMessage.setText("Book is not rented");
+                        isErrorMessage.setText("CommonBook is not rented");
                     }
 
                 }
@@ -319,7 +319,7 @@ public class ReturnBookView extends JPanel implements ActionListener, PropertyCh
             if (!returnDate.isEmpty()) {
                 // isbookReturnDate.setText("1111-11-11");
                 currentState.setReturnDate(null);
-                isErrorMessage.setText("Book is not rented. You can type in return date, but it does not represent anything");
+                isErrorMessage.setText("CommonBook is not rented. You can type in return date, but it does not represent anything");
             }
         }
     }
@@ -333,7 +333,7 @@ public class ReturnBookView extends JPanel implements ActionListener, PropertyCh
     public void actionPerformed(ActionEvent e) {
         if (returnBookViewModel.RETURN_BOOK.equals(e.getActionCommand())) {
             if (TemproraryInfo.update().get("isRented").equals("true")) {
-                System.out.println("return Book button clicked");
+                System.out.println("return CommonBook button clicked");
                 ReturnBookState state = returnBookViewModel.getState();
                 if (state == null) {
                     throw new IllegalStateException("ReturnBookState is null");

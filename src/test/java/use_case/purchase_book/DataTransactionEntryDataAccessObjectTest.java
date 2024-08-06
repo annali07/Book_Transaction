@@ -30,7 +30,7 @@ public class DataTransactionEntryDataAccessObjectTest {
         filePathField.set(dao, testFilePath);
 
         // Create a test file with some initial data
-        String initialData = "[{\"transactionId\":1,\"bookId\":101,\"bookName\":\"Test Book 1\",\"soldPrice\":29.99,\"date\":\"2023-07-15\"}]";
+        String initialData = "[{\"transactionId\":1,\"bookId\":101,\"bookName\":\"Test CommonBook 1\",\"soldPrice\":29.99,\"date\":\"2023-07-15\"}]";
         Files.write(Paths.get(testFilePath), initialData.getBytes(), StandardOpenOption.CREATE);
 
     }

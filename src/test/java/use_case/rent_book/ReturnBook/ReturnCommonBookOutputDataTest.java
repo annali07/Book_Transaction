@@ -5,7 +5,7 @@ import use_case.rent_book.ReturnBook.ReturnBookOutputData;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class ReturnBookOutputDataTest {
+public class ReturnCommonBookOutputDataTest {
 
     @Test
     void testReturnBookOutputData() {

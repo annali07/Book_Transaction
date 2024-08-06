@@ -9,7 +9,7 @@ import java.util.Date;
 
 import static org.mockito.Mockito.*;
 
-public class ReturnBookControllerTest {
+public class ReturnCommonBookControllerTest {
     private ReturnBookController returnBookController;
     private ReturnBookInputBoundary returnBookInputBoundary;
 

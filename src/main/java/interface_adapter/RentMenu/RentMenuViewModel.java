@@ -6,7 +6,7 @@ import java.beans.PropertyChangeSupport;
 import interface_adapter.view.ViewModel;
 
 /**
- * ViewModel for the Rent Book view, managing the state and labels for the view components.
+ * ViewModel for the Rent CommonBook view, managing the state and labels for the view components.
  * Provides methods for updating the state and notifying listeners of property changes.
  *
  */

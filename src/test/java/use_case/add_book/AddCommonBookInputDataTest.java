@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-class AddBookInputDataTest {
+class AddCommonBookInputDataTest {
 
     private AddBookInputData addBookInputData;
     private final String isbn = "0394558782";

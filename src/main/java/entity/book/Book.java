@@ -1,145 +1,39 @@
 package entity.book;
 
-import java.util.Date;
-import com.google.gson.Gson;
 import com.google.gson.JsonObject;
+import com.google.gson.JsonParser;
+import data.misc_info.FilePathConstants;
 
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import data.misc_info.FilePathConstants;
-import com.google.gson.JsonParser;
-
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.Date;
 
-public class Book {
-    private static final String FILE_PATH = FilePathConstants.BOOK_COUNT_FILE;
-    private static final Gson gson = new Gson();
-    public static final int RENTAL_PRICE = 1;
-
-    private int rentalPrice = RENTAL_PRICE;
-    private String BorrowerNumber;
-    private String isRented = "false";
-    private double bookPrice;
-    private String bookName;
-    private String BorrowerName;
-    private int bookID;
-    private Date rentalStartDate;
-    private Date rentalEndDate;
-
-    // Constructor with parameters and default values
-    public Book(String bookName, double bookPrice) {
-        this.bookName = bookName;
-        this.bookPrice = bookPrice;
-        this.rentalStartDate = null; // default value
-        this.rentalEndDate = null; //
-        this.BorrowerName = "";
-        this.BorrowerNumber = "";
-        setBookID();
-    }
-
-    // Used in GetBook
-    public Book(int bookID, String bookName, double bookPrice, Date rentalStartDate, Date rentalEndDate, String isRented, String borrowerName, String borrowerNumber) {
-        this.bookID = bookID;
-        this.bookName = bookName;
-        this.bookPrice = bookPrice;
-        this.rentalStartDate = rentalStartDate;
-        this.rentalEndDate = rentalEndDate;
-        this.isRented = isRented;
-        this.BorrowerName = borrowerName;
-        this.BorrowerNumber = borrowerNumber;
-    }
-
-    public Book(int bookID, String bookName, double bookPrice) {
-        this.bookName = bookName;
-        this.bookPrice = bookPrice;
-        this.rentalStartDate = null; // default value
-        this.rentalEndDate = null; //
-        this.BorrowerName = "";
-        this.BorrowerNumber = "";
-        this.bookID = bookID;
-    }
-
+public interface Book {
     // Getter and Setter for bookName
-    public String getBookName() {
-        return bookName;
-    }
+    public String getBookName();
 
-    public void setBookName(String bookName) {
-        this.bookName = bookName;
-    }
+    public void setBookName(String bookName);
 
     // Getter and Setter for bookID
-    public int getBookID() {
-        return bookID;
-    }
+    public int getBookID();
 
-    public void setBookID() {
-        this.bookID = readBookCount();
-        writeBookCount(bookID+1);
-    }
+    public void setBookID();
 
-    public String getIsRented() {return isRented; }
+    public String getIsRented();
 
     // Getter and Setter for bookPrice
-    public double getBookPrice() {
-        return bookPrice;
-    }
+    public double getBookPrice();
 
     // Getter and Setter for rentalStartDate
-    public Date getRentalStartDate() {
-        return rentalStartDate;
-    }
+    public Date getRentalStartDate();
 
-    public void setRentalStartDate(Date rentalStartDate) {
-        this.rentalStartDate = rentalStartDate;
-    }
+    public void setRentalStartDate(Date rentalStartDate);
 
     // Getter and Setter for rentalEndDate
-    public Date getRentalEndDate() {
-        return rentalEndDate;
-    }
+    public Date getRentalEndDate();
 
-    public void setRentalEndDate(Date rentalEndDate) {
-        this.rentalEndDate = rentalEndDate;
-    }
-
-    private static int readBookCount() {
-        try (FileReader reader = new FileReader(FILE_PATH)) {
-            JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);
-            return jsonObject.get("bookCount").getAsInt();
-        } catch (IOException e) {
-            return 0;
-        }
-    }
-
-    private static void writeBookCount(int bookCount) {
-        JsonObject jsonObject;
-
-        // Read the existing file and parse it as a JsonObject
-        try {
-            String content = new String(Files.readAllBytes(Paths.get(FilePathConstants.BOOK_COUNT_FILE)));
-            jsonObject = JsonParser.parseString(content).getAsJsonObject();
-        } catch (IOException e) {
-            jsonObject = new JsonObject();
-            jsonObject.addProperty("transactionCount", 0); // Initialize with default value if file does not exist
-        }
-
-        // Update the bookCount field
-        jsonObject.addProperty("bookCount", bookCount);
-
-        // Write the updated JsonObject back to the file
-        try (FileWriter writer = new FileWriter(FilePathConstants.BOOK_COUNT_FILE)) {
-            gson.toJson(jsonObject, writer);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-    }
+    public void setRentalEndDate(Date rentalEndDate);
 }
-
-
-
-
-
-

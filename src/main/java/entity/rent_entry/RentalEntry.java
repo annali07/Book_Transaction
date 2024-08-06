@@ -4,7 +4,7 @@ import com.google.gson.Gson;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import data.misc_info.FilePathConstants;
-import entity.book.Book;
+import entity.book.CommonBook;
 
 import java.io.FileReader;
 import java.io.FileWriter;
@@ -17,7 +17,7 @@ import java.util.concurrent.TimeUnit;
 public class RentalEntry {
     private static final String FILE_PATH = FilePathConstants.BOOK_COUNT_FILE;
     private static final Gson gson = new Gson();
-    private static final int chargePerDay = Book.RENTAL_PRICE;
+    private static final int chargePerDay = CommonBook.RENTAL_PRICE;
     private static final int overdueChargePerDay = 5;
 
     private int rentalId;

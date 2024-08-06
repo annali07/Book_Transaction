@@ -21,7 +21,7 @@ import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.atLeastOnce;
 import static org.mockito.Mockito.verify;
 
-class PurchaseBookCaseFactoryTest {
+class PurchaseCommonBookCaseFactoryTest {
 
     @Mock
     private ViewManagerModel mockViewManagerModel;

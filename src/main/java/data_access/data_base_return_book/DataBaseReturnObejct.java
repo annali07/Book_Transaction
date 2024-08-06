@@ -63,7 +63,7 @@ public class DataBaseReturnObejct implements DatabaseReturnInterface{
             }
         }
         if (!bookFound) {
-            System.out.println("Book with ID " + bookID + " not found.");
+            System.out.println("CommonBook with ID " + bookID + " not found.");
             return;
         }
         // Write the modified JSON back to the file

@@ -16,7 +16,7 @@ import view.views.ReturnBookView;
 import java.io.IOException;
 import java.text.ParseException;
 
-class ReturnBookUseCaseFactoryTest {
+class ReturnCommonBookUseCaseFactoryTest {
 
     @Mock
     private ViewManagerModel mockViewManagerModel;

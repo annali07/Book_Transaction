@@ -129,7 +129,7 @@ public class RentMenuView extends JPanel implements ActionListener, PropertyChan
     @Override
     public void actionPerformed(ActionEvent e) {
         if (rentMenuViewModel.SEARCH_LABEL.equals(e.getActionCommand())) {
-            System.out.println("Search Book button clicked");
+            System.out.println("Search CommonBook button clicked");
             RentMenuState state = rentMenuViewModel.getState();
             if (state == null) {
                 throw new IllegalStateException("RentMenuState is null");

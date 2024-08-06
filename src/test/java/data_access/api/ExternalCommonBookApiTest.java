@@ -16,7 +16,7 @@ import org.mockito.MockitoAnnotations;
 
 import entity.api.ApiResponse;
 
-public class ExternalBookApiTest {
+public class ExternalCommonBookApiTest {
 
     @InjectMocks
     private ExternalBookApi externalBookApi;
@@ -39,7 +39,7 @@ public class ExternalBookApiTest {
     @Test
     public void testFetchBookDetailsSuccess() throws Exception {
         // Prepare mocked response
-        String fakeResponse = "{\"ISBN:9783161484100\":{\"title\":\"Test Book\",\"authors\":[{\"name\":\"John Doe\"}]}}";
+        String fakeResponse = "{\"ISBN:9783161484100\":{\"title\":\"Test CommonBook\",\"authors\":[{\"name\":\"John Doe\"}]}}";
         InputStream fakeInput = new ByteArrayInputStream(fakeResponse.getBytes());
 
         when(mockConnection.getResponseCode()).thenReturn(HttpURLConnection.HTTP_OK);

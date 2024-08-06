@@ -9,7 +9,7 @@ import java.beans.PropertyChangeListener;
 import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.Mockito.*;
 
-public class BorrowBookViewModelTest {
+public class BorrowCommonBookViewModelTest {
 
     private BorrowBookViewModel viewModel;
     private BorrowBookState state;

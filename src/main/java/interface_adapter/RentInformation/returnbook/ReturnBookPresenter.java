@@ -65,7 +65,7 @@ public class ReturnBookPresenter implements ReturnBookOutputBoundary {
     public void prepareCancelView() {
         viewManagerModel.setActiveView(returnOrBorrowViewModel.getViewName());
         viewManagerModel.firePropertyChanged();
-        System.out.println("Switched from Return Book View to choose Menu");
+        System.out.println("Switched from Return CommonBook View to choose Menu");
 
     }
 }

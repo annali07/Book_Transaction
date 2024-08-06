@@ -14,7 +14,7 @@ import java.beans.PropertyChangeSupport;
 public class ReturnBookViewModel extends ViewModel {
 
 
-    public final String TITLE_LABEL = "Return Book";
+    public final String TITLE_LABEL = "Return CommonBook";
     public final String BOOKID_LABEL = "Enter bookID";
     public final String BOOK_NAME = "Enter bookName";
 

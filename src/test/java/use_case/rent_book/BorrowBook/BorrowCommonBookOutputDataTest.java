@@ -8,7 +8,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
-public class BorrowBookOutputDataTest {
+public class BorrowCommonBookOutputDataTest {
 
     private BorrowBookOutputData outputData;
     private final int bookID = 1;

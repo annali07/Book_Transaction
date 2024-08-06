@@ -33,7 +33,7 @@ class TemproraryInfoTest {
 
         // Insert a test document
         Document testBook = new Document("bookID", TEST_BOOK_ID)
-                .append("bookName", "Test Book")
+                .append("bookName", "Test CommonBook")
                 .append("rentalStartDate", "2023-01-01")
                 .append("rentalEndDate", "2023-12-31")
                 .append("isRented", "Yes")
@@ -66,7 +66,7 @@ class TemproraryInfoTest {
         Map<String, String> bookInfo = TemproraryInfo.update();
         assertNotNull(bookInfo);
         assertEquals(String.valueOf(TEST_BOOK_ID), bookInfo.get("bookID"));
-        assertEquals("Test Book", bookInfo.get("bookName"));
+        assertEquals("Test CommonBook", bookInfo.get("bookName"));
         assertEquals("2023-01-01", bookInfo.get("Start Date"));
         assertEquals("2023-12-31", bookInfo.get("End Date"));
         assertEquals("Yes", bookInfo.get("isRented"));
