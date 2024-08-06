@@ -19,6 +19,7 @@ public interface BookFactory {
 //    }
 
     CommonBook createBook(int bookID, String bookName, double bookPrice, Date rentalStartDate, Date rentalEndDate, String isRented, String borrowerName, String borrowerNumber);
+
     CommonBook createBook(String bookName, double bookPrice);
 
 }

@@ -1,11 +1,10 @@
 package use_case.rent_book.ReturnBook;
 
 import static org.mockito.Mockito.*;
-import static org.junit.jupiter.api.Assertions.*;
 
 import data_access.add_book_repository.BookRepositoryDataAccessInterface;
 import data_access.data_base_return_book.DatabaseReturnInterface;
-import entity.rent_entry.RentalEntry;
+import entity.rent_entry.CommonRentalEntry;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.mockito.*;
@@ -42,7 +41,7 @@ class ReturnCommonBookInteractorTest {
 
         // Assert
         verify(mockPresenter, never()).prepareSuccessView(any(ReturnBookOutputData.class));
-        verify(mockUserGateway, never()).writeReturnFile(any(RentalEntry.class));
+        verify(mockUserGateway, never()).writeReturnFile(any(CommonRentalEntry.class));
         System.out.println("Output: The bookID is invalid");
     }
 
@@ -55,7 +54,7 @@ class ReturnCommonBookInteractorTest {
         interactor.execute(inputData);
 
         // Assert
-        verify(mockUserGateway).writeReturnFile(any(RentalEntry.class));
+        verify(mockUserGateway).writeReturnFile(any(CommonRentalEntry.class));
         verify(mockPresenter).prepareSuccessView(any(ReturnBookOutputData.class));
         System.out.println("Output: The book has been returned.");
     }

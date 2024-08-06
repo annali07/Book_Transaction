@@ -115,6 +115,21 @@ public class CommonBook implements Book{
         this.rentalEndDate = rentalEndDate;
     }
 
+    @Override
+    public String getBorrowerName(){
+        return this.BorrowerName;
+    }
+
+    @Override
+    public String getBorrowerNumber(){
+        return this.BorrowerNumber;
+    }
+
+    @Override
+    public int getRentalPrice(){
+        return this.rentalPrice;
+    }
+
     private static int readBookCount() {
         try (FileReader reader = new FileReader(FILE_PATH)) {
             JsonObject jsonObject = gson.fromJson(reader, JsonObject.class);

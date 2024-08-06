@@ -1,9 +1,7 @@
 package data_access.database_rental_entry;
 
-import entity.purchase_entry.TransactionEntry;
-import entity.rent_entry.RentalEntry;
+import entity.rent_entry.CommonRentalEntry;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -23,9 +21,9 @@ public interface DatabaseRentalEntryDataAccessInterface{
      * Retrieves a rental entry by its ID.
      *
      * @param entryID The ID of the rental entry to retrieve.
-     * @return The RentalEntry object if found, or null if not found.
+     * @return The CommonRentalEntry object if found, or null if not found.
      */
-    public RentalEntry getRentalEntry(int entryID);
+    public CommonRentalEntry getRentalEntry(int entryID);
 
     /**
      * Calculates the total rental revenue between two dates.

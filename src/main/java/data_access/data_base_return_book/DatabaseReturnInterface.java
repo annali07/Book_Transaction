@@ -1,6 +1,6 @@
 package data_access.data_base_return_book;
 
-import entity.rent_entry.RentalEntry;
+import entity.rent_entry.CommonRentalEntry;
 
 /**
  * Interface for database operations related to returning books.
@@ -16,7 +16,7 @@ public interface DatabaseReturnInterface {
     /**
      * Writes the rental entry information to the return file.
      *
-     * @param rentalEntry the rental entry to write
+     * @param commonRentalEntry the rental entry to write
      */
-    public void writeReturnFile(RentalEntry rentalEntry);
+    public void writeReturnFile(CommonRentalEntry commonRentalEntry);
 }

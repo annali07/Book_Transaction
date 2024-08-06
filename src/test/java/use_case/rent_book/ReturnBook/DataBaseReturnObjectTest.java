@@ -2,7 +2,7 @@ package use_case.rent_book.ReturnBook;
 
 import com.google.gson.*;
 import data_access.data_base_return_book.DataBaseReturnObejct;
-import entity.rent_entry.RentalEntry;
+import entity.rent_entry.CommonRentalEntry;
 import org.json.simple.JSONObject;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -78,9 +78,9 @@ public class DataBaseReturnObjectTest {
         Date startDate = new Date(2023, 1, 1);
         Date endDate = new Date(2023, 1, 15);
         Date returnDate = new Date(2023, 1, 20);
-        RentalEntry rentalEntry = new RentalEntry(bookID, startDate, endDate, returnDate);
+        CommonRentalEntry commonRentalEntry = new CommonRentalEntry(bookID, startDate, endDate, returnDate);
 
-        dataBaseReturnObejct.writeReturnFile(rentalEntry);
+        dataBaseReturnObejct.writeReturnFile(commonRentalEntry);
 
         // Verify that the return transaction is written correctly
         try {
@@ -90,7 +90,7 @@ public class DataBaseReturnObjectTest {
 
             assertEquals(1, jsonArray.size());
             JsonElement transactionElement = jsonArray.get(0);
-            RentalEntry writtenEntry = new Gson().fromJson(transactionElement, RentalEntry.class);
+            CommonRentalEntry writtenEntry = new Gson().fromJson(transactionElement, CommonRentalEntry.class);
 
             assertEquals(bookID, writtenEntry.getBookID());
             assertEquals(startDate, writtenEntry.getStartDate());

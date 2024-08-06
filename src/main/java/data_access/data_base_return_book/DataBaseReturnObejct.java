@@ -1,6 +1,5 @@
 package data_access.data_base_return_book;
-import com.google.gson.*;
-import entity.rent_entry.RentalEntry;
+import entity.rent_entry.CommonRentalEntry;
 import io.github.cdimascio.dotenv.Dotenv;
 import org.json.simple.JSONObject;
 import org.json.simple.parser.JSONParser;
@@ -15,9 +14,6 @@ import com.mongodb.client.MongoDatabase;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
-import java.nio.file.Files;
-import java.nio.file.Paths;
-import java.util.Date;
 import java.util.Iterator;
 import java.util.Set;
 import data.misc_info.FilePathConstants;
@@ -78,22 +74,22 @@ public class DataBaseReturnObejct implements DatabaseReturnInterface{
     /**
      * Writes the return transaction to the rental transaction file.
      *
-     * @param rentalEntry the rental entry to write
+     * @param commonRentalEntry the rental entry to write
      */
     @Override
-    public void writeReturnFile(RentalEntry rentalEntry) {
+    public void writeReturnFile(CommonRentalEntry commonRentalEntry) {
         try (MongoClient mongoClient = MongoClients.create(mongoUri)) {
             MongoDatabase database = mongoClient.getDatabase("Elysia");
             MongoCollection<Document> collection = database.getCollection("rentalhistory");
 
-            // Convert the rentalEntry to a Document
-            Document rentalDoc = new Document("transactionId", rentalEntry.getRentalId())
-                    .append("bookId", rentalEntry.getBookId())
-                    .append("charge", rentalEntry.getCharge())
-                    .append("rentalStartDate", rentalEntry.getRentalStartDate())
-                    .append("rentalEndDate", rentalEntry.getRentalEndDate())
-                    .append("returnDate", rentalEntry.getReturnDate())
-                    .append("maxCharge", rentalEntry.getMaxCharge());
+            // Convert the commonRentalEntry to a Document
+            Document rentalDoc = new Document("transactionId", commonRentalEntry.getRentalId())
+                    .append("bookId", commonRentalEntry.getBookId())
+                    .append("charge", commonRentalEntry.getCharge())
+                    .append("rentalStartDate", commonRentalEntry.getRentalStartDate())
+                    .append("rentalEndDate", commonRentalEntry.getRentalEndDate())
+                    .append("returnDate", commonRentalEntry.getReturnDate())
+                    .append("maxCharge", commonRentalEntry.getMaxCharge());
 
             // Insert the Document into the collection
             collection.insertOne(rentalDoc);
@@ -123,7 +119,7 @@ public class DataBaseReturnObejct implements DatabaseReturnInterface{
 //        }
 //
 //        // Convert the transactionEntry to a JsonElement
-//        JsonElement transactionElement = gson.toJsonTree(rentalEntry);
+//        JsonElement transactionElement = gson.toJsonTree(commonRentalEntry);
 //
 //        // Add the transaction to the JsonArray
 //        jsonArray.add(transactionElement);
