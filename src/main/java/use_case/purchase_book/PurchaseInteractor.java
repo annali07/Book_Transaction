@@ -3,7 +3,8 @@ package use_case.purchase_book;
 import data_access.add_book_repository.BookRepositoryDataAccessInterface;
 import data_access.database_transaction_entry.DatabaseTransactionEntryDataAccessInterface;
 import entity.book.CommonBook;
-import entity.purchase_entry.TransactionEntry;
+import entity.purchase_entry.CommonTransactionEntry;
+
 import java.time.LocalDate;
 import java.time.ZoneId;
 import java.util.Date;
@@ -51,7 +52,7 @@ public class PurchaseInteractor implements PurchaseInputDataBoundary{
             String bookName = book.getBookName();
             LocalDate localDate = LocalDate.now();
             Date today = Date.from(localDate.atStartOfDay(ZoneId.systemDefault()).toInstant());
-            TransactionEntry transaction = new TransactionEntry(bookID, bookName, bookPrice, today);
+            CommonTransactionEntry transaction = new CommonTransactionEntry(bookID, bookName, bookPrice, today);
 
             boolean db = databaseTransactionEntryDataAccessObject.createTransactionEntry(transaction);
             boolean del = bookRepositoryDataAccessObject.deleteBook(bookID);

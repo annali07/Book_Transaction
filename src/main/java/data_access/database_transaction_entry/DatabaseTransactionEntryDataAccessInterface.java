@@ -1,8 +1,7 @@
 package data_access.database_transaction_entry;
 
-import entity.purchase_entry.TransactionEntry;
+import entity.purchase_entry.CommonTransactionEntry;
 
-import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -13,17 +12,17 @@ public interface DatabaseTransactionEntryDataAccessInterface {
      * Retrieves a transaction entry by its ID.
      *
      * @param id The ID of the transaction to retrieve.
-     * @return The TransactionEntry object if found, or null if not found.
+     * @return The CommonTransactionEntry object if found, or null if not found.
      */
-    public TransactionEntry getTransactionEntry(int id);
+    public CommonTransactionEntry getTransactionEntry(int id);
 
     /**
      * Creates a new transaction entry.
      *
-     * @param transactionEntry The transaction entry to be created.
+     * @param commonTransactionEntry The transaction entry to be created.
      * @return true if the transaction entry is successfully created, false otherwise.
      */
-    public boolean createTransactionEntry(TransactionEntry transactionEntry);
+    public boolean createTransactionEntry(CommonTransactionEntry commonTransactionEntry);
 
     /**
      * Calculates the total purchase revenue between two dates.
