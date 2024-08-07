@@ -92,7 +92,7 @@ public class DatabaseRentalEntryDataAccessObject implements DatabaseRentalEntryD
             Document doc = collection.find(eq("transactionId", rentalID)).first();
 
             if (doc != null) {
-                // Parse the Document into a TransactionEntry object
+                // Parse the Document into a CommonTransactionEntry object
                 CommonRentalEntry entry = new CommonRentalEntry(
                         doc.getInteger("transactionId"),
                         doc.getInteger("bookId"),

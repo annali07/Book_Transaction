@@ -2,13 +2,13 @@ package use_case.purchase_book;
 
 import com.google.gson.JsonObject;
 import entity.book.CommonBook;
+import entity.purchase_entry.CommonTransactionEntry;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
 import data_access.add_book_repository.BookRepositoryDataAccessObject;
 import data_access.database_transaction_entry.DataTransactionEntryDataAccessObject;
-import entity.purchase_entry.TransactionEntry;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -76,7 +76,7 @@ class PurchaseInteractorTest {
 
 
         // Test that the transaction entry was created in the database
-        TransactionEntry transaction = databaseTransactionEntryDataAccessObject.getTransactionEntry(1);
+        CommonTransactionEntry transaction = databaseTransactionEntryDataAccessObject.getTransactionEntry(1);
         assertEquals(1, transaction.getBookId());
         assertEquals("A Game of Thrones", transaction.getBookName());
         assertEquals(99.0, transaction.getSoldPrice(), 0.01);

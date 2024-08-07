@@ -1,7 +1,7 @@
 package use_case.purchase_book;
 
 import data_access.database_transaction_entry.DataTransactionEntryDataAccessObject;
-import entity.purchase_entry.TransactionEntry;
+import entity.purchase_entry.CommonTransactionEntry;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -15,7 +15,7 @@ import java.util.Date;
 
 import static org.junit.jupiter.api.Assertions.*;
 
-public class DataTransactionEntryDataAccessObjectTest {
+public class DataCommonTransactionEntryDataAccessObjectTest {
 
     private DataTransactionEntryDataAccessObject dao;
     private final String testFilePath = "test_transactions.json";
@@ -43,7 +43,7 @@ public class DataTransactionEntryDataAccessObjectTest {
 
     @Test
     void testgetTransactionEntry() {
-        TransactionEntry entry = dao.getTransactionEntry(1);
+        CommonTransactionEntry entry = dao.getTransactionEntry(1);
         assertNotNull(entry);
         assertEquals(1, entry.getTransactionId());
         assertEquals(1, entry.getBookId());
@@ -55,12 +55,12 @@ public class DataTransactionEntryDataAccessObjectTest {
     @Test
     void testcreateTransactionEntry() {
         Date date = new Date(23, 6, 14);
-        TransactionEntry newEntry = new TransactionEntry(2, "114514", 1111, date);
+        CommonTransactionEntry newEntry = new CommonTransactionEntry(2, "114514", 1111, date);
         boolean result = dao.createTransactionEntry(newEntry);
 
         assertTrue(result);
 
-        TransactionEntry retrievedEntry = dao.getTransactionEntry(2);
+        CommonTransactionEntry retrievedEntry = dao.getTransactionEntry(2);
         assertNotNull(retrievedEntry);
         assertEquals(2, retrievedEntry.getTransactionId());
         assertEquals(1, retrievedEntry.getBookId());
