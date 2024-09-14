@@ -1,4 +1,4 @@
-# Book Transaction
+# Book Transaction (A+ Project)
 
 The Book Transaction software allows book managers to manage books inside database.
 
